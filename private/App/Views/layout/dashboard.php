@@ -162,7 +162,7 @@
     <!-- <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     </div> -->
 
-    <div class="header bg-primary pb-6">
+    <div class="header bg-primary pb-7">
       <div class="container-fluid">
         <div class="header-body pt-3">
           <div class="row align-items-center">
@@ -204,7 +204,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid mt--6">
+    <div class="container-fluid mt--7">
       <div class="row">
         <div class="col-md-12">
 

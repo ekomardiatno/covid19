@@ -116,7 +116,7 @@
         </div>
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
-            <h4 class="text-center font-weight-extra-bold text-uppercase mb-4">Positif COVID-19/Corona</h4>
+            <h4 class="text-center font-weight-extra-bold text-uppercase mb-4">Kasus Positif COVID-19/Corona</h4>
             <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_positif'] > 0 ? $data['total_kasus']['total_positif'] : '-' ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
