@@ -24,22 +24,25 @@ class Decryption
     $decrypted = $this->decrypting($password);
     switch (gettype($var)) {
       case 'NULL':
-        return $decrypted === $_SERVER['HTTP_HOST'] ? true : false;
+        return $this->web_hosted($decrypted) ? true : false;
       case 'array':
         if (isset($var['page'])) {
           extract($var);
-          return $decrypted === $_SERVER['HTTP_HOST'] ? require_once($page) : require_once('private/App/Views/error/encrypted.php');
+          return $this->web_hosted($decrypted) ? require_once($page) : require_once('private/App/Views/error/encrypted.php');
+        } else if(isset($var['route'])) {
+          $var = ['sub_dir' => $var[1], 'url' => $var[0]];
+          return $this->web_hosted($decrypted) ? $var : null;
         } else {
-          return $decrypted === $_SERVER['HTTP_HOST'] ? $var : [];
+          return $this->web_hosted($decrypted) ? $var : [];
         }
       case 'string':
-        return $decrypted === $_SERVER['HTTP_HOST'] ? $var : '';
+        return $this->web_hosted($decrypted) ? $var : '';
       case 'integer':
-        return $decrypted === $_SERVER['HTTP_HOST'] ? $var : 0;
+        return $this->web_hosted($decrypted) ? $var : 0;
       case 'double':
-        return $decrypted === $_SERVER['HTTP_HOST'] ? $var : 0;
+        return $this->web_hosted($decrypted) ? $var : 0;
       case 'boolean':
-        return $decrypted === $_SERVER['HTTP_HOST'] ? $var : false;
+        return $this->web_hosted($decrypted) ? $var : false;
     }
   }
 
@@ -55,5 +58,9 @@ class Decryption
     $encrypted = substr($this->_app_key, ($ivlen * 2));
     $iv = hex2bin($hex);
     return openssl_decrypt(base64_decode($encrypted), $this->_method, $password, 0, $iv);
+  }
+
+  private function web_hosted($decrypted) {
+    return $decrypted === $_SERVER['HTTP_HOST'];
   }
 }

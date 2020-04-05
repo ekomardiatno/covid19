@@ -14,7 +14,8 @@ class Route
         $method = 'index',
         $params = [],
         $dirController = 'private/App/Controllers/',
-        $error_404 = 'private/App/Views/error/404.php';
+        $error_404 = 'private/App/Views/error/404.php',
+        $decryption;
 
     public function __construct()
     {
@@ -71,6 +72,9 @@ class Route
 
     public function parseURL()
     {
+        
+        $decryption = new Decryption;
+        $this->decryption = $decryption;
 
         if (isset($_GET['url'])) {
 
@@ -88,7 +92,8 @@ class Route
                 $url = array_values($url);
             }
 
-            return $set = ['sub_dir' => $sub_dir, 'url' => $url];
+            return $this->decryption->decrypted([$url, $sub_dir, 'route' => true]);
+            
         }
     }
 }
