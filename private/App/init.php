@@ -1,23 +1,15 @@
 <?php
 
-// Register Core
-spl_autoload_register(function ($class) {
+$dir = ['/Core/', '/Wrapper/', '/Helpers/'];
 
-    if (file_exists(__DIR__ . '/Core/' . $class . '.php')) {
-
-        require_once __DIR__ . '/Core/' . $class . '.php';
-        
-    }
-
-});
-
-// Register Helpers
-spl_autoload_register(function ($class) {
-
-    if (file_exists(__DIR__ . '/Helpers/' . $class . '.php')) {
-
-        require_once __DIR__ . '/Helpers/' . $class . '.php';
-
-    }
-
-});
+foreach($dir as $d) {
+    spl_autoload_register(function ($class) use ($d) {
+    
+        if (file_exists(__DIR__ . $d . $class . '.php')) {
+    
+            require_once __DIR__ . $d . $class . '.php';
+            
+        }
+    
+    });
+}

@@ -31,6 +31,7 @@
         <th scope="col">Nama Pasien</th>
         <th scope="col">Umur</th>
         <th scope="col">Kecamatan</th>
+        <th scope="col">Tanggal</th>
         <th scope="col">Status</th>
         <th scope="col">&nbsp;</th>
       </tr>
@@ -68,6 +69,7 @@
           <td><?= $d['nama']; ?></td>
           <td><?= $d['umur']; ?></td>
           <td><?= $d['nama_kecamatan']; ?></td>
+          <td><?= Mod::DateID($d['tanggal']); ?></td>
           <td><span class="badge badge-primary"><?= $d['status']; ?></span></td>
           <td>
             <a href="<?= Web::url('admin.kasus.edit.' . $d['id_kasus']) ?>" class="btn btn-warning btn-sm">Edit</a>

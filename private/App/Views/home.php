@@ -18,6 +18,65 @@
         <p class="text-light mb-0 mt-3 font-italic font-weight-light letter-spacing small">*Jam layanan: 08:00 - 22:00 WIB</p>
       </div>
       <div class="line"></div>
+      <div class="flex-panel mt-5">
+        <div class="panel panel-default d-flex flex-column">
+          <div class="panel-body">
+            <h4 class="text-center font-weight-medium text-uppercase mb-4">ODP (Orang dalam pemantauan)</h4>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_odp'] > 0 ? $data['total_kasus']['total_odp'] : '-' ?></h2>
+            <div class="detail-kasus">
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['odp_proses'] > 0 ? $data['total_kasus']['odp_proses'] : '-' ?></h4>
+                <p class="text-center text-muted">Proses pemantauan</p>
+              </div>
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['odp_selesai'] > 0 ? $data['total_kasus']['odp_selesai'] : '-' ?>
+                </h4>
+                <p class="text-center text-muted">Selesai pemantauan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default d-flex flex-column">
+          <div class="panel-body">
+            <h4 class="text-center font-weight-medium text-uppercase mb-4">PDP (Pasien dalam pengawasan)</h4>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_pdp'] > 0 ? $data['total_kasus']['total_pdp'] : '-' ?></h2>
+            <div class="detail-kasus">
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['pdp_perawatan'] > 0 ? $data['total_kasus']['pdp_perawatan'] : '-' ?></h4>
+                <p class="text-center text-muted">Masih dirawat</p>
+              </div>
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['pdp_sembuh'] > 0 ? $data['total_kasus']['pdp_sembuh'] : '-' ?></h4>
+                <p class="text-center text-muted">Pulang dan sehat</p>
+              </div>
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['pdp_meninggal'] > 0 ? $data['total_kasus']['pdp_meninggal'] : '-' ?></h4>
+                <p class="text-center text-muted">Meninggal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default d-flex flex-column">
+          <div class="panel-body">
+            <h4 class="text-center font-weight-medium text-uppercase mb-4">Kasus Positif COVID-19/Corona</h4>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_positif'] > 0 ? $data['total_kasus']['total_positif'] : '-' ?></h2>
+            <div class="detail-kasus">
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['positif_dirawat'] > 0 ? $data['total_kasus']['positif_dirawat'] : '-' ?></h4>
+                <p class="text-center text-muted">Masih Dirawat</p>
+              </div>
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['positif_sembuh'] > 0 ? $data['total_kasus']['positif_sembuh'] : '-' ?></h4>
+                <p class="text-center text-muted">Pulang dan sehat</p>
+              </div>
+              <div class="item-detail">
+                <h4 class="text-center"><?= $data['total_kasus']['positif_meninggal'] > 0 ? $data['total_kasus']['positif_meninggal'] : '-' ?></h4>
+                <p class="text-center text-muted">Meninggal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!--<div class="overlay-animated"></div>-->
@@ -79,7 +138,7 @@
       <div class="flex-panel">
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
-            <h4 class="text-center font-weight-extra-bold text-uppercase mb-4">ODP (Orang dalam pemantauan)</h4>
+            <h4 class="text-center font-weight-medium text-uppercase mb-4">ODP (Orang dalam pemantauan)</h4>
             <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_odp'] > 0 ? $data['total_kasus']['total_odp'] : '-' ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
@@ -96,7 +155,7 @@
         </div>
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
-            <h4 class="text-center font-weight-extra-bold text-uppercase mb-4">PDP (Pasien dalam pengawasan)</h4>
+            <h4 class="text-center font-weight-medium text-uppercase mb-4">PDP (Pasien dalam pengawasan)</h4>
             <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_pdp'] > 0 ? $data['total_kasus']['total_pdp'] : '-' ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
@@ -116,7 +175,7 @@
         </div>
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
-            <h4 class="text-center font-weight-extra-bold text-uppercase mb-4">Kasus Positif COVID-19/Corona</h4>
+            <h4 class="text-center font-weight-medium text-uppercase mb-4">Kasus Positif COVID-19/Corona</h4>
             <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_positif'] > 0 ? $data['total_kasus']['total_positif'] : '-' ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">

@@ -28,7 +28,7 @@ class Decryption
       case 'array':
         if (isset($var['page'])) {
           extract($var);
-          return $this->web_hosted($decrypted) ? require_once($page) : require_once('private/App/Views/error/encrypted.php');
+          return $this->web_hosted($decrypted) ? require_once($page) : require_once('private/App/Views/error/unverified.php');
         } else if(isset($var['route'])) {
           $var = ['sub_dir' => $var[1], 'url' => $var[0]];
           return $this->web_hosted($decrypted) ? $var : null;

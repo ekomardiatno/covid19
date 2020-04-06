@@ -16,7 +16,7 @@ class KasusController extends Controller
   {
 
     $attr = [
-      'kasus' => ['id_kasus', 'nama', 'umur', 'status'],
+      'kasus' => ['id_kasus', 'nama', 'umur', 'status', 'tanggal'],
       'kecamatan' => ['nama_kecamatan']
     ];
     $index = [
