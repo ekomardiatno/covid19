@@ -33,7 +33,7 @@
 		<div class="container text-center">
 			<h1 class="mt-0 fw-700">404!</h1>
 			<h4>Halaman tidak ditermukan.</h4>
-			<a href="<?php Auth::user() != null ? Web::url('admin') : $url = Web::url(); ?>">Kembali ke Beranda.</a>
+			<a href="<?= Web::url(); ?>">Kembali ke Beranda.</a>
 		</div>
 	</div>
 </body>

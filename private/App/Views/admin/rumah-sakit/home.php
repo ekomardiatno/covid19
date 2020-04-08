@@ -46,11 +46,11 @@
         $telepon_rumah_sakit_str = substr($telepon_rumah_sakit_str, 0, -2);
       ?>
         <!-- Modal -->
-        <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus" aria-hidden="true">
+        <div class="modal fade" id="modalHapus-<?= $d['id_rumah_sakit'] ?>" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus-<?= $d['id_rumah_sakit'] ?>" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="labelModalHapus">Peringatan</h5>
+                <h5 class="modal-title" id="labelModalHapus-<?= $d['id_rumah_sakit'] ?>">Peringatan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -76,7 +76,7 @@
           <td><?= $telepon_rumah_sakit_str; ?></td>
           <td>
             <a href="<?= Web::url('admin.rumah-sakit.edit.' . $d['id_rumah_sakit']) ?>" class="btn btn-warning btn-sm">Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus">Hapus</button>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus-<?= $d['id_rumah_sakit'] ?>">Hapus</button>
           </td>
         </tr>
       <?php

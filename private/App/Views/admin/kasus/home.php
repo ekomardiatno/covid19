@@ -42,11 +42,11 @@
       foreach ($data as $d) :
       ?>
         <!-- Modal -->
-        <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus" aria-hidden="true">
+        <div class="modal fade" id="modalHapus-<?= $d['id_kasus'] ?>" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus-<?= $d['id_kasus'] ?>" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="labelModalHapus">Peringatan</h5>
+                <h5 class="modal-title" id="labelModalHapus-<?= $d['id_kasus'] ?>">Peringatan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -74,7 +74,7 @@
           <td><span class="badge badge-primary"><?= $d['status']; ?></span></td>
           <td>
             <a href="<?= Web::url('admin.kasus.edit.' . $d['id_kasus']) ?>" class="btn btn-warning btn-sm">Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus">Hapus</button>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus'] ?>">Hapus</button>
           </td>
         </tr>
       <?php
