@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2020 at 01:16 PM
--- Server version: 10.1.40-MariaDB
--- PHP Version: 7.3.5
+-- Generation Time: Apr 08, 2020 at 04:48 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,9 +33,10 @@ CREATE TABLE `kasus` (
   `id_kecamatan` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `umur` int(3) NOT NULL,
+  `riwayat` text NOT NULL,
   `status` enum('odp_proses','odp_selesai','pdp_perawatan','pdp_sembuh','pdp_meninggal','positif_dirawat','positif_meninggal','positif_sembuh') NOT NULL,
   `tanggal` date NOT NULL,
-  `tanggal_dibuat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `tanggal_dibuat` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -81,7 +82,7 @@ CREATE TABLE `rumah_sakit` (
   `nama_rumah_sakit` varchar(50) NOT NULL,
   `alamat_rumah_sakit` text NOT NULL,
   `telepon_rumah_sakit` text NOT NULL,
-  `tanggal_dibuat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `tanggal_dibuat` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -105,7 +106,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `username`, `name`, `email`, `password`, `role`, `last_login`) VALUES
-(1, 'admin', 'Administrator', 'admin@email.com', '$2y$10$XLKzSVy3uHcYZwDt8YYV6.5QCIiq/ac4wWF903RTcRzJdi6km3a6C', 'admin', '2020-04-05 13:15:07');
+(1, 'admin', 'Administrator', 'admin@email.com', '$2y$10$XLKzSVy3uHcYZwDt8YYV6.5QCIiq/ac4wWF903RTcRzJdi6km3a6C', 'admin', '2020-04-08 03:55:12');
 
 --
 -- Indexes for dumped tables

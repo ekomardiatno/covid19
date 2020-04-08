@@ -38,7 +38,8 @@ class LoginController extends Controller
   public function action()
   {
 
-    if ( isset($_POST['username']) ) {
+    $data = $this->data()->post;
+    if ( isset($data->username) ) {
 
       $attr = [
         'password',
@@ -51,7 +52,7 @@ class LoginController extends Controller
         'params' => [
           [
             'column' => 'username',
-            'value' => $_POST['username']
+            'value' => $data->username
           ]
         ],
         'limit' => [0,1]
@@ -63,10 +64,10 @@ class LoginController extends Controller
 
         extract($user);
 
-        if(password_verify($_POST['password'], $password)) {
+        if(password_verify($data->password, $password)) {
 
           $_SESSION['auth']['hasLogin'] = true;
-          $_SESSION['auth']['username'] = $_POST['username'];
+          $_SESSION['auth']['username'] = $data->username;
           $_SESSION['auth']['name'] = $name;
           $_SESSION['auth']['email'] = $email;
           $_SESSION['auth']['role'] = $role;
@@ -76,7 +77,7 @@ class LoginController extends Controller
             'params' => [
               [
                 'column' => 'username',
-                'value' => $_POST['username']
+                'value' => $data->username
               ]
             ]
           ];

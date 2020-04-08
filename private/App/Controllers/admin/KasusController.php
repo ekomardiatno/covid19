@@ -58,7 +58,8 @@ class KasusController extends Controller
 
   public function post()
   {
-    $insert = $this->_model->insert($_POST);
+    $data = $this->data()->post;
+    $insert = $this->_model->insert($data);
 
     if ($insert) {
       Flasher::setFlash('<b>Berhasil!</b> menambahkan kasus', 'success', 'ni ni-check-bold', 'top', 'center');
@@ -97,7 +98,8 @@ class KasusController extends Controller
   }
   public function update($id)
   {
-    $update = $this->_model->update($_POST, ['data_id' => $id]);
+    $data = $this->data()->post;
+    $update = $this->_model->update($data, ['data_id' => $id]);
 
     if ($update) {
       Flasher::setFlash('<b>Berhasil!</b> kasus diperbarui', 'success', 'ni ni-check-bold', 'top', 'center');
@@ -110,7 +112,8 @@ class KasusController extends Controller
 
   public function delete()
   {
-    $id = $_POST['id_kasus'];
+    $data = $this->data()->post;
+    $id = $data->id_kasus;
     $delete = $this->_model->delete(['data_id' => $id]);
 
     if ($delete) {

@@ -2,6 +2,7 @@
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
+        <?= Web::FORM_KEY() ?>
         <div class="form-group">
           <label class="small form-control-label" for="nama">Nama<span class="text-danger">*</span></label>
           <input value="<?= $data['kasus']['nama'] ?>" type="text" maxlength="50" placeholder="Masukan nama" required name="nama" id="nama" class="form-control form-control-sm form-control-alternative">
@@ -31,6 +32,10 @@
             </div>
             <input value="<?= $data['kasus']['tanggal'] ?>" class="form-control datepicker" name="tanggal" id="tanggal" placeholder="Select date" type="text">
           </div>
+        </div>
+        <div class="form-group">
+          <label class="small form-control-label" for="riwayat">Riwayat kontak dan perjalanan</label>
+          <textarea class="form-control form-control-sm form-control-alternative" name="riwayat" col="3" placeholder="Masukkan riwayat kontak dan perjalanan"><?= $data['kasus']['riwayat'] ?></textarea>
         </div>
       </div>
     </div>

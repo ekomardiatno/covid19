@@ -7,41 +7,42 @@
  * Licensed under MIT (https://github.com/ekomardiatno/koma-mvc/blob/master/LICENSE)
  */
 
-class Controller
+class Controller extends BaseController
 {
 
     private $dir_model = 'private/App/Models/',
         $hasLogin = false,
-        $_views;
+        $_web;
 
     public function __construct()
     {
-        $this->_views = View::getInstance();
+        parent::__construct();
+        $this->_web = Web::getInstance();
     }
 
     public function layout($file)
     {
-        $this->_views->layout($file);
+        $this->_web->layout($file);
     }
 
     public function title($title)
     {
-        $this->_views->title($title);
+        $this->_web->title($title);
     }
 
     public function desc($desc)
     {
-        $this->_views->desc($desc);
+        $this->_web->desc($desc);
     }
 
     public function breadcrumb($breadcrumb = null)
     {
-        $this->_views->breadcrumb($breadcrumb);
+        $this->_web->breadcrumb($breadcrumb);
     }
 
     public function view($file, $data = [])
     {
-        $this->_views->view($file, $data);
+        $this->_web->view($file, $data);
     }
 
     public function model($file)
@@ -78,5 +79,10 @@ class Controller
             Auth::setUrl($url);
             $this->redirect('admin.login');
         }
+    }
+
+    public function data()
+    {
+        return parent::data();
     }
 }

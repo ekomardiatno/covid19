@@ -13,8 +13,7 @@ class Database
     private static $_instance = null;
 
     private $mysqli,
-        $table,
-        $decryption;
+        $table;
 
     public function __construct()
     {
@@ -23,9 +22,6 @@ class Database
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
-        
-        $decryption = new Decryption;
-        $this->decryption = $decryption;
     }
 
     public static function getInstance()
@@ -331,6 +327,6 @@ class Database
                 break;
         }
         
-        return $this->decryption->decrypted($data);
+        return $data;
     }
 }

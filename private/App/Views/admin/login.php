@@ -7,6 +7,7 @@
           <small>Masukan username dan password untuk masuk</small>
         </div>
         <form action="<?= Web::url('admin.login.action'); ?>" method="POST" role="form">
+          <?= Web::FORM_KEY() ?>
           <div class="form-group mb-3">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">

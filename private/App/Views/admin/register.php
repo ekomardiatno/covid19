@@ -7,6 +7,7 @@
           <small>Gunakan email asli untuk mendaftar</small>
         </div>
         <form action="<?= Web::url('admin.register.action'); ?>" method="POST" role="form">
+          <?= Web::FORM_KEY() ?>
           <div class="form-group mb-3">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">

@@ -72,9 +72,6 @@ class Route
 
     public function parseURL()
     {
-        
-        $decryption = new Decryption;
-        $this->decryption = $decryption;
 
         if (isset($_GET['url'])) {
 
@@ -92,7 +89,7 @@ class Route
                 $url = array_values($url);
             }
 
-            return $this->decryption->decrypted([$url, $sub_dir, 'route' => true]);
+            return ['sub_dir' => $sub_dir, 'url' => $url];
             
         }
     }

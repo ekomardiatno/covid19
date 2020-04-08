@@ -2,6 +2,7 @@
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
+        <?= Web::FORM_KEY() ?>
         <div class="form-group">
           <label class="small form-control-label" for="username">Username<span class="text-danger">*</span></label>
           <input value="<?= $data['username'] ?>" type="text" maxlength="50" placeholder="Masukkan username" required name="attr[username]" id="username" class="form-control form-control-sm form-control-alternative">
@@ -123,7 +124,7 @@
     }.bind(this), 500)
   })
 
-  form.find('.btn-save').on('click', function () {
+  form.find('.btn-save').on('click', function() {
     if (!isReady($(this))) {
       e.preventDefault()
       flashMessage('ni ni-fat-remove', 'Gagal! Periksa kembali form', '<?= $msg['type']; ?>', '<?= $msg['y']; ?>', '<?= $msg['x']; ?>')

@@ -2,6 +2,7 @@
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
+        <?= Web::FORM_KEY() ?>
         <div class="form-group">
           <label class="small form-control-label" for="nama_rumah_sakit">Nama rumah sakit<span class="text-danger">*</span></label>
           <input type="text" maxlength="50" placeholder="Masukan nama rumah sakit" required name="nama_rumah_sakit" id="nama_rumah_sakit" class="form-control form-control-sm form-control-alternative">
@@ -33,16 +34,16 @@
             $(this).prev('.form-group').append(html)
             toggleButton($('.input-with-button'))
           })
-          $('body').on('click', '.remove-element', function () {
+          $('body').on('click', '.remove-element', function() {
             let parent = $(this).parent('.input-with-button')
-            if($('.input-with-button').length > 1) {
+            if ($('.input-with-button').length > 1) {
               parent.remove()
             }
             toggleButton($('.input-with-button'))
           })
 
           let toggleButton = (inputWithButton = null) => {
-            if(inputWithButton.length > 1) {
+            if (inputWithButton.length > 1) {
               inputWithButton.eq(0).children('button.remove-element').prop('disabled', false)
             } else {
               inputWithButton.eq(0).children('button.remove-element').prop('disabled', true)

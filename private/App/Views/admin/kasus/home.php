@@ -56,6 +56,7 @@
               </div>
               <div class="modal-footer">
                 <form action="<?= Web::url('admin.kasus.delete') ?>" method="post">
+                  <?= Web::FORM_KEY() ?>
                   <input type="hidden" name="id_kasus" value="<?= $d['id_kasus'] ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>

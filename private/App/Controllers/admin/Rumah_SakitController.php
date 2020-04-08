@@ -37,8 +37,9 @@ class Rumah_SakitController extends Controller
 
   public function post()
   {
-    $_POST['telepon_rumah_sakit'] = serialize($_POST['telepon_rumah_sakit']);
-    $insert = $this->_model->insert($_POST);
+    $data = $this->data()->post;
+    $data->telepon_rumah_sakit = serialize($data->telepon_rumah_sakit);
+    $insert = $this->_model->insert($data);
 
     if ($insert) {
       Flasher::setFlash('<b>Berhasil!</b> menambahkan rumah sakit', 'success', 'ni ni-check-bold', 'top', 'center');
@@ -74,8 +75,9 @@ class Rumah_SakitController extends Controller
 
   public function update($id)
   {
-    $_POST['telepon_rumah_sakit'] = serialize($_POST['telepon_rumah_sakit']);
-    $update = $this->_model->update($_POST, ['data_id' => $id]);
+    $data = $this->data()->post;
+    $data->telepon_rumah_sakit = serialize($data->telepon_rumah_sakit);
+    $update = $this->_model->update($data, ['data_id' => $id]);
 
     if ($update) {
       Flasher::setFlash('<b>Berhasil!</b> kasus diperbarui', 'success', 'ni ni-check-bold', 'top', 'center');
@@ -88,7 +90,8 @@ class Rumah_SakitController extends Controller
 
   public function delete()
   {
-    $id = $_POST['id_rumah_sakit'];
+    $data = $this->data()->post;
+    $id = $data->id_rumah_sakit;
     $delete = $this->_model->delete(['data_id' => $id]);
 
     if ($delete) {

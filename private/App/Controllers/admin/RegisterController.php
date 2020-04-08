@@ -31,14 +31,16 @@ class RegisterController extends Controller
   public function action()
   {
 
-    if( isset($_POST['username']) ){
+    $data = $this->data()->post;
+
+    if( isset($data->username) ){
 
       $post = [
-        'username' => $_POST['username'],
-        'name' => $_POST['name'],
-        'email' => $_POST['email'],
-        'password' => Mod::hash($_POST['password']),
-        'role' => $_POST['role']
+        'username' => $data->username,
+        'name' => $data->name,
+        'email' => $data->email,
+        'password' => Mod::hash($data->password),
+        'role' => $data->role
       ];
 
       $model = $this->model('User');

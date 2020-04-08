@@ -2,11 +2,10 @@
 
 session_start();
 
-require_once './vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv('./');
 $dotenv->load();
 
-require_once './private/App/init.php';
-require_once './private/App/Lincense/License.php';
+require_once __DIR__.'/private/App/init.php';
 $license = new License;
-$license->verified();
+$license->validate()->Route();
