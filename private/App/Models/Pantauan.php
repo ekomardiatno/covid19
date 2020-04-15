@@ -1,12 +1,17 @@
 <?php
 
-class Kecamatan extends Model
+class Pantauan extends Model
 {
+
+  public function __construct()
+  {
+    parent::__construct();
+    $this->_db->table('pantauan');
+  }
 
   public function insert($post, $fetch = null)
   {
 
-    $this->_db->table('kecamatan');
     return $this->_db->insert($post, $fetch);
 
   }
@@ -14,7 +19,6 @@ class Kecamatan extends Model
   public function read($fields = null, $where = null, $fetch = 'ARRAY')
   {
 
-    $this->_db->table('kecamatan');
     return $this->_db->select($fields, $where, $fetch);
 
   }
@@ -22,7 +26,6 @@ class Kecamatan extends Model
   public function join($join, $fields, $index, $where = null, $fetch = 'ARRAY')
   {
 
-    $this->_db->table('kecamatan');
     return $this->_db->join($join, $fields, $index, $where, $fetch);
 
   }
@@ -30,7 +33,6 @@ class Kecamatan extends Model
   public function update($data, $where, $fetch = null)
   {
 
-    $this->_db->table('kecamatan');
     return $this->_db->update($data, $where, $fetch);
 
   }
@@ -38,7 +40,6 @@ class Kecamatan extends Model
   public function delete($where, $fetch = null)
   {
 
-    $this->_db->table('kecamatan');
     return $this->_db->delete($where, $fetch);
 
   }

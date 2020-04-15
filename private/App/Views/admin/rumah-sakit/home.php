@@ -60,7 +60,7 @@
               </div>
               <div class="modal-footer">
                 <form action="<?= Web::url('admin.rumah-sakit.delete') ?>" method="post">
-                  <?= Web::FORM_KEY() ?>
+                  <?= Web::key_field() ?>
                   <input type="hidden" name="id_rumah_sakit" value="<?= $d['id_rumah_sakit'] ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>

@@ -30,18 +30,18 @@ class LoginController extends Controller
   public function index()
   {
 
-    $this->layout('login');
-    $this->view('admin.login');
+    $this->_web->layout('login');
+    $this->_web->view('admin.login');
 
   }
 
   public function action()
   {
 
-    $data = $this->data()->post;
-    if ( isset($data->username) ) {
+    $data = $this->request()->post;
+    if ( isset($data['username']) ) {
 
-      $attr = [
+      $fields = [
         'password',
         'name',
         'email',
@@ -52,22 +52,22 @@ class LoginController extends Controller
         'params' => [
           [
             'column' => 'username',
-            'value' => $data->username
+            'value' => $data['username']
           ]
         ],
         'limit' => [0,1]
       ];
 
-      if($this->model('User')->read($attr, $where, 'NUM_ROWS') > 0) {
+      if($this->model('User')->read($fields, $where, 'NUM_ROWS') > 0) {
 
-        $user = $this->model('User')->read($attr, $where, 'ARRAY_ONE');
+        $user = $this->model('User')->read($fields, $where, 'ARRAY_ONE');
 
         extract($user);
 
-        if(password_verify($data->password, $password)) {
+        if(password_verify($data['password'], $password)) {
 
           $_SESSION['auth']['hasLogin'] = true;
-          $_SESSION['auth']['username'] = $data->username;
+          $_SESSION['auth']['username'] = $data['username'];
           $_SESSION['auth']['name'] = $name;
           $_SESSION['auth']['email'] = $email;
           $_SESSION['auth']['role'] = $role;
@@ -77,7 +77,7 @@ class LoginController extends Controller
             'params' => [
               [
                 'column' => 'username',
-                'value' => $data->username
+                'value' => $data['username']
               ]
             ]
           ];
@@ -113,7 +113,7 @@ class LoginController extends Controller
 
     } else {
 
-      $this->view('error.404');
+      $this->_web->view('error.404');
 
     }
 

@@ -2,7 +2,7 @@
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
-        <?= Web::FORM_KEY() ?>
+        <?= Web::key_field() ?>
         <div class="form-group">
           <label class="small form-control-label" for="nama_rumah_sakit">Nama rumah sakit<span class="text-danger">*</span></label>
           <input type="text" maxlength="50" placeholder="Masukan nama rumah sakit" required name="nama_rumah_sakit" id="nama_rumah_sakit" class="form-control form-control-sm form-control-alternative">

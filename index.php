@@ -7,5 +7,5 @@ $dotenv = new Dotenv\Dotenv('./');
 $dotenv->load();
 
 require_once __DIR__.'/private/App/init.php';
-$license = new License;
-$license->validate()->Route();
+$app = new App;
+$app->route();

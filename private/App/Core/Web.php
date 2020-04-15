@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Web 1.1 - Created by Eko Mardiatno.
+ * Web 1.1.0 - Created by Eko Mardiatno.
  * Copyright 2018 KOMA MVC. All Right Reserved.
  * Instagram @komafx
  * Licensed under MIT (https://github.com/ekomardiatno/koma-mvc/blob/master/LICENSE)
@@ -89,7 +89,7 @@ class Web
         require_once($this->dir_layout . $this->layout . '.php');
     }
 
-    public static function FORM_KEY()
+    public static function key_field()
     {
         return '<input type="hidden" name="_key" value="'. getenv('APP_KEY') .'">';
     }

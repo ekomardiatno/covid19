@@ -11,7 +11,7 @@
   <meta content="<?= $desc; ?>" name="description" />
   <base href="<?= Web::url('admin') ?>">
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet">
   <link rel="stylesheet" href="<?= Web::assets('nucleo.css', 'css') ?>">
   <link rel="stylesheet" href="<?= Web::assets('bootstrap-datepicker.min.css', 'css') ?>">
   <link rel="stylesheet" href="<?= Web::assets('Chart.min.css', 'css') ?>">
@@ -93,24 +93,24 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin'); ?>">
-              <i class="fas fa-home"></i> Beranda
+              <i class="fas fa-home text-primary"></i> Beranda
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.kasus'); ?>">
-              <i class="fas fa-viruses"></i> Kasus COVID-19
+              <i class="fas fa-viruses text-orange"></i> Kasus COVID-19
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.rumah-sakit'); ?>">
-              <i class="fas fa-hospital"></i> Rumah Sakit
+              <i class="fas fa-hospital text-success"></i> Rumah Sakit
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.user'); ?>">
               <i class="fas fa-users"></i> Pengguna
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -118,7 +118,7 @@
 
   <div class="main-content">
     <!-- Top navbar -->
-    <nav class="navbar navbar-expand border-bottom navbar-dark bg-primary" id="navbar-main">
+    <nav class="navbar navbar-expand navbar-dark bg-primary" id="navbar-main">
       <div class="container-fluid">
         <ul class="navbar-nav align-items-center ml-md--3">
           <li class="nav-item">
@@ -164,9 +164,8 @@
 
     <div class="header bg-primary pb-7">
       <div class="container-fluid">
-        <div class="header-body pt-3">
+        <div class="header-body pt-3 pt-md-4">
           <div class="row align-items-center">
-
 
             <?php
             if ($breadcrumb !== null) :

@@ -26,22 +26,23 @@ class ProfilController extends Controller
       'ARRAY_ONE'
     );
 
-    $this->title('Ubah Profil');
-    $this->breadcrumb([
+    $this->_web->title('Ubah Profil');
+    $this->_web->breadcrumb([
       ['admin.profil.edit', 'Ubah profil']
     ]);
-    $this->layout('dashboard');
-    $this->view('admin.profil.edit', $data);
+    $this->_web->layout('dashboard');
+    $this->_web->view('admin.profil.edit', $data);
   }
 
   public function update($id)
   {
-    if ($_POST['attr']['password'] === '') {
-      unset($_POST['attr']['password']);
+    $data = $this->request()->post;
+    if ($data['attr']['password'] === '') {
+      unset($data['attr']['password']);
     } else {
-      $_POST['attr']['password'] = Mod::hash($_POST['attr']['password']);
+      $data['attr']['password'] = Mod::hash($data['attr']['password']);
     }
-    extract($_POST);
+    extract($data);
     $user = $this->_model->read(
       ['password'],
       [
@@ -56,11 +57,11 @@ class ProfilController extends Controller
     );
 
     if (password_verify($password, $user['password'])) {
-      $update = $this->_model->update($attr, ['data_id' => $id]);
+      $update = $this->_model->update($fields, ['data_id' => $id]);
       if ($update) {
-        $_SESSION['auth']['username'] = $attr['username'];
-        $_SESSION['auth']['name'] = $attr['name'];
-        $_SESSION['auth']['email'] = $attr['email'];
+        $_SESSION['auth']['username'] = $fields['username'];
+        $_SESSION['auth']['name'] = $fields['name'];
+        $_SESSION['auth']['email'] = $fields['email'];
         Flasher::setFlash('<b>Berhasil!</b> profil diperbarui', 'success', 'ni ni-check-bold', 'top', 'center');
       } else {
         Flasher::setFlash('<b>Gagal!</b> Ada kesalahan', 'danger', 'ni ni-fat-remove', 'top', 'center');

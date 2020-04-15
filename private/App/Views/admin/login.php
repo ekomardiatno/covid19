@@ -7,7 +7,7 @@
           <small>Masukan username dan password untuk masuk</small>
         </div>
         <form action="<?= Web::url('admin.login.action'); ?>" method="POST" role="form">
-          <?= Web::FORM_KEY() ?>
+          <?= Web::key_field() ?>
           <div class="form-group mb-3">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
@@ -30,10 +30,10 @@
         </form>
       </div>
     </div>
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
       <div class="col-12 text-right">
         <a href="<?= Web::url('admin.register'); ?>" class="text-light"><small>Buat akun baru</small></a>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

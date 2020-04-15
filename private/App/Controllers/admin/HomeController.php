@@ -62,7 +62,7 @@ class HomeController extends Controller
     $data['total_status_kasus_sekarang']['total_pdp'] = $total_kasus_sekarang['pdp_perawatan'] + $total_kasus_sekarang['pdp_sembuh'] + $total_kasus_sekarang['pdp_meninggal'];
     $data['total_status_kasus_sekarang']['total_positif'] = $total_kasus_sekarang['positif_dirawat'] + $total_kasus_sekarang['positif_sembuh'] + $total_kasus_sekarang['positif_meninggal'];
 
-    $this->layout('dashboard');
-    $this->view('admin.home', $data);
+    $this->_web->layout('dashboard');
+    $this->_web->view('admin.home', $data);
   }
 }

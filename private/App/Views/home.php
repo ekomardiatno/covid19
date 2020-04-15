@@ -10,13 +10,13 @@
       </div> -->
       <h1>Kuansing Tanggap Covid-19</h1>
       <h3 class="opening type-it">Layanan tanggap darurat COVID-19 kabupaten Kuantan Singingi</h3>
-      <div class="mb-3 mt-4">
+      <!-- <div class="mb-3 mt-4">
         <div class="d-flex flex-wrap justify-content-center mx--2 my--2">
           <a href="#" class="btn btn-banner mx-2 my-2">Hotline: 119</a>
           <a href="#" class="btn btn-banner mx-2 my-2">Hotline: 0852-6539-0530</a>
         </div>
         <p class="text-light mb-0 mt-3 font-italic font-weight-light letter-spacing small">*Jam layanan: 08:00 - 22:00 WIB</p>
-      </div>
+      </div> -->
       <div class="line"></div>
       <div class="flex-panel mt-5">
         <div class="panel panel-default d-flex flex-column">

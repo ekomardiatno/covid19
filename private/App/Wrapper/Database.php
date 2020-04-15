@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Database Wrapper 3.3.1 - Created by Eko Mardiatno.
+ * Database Wrapper 3.3.2 - Created by Eko Mardiatno.
  * Copyright 2018 KOMA MVC. All Right Reserved.
  * Instagram @komafx
  * Licensed under MIT (https://github.com/ekomardiatno/koma-mvc/blob/master/LICENSE)
@@ -42,7 +42,7 @@ class Database
     }
 
     /* ================================================================
-     * $attr = [
+     * $fields = [
      *     'column1', 'column2', 'column3'
      * ];
 
@@ -66,14 +66,14 @@ class Database
      * ];
      * ================================================================
      */
-    public function select($attr = null, $where = null, $fetch = 'ARRAY')
+    public function select($fields = null, $where = null, $fetch = 'ARRAY')
     {
 
         $table = $this->table;
         $sql = 'SELECT ';
 
-        if ($attr != null) {
-            foreach ($attr as $value) {
+        if ($fields != null) {
+            foreach ($fields as $value) {
                 $sql .= $value . ',';
             }
         } else {
@@ -90,7 +90,7 @@ class Database
     }
 
     /* ======================================================
-     *   $attr = [
+     *   $fields = [
      *       'table1' => ['column1', 'column2', 'column3'],
      *       'table2' => ['column2']
      *   ];
@@ -110,16 +110,16 @@ class Database
      *       'limit' => [0,1]
      *   ];
      *
-     *  $model->join('INNER JOIN/OUTER JOIN/LEFT JOIN/RIGHT JOIN', $attr, $index, $where);
+     *  $model->join('INNER JOIN/OUTER JOIN/LEFT JOIN/RIGHT JOIN', $fields, $index, $where);
      * =======================================================
     */
-    public function join($join, $attr = [], $index = [], $where = null, $fetch = 'ARRAY')
+    public function join($join, $fields = [], $index = [], $where = null, $fetch = 'ARRAY')
     {
         $table = $this->table;
         $sql = 'SELECT ';
-        foreach ($attr as $key => $value) {
+        foreach ($fields as $key => $value) {
             for ($i = 0; $i < count($value); $i++) {
-                $sql .= $key . '.' . $attr[$key][$i] . ',';
+                $sql .= $key . '.' . $fields[$key][$i] . ',';
             }
         }
         $sql = substr($sql, 0, -1) . ' FROM ' . $table;

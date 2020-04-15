@@ -12,33 +12,33 @@ class Rumah_SakitController extends Controller
   public function index()
   {
     $data = $this->_model->read();
-    $this->title('Rumah Sakit');
-    $this->breadcrumb(
+    $this->_web->title('Rumah Sakit');
+    $this->_web->breadcrumb(
       [
         ['admin.rumah-sakit', 'Rumah Sakit']
       ]
     );
-    $this->layout('dashboard');
-    $this->view('admin.rumah-sakit.home', $data);
+    $this->_web->layout('dashboard');
+    $this->_web->view('admin.rumah-sakit.home', $data);
   }
 
   public function tambah()
   {
-    $this->title('Tambah Rumah Sakit');
-    $this->breadcrumb(
+    $this->_web->title('Tambah Rumah Sakit');
+    $this->_web->breadcrumb(
       [
         ['admin.rumah-sakit', 'Rumah Sakit'],
         ['admin.rumah-sakit.tambah', 'Tambah Rumah Sakit']
       ]
     );
-    $this->layout('dashboard');
-    $this->view('admin.rumah-sakit.add');
+    $this->_web->layout('dashboard');
+    $this->_web->view('admin.rumah-sakit.add');
   }
 
   public function post()
   {
-    $data = $this->data()->post;
-    $data->telepon_rumah_sakit = serialize($data->telepon_rumah_sakit);
+    $data = $this->request()->post;
+    $data['telepon_rumah_sakit'] = serialize($data['telepon_rumah_sakit']);
     $insert = $this->_model->insert($data);
 
     if ($insert) {
@@ -62,21 +62,21 @@ class Rumah_SakitController extends Controller
     ];
     $data = $this->_model->read(null, $where, 'ARRAY_ONE');
     $data['telepon_rumah_sakit'] = unserialize($data['telepon_rumah_sakit']);
-    $this->title('Edit Rumah Sakit');
-    $this->breadcrumb(
+    $this->_web->title('Edit Rumah Sakit');
+    $this->_web->breadcrumb(
       [
         ['admin.rumah-sakit', 'Rumah Sakit'],
         ['admin.rumah-sakit.edit.' . $id, 'Edit Rumah Sakit']
       ]
     );
-    $this->layout('dashboard');
-    $this->view('admin.rumah-sakit.edit', $data);
+    $this->_web->layout('dashboard');
+    $this->_web->view('admin.rumah-sakit.edit', $data);
   }
 
   public function update($id)
   {
-    $data = $this->data()->post;
-    $data->telepon_rumah_sakit = serialize($data->telepon_rumah_sakit);
+    $data = $this->request()->post;
+    $data['telepon_rumah_sakit'] = serialize($data['telepon_rumah_sakit']);
     $update = $this->_model->update($data, ['data_id' => $id]);
 
     if ($update) {
@@ -90,8 +90,8 @@ class Rumah_SakitController extends Controller
 
   public function delete()
   {
-    $data = $this->data()->post;
-    $id = $data->id_rumah_sakit;
+    $data = $this->request()->post;
+    $id = $data['id_rumah_sakit'];
     $delete = $this->_model->delete(['data_id' => $id]);
 
     if ($delete) {

@@ -2,18 +2,18 @@
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
-        <?= Web::FORM_KEY() ?>
+        <?= Web::key_field() ?>
         <div class="form-group">
           <label class="small form-control-label" for="username">Username<span class="text-danger">*</span></label>
-          <input value="<?= $data['username'] ?>" type="text" maxlength="50" placeholder="Masukkan username" required name="attr[username]" id="username" class="form-control form-control-sm form-control-alternative">
+          <input value="<?= $data['username'] ?>" type="text" maxlength="50" placeholder="Masukkan username" required name="fields[username]" id="username" class="form-control form-control-sm form-control-alternative">
         </div>
         <div class="form-group">
           <label class="small form-control-label" for="name">Nama<span class="text-danger">*</span></label>
-          <input value="<?= $data['name'] ?>" type="text" maxlength="50" placeholder="Masukkan nama" required name="attr[name]" id="name" class="form-control form-control-sm form-control-alternative">
+          <input value="<?= $data['name'] ?>" type="text" maxlength="50" placeholder="Masukkan nama" required name="fields[name]" id="name" class="form-control form-control-sm form-control-alternative">
         </div>
         <div class="form-group">
           <label class="small form-control-label" for="email">Email<span class="text-danger">*</span></label>
-          <input value="<?= $data['email'] ?>" type="text" placeholder="Masukkan email" required name="attr[email]" id="email" class="form-control form-control-sm form-control-alternative">
+          <input value="<?= $data['email'] ?>" type="text" placeholder="Masukkan email" required name="fields[email]" id="email" class="form-control form-control-sm form-control-alternative">
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
           <label class="small form-control-label" for="new_password">Password baru</label>
-          <input type="password" placeholder="Masukkan password baru" name="attr[password]" id="new_password" class="form-control form-control-sm form-control-alternative">
+          <input type="password" placeholder="Masukkan password baru" name="fields[password]" id="new_password" class="form-control form-control-sm form-control-alternative">
         </div>
         <div class="form-group">
           <label class="small form-control-label" for="re_new_password">Ulangi Password baru</label>
@@ -75,7 +75,6 @@
               </div>
             </div>
           </div>
-          <button type="reset" class="btn btn-warning btn-sm">Reset</button>
         </div>
       </div>
     </div>

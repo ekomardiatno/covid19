@@ -17,7 +17,7 @@ class UserController extends Controller
 
     $model = $this->model('User');
 
-    $attr = [
+    $fields = [
       'username',
       'email',
       'name',
@@ -28,11 +28,11 @@ class UserController extends Controller
       'order_by' => ['name', 'ASC']
     ];
 
-    $data = $model->read($attr, $where);
+    $data = $model->read($fields, $where);
 
-    $this->title('Pengguna');
-    $this->layout('dashboard');
-    $this->view('admin.user.home', $data);
+    $this->_web->title('Pengguna');
+    $this->_web->layout('dashboard');
+    $this->_web->view('admin.user.home', $data);
 
   }
 

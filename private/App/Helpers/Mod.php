@@ -13,38 +13,43 @@ class Mod
     public static function dateID($a)
     {
 
+        $now = date_create(date('2020-04-18'));
+        $past = date_create($a);
+        $diff = date_diff($past, $now);
+        $diff = intval($diff->format('%R%a'));
+
         $y = substr($a, 0, 4);
         $m = substr($a, 5, 2);
         $d = substr($a, 8, 2);
         $t = substr($a, 11, 5);
 
         if ($m == '01') {
-            $m = 'Januari';
+            $m = 'Jan';
         } else if ($m == '02') {
-            $m = 'Februari';
+            $m = 'Feb';
         } else if ($m == '03') {
-            $m = 'Maret';
+            $m = 'Mar';
         } else if ($m == '04') {
-            $m = 'April';
+            $m = 'Apr';
         } else if ($m == '05') {
             $m = 'Mei';
         } else if ($m == '06') {
-            $m = 'Juni';
+            $m = 'Jun';
         } else if ($m == '07') {
-            $m = 'Juli';
+            $m = 'Jul';
         } else if ($m == '08') {
-            $m = 'Agustus';
+            $m = 'Agu';
         } else if ($m == '09') {
-            $m = 'September';
+            $m = 'Sep';
         } else if ($m == '10') {
-            $m = 'Oktober';
+            $m = 'Okt';
         } else if ($m == '11') {
-            $m = 'November';
+            $m = 'Nov';
         } else if ($m == '12') {
-            $m = 'Desember';
+            $m = 'Des';
         }
 
-        return $d . ' ' . $m . ' ' . $y . ' ' . $t;
+        return $d . ' ' . $m . ' ' . $y . ($t ? ', ' . $t : '');
 
     }
 

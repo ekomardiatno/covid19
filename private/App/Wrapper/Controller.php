@@ -1,57 +1,31 @@
 <?php
 
 /**
- * Controller 1.1.1 - Created by Eko Mardiatno.
+ * Controller 1.1.3 - Created by Eko Mardiatno.
  * Copyright 2018 KOMA MVC. All Right Reserved.
  * Instagram @komafx
  * Licensed under MIT (https://github.com/ekomardiatno/koma-mvc/blob/master/LICENSE)
  */
 
-class Controller extends BaseController
+class Controller
 {
 
-    private $dir_model = 'private/App/Models/',
-        $hasLogin = false,
-        $_web;
+    private $model_dir = __DIR__.'/../Models/';
+    private $has_login = false;
+    protected $_web;
 
     public function __construct()
     {
-        parent::__construct();
         $this->_web = Web::getInstance();
-    }
-
-    public function layout($file)
-    {
-        $this->_web->layout($file);
-    }
-
-    public function title($title)
-    {
-        $this->_web->title($title);
-    }
-
-    public function desc($desc)
-    {
-        $this->_web->desc($desc);
-    }
-
-    public function breadcrumb($breadcrumb = null)
-    {
-        $this->_web->breadcrumb($breadcrumb);
-    }
-
-    public function view($file, $data = [])
-    {
-        $this->_web->view($file, $data);
     }
 
     public function model($file)
     {
-        require_once $this->dir_model . $file . '.php';
+        require_once $this->model_dir . $file . '.php';
         return new $file;
     }
 
-    public function redirect($url, $data = [])
+    public function redirect($url)
     {
         $url = str_replace('.', '/', $url);
         header('location: ' . getenv('APP_URL') . $url);
@@ -67,11 +41,11 @@ class Controller extends BaseController
 
             if (isset($_SESSION['auth'])) {
 
-                $this->hasLogin = $_SESSION['auth']['hasLogin'];
+                $this->has_login = $_SESSION['auth']['hasLogin'];
             }
         }
 
-        if ($this->hasLogin) {
+        if ($this->has_login) {
             if (!in_array($_SESSION['auth']['role'], $role)) {
                 $this->redirect('admin');
             }
@@ -81,8 +55,8 @@ class Controller extends BaseController
         }
     }
 
-    public function data()
+    public function request()
     {
-        return parent::data();
+        return new Request;
     }
 }

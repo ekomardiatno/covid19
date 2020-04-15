@@ -23,15 +23,15 @@ class RegisterController extends Controller
   public function index()
   {
 
-    $this->layout('login');
-    $this->view('admin.register');
+    $this->_web->layout('login');
+    $this->_web->view('admin.register');
 
   }
 
   public function action()
   {
 
-    $data = $this->data()->post;
+    $data = $this->request()->post;
 
     if( isset($data->username) ){
 
@@ -55,7 +55,7 @@ class RegisterController extends Controller
 
     } else {
 
-      $this->view('error.404');
+      $this->_web->view('error.404');
 
     }
 
