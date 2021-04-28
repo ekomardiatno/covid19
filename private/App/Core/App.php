@@ -104,10 +104,10 @@ class App extends Aes
     }
 
     switch($this->license_status) {
-      case 'invalid':
-        return require_once $this->error_invalid;
-      case 'expired':
-        return require_once $this->error_expired;
+      // case 'invalid':
+      //   return require_once $this->error_invalid;
+      // case 'expired':
+      //   return require_once $this->error_expired;
       default:
         require_once $this->controller_dir . $this->controller . '.php';
     }

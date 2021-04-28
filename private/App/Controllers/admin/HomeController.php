@@ -2,7 +2,6 @@
 
 class HomeController extends Controller
 {
-
   public function __construct()
   {
 
@@ -13,55 +12,42 @@ class HomeController extends Controller
 
   public function index()
   {
-
-    $status_kasus = ['odp_proses', 'odp_selesai', 'pdp_perawatan', 'pdp_sembuh', 'pdp_meninggal', 'positif_dirawat', 'positif_sembuh', 'positif_meninggal'];
-    $_db = Database::getInstance();
-    $dateNow = date('Y-m-d');
-    $year = substr($dateNow, 0, 4);
-    $month = intval(substr($dateNow, 5, 2)) - 1;
-    $month = strlen($month) > 1 ? strval($month) : '0' . $month;
-    $dateLastMonth = $year . '-' . $month . '-01';
-    $dateLastMonth = date("Y-m-t", strtotime($dateLastMonth));
-    $sqlLastMonth = "SELECT";
-    foreach($status_kasus as $s) {
-      $sqlLastMonth .= " SUM(CASE WHEN status LIKE '". $s ."' AND tanggal <= '" . $dateLastMonth . "' THEN 1 ELSE 0 END) " . $s . ",";
-    }
-    $sqlLastMonth = substr($sqlLastMonth, 0, -1);
-    $sqlLastMonth .= " FROM kasus";
-    $totalKasusLastMonth = $_db->query($sqlLastMonth);
-    $total_kasus_bulan_lalu = [];
-    foreach($status_kasus as $s){
-      $total_kasus_bulan_lalu[$s] = array_reduce($totalKasusLastMonth, function ($total, $d) use ($s) {
-        return $total + $d[$s];
-      }, 0);
-    }
-    
-    $sql_kasus_kecamatan = "SELECT kecamatan.nama_kecamatan,";
-    foreach($status_kasus as $s) {
-      $sql_kasus_kecamatan .= " SUM(CASE WHEN kasus.status LIKE '". $s ."' THEN 1 ELSE 0 END) " . $s . ",";
-    }
-    $sql_kasus_kecamatan = substr($sql_kasus_kecamatan, 0, -1);
-    $sql_kasus_kecamatan .= " FROM kasus RIGHT JOIN kecamatan on kasus.id_kecamatan = kecamatan.id_kecamatan group by kecamatan.nama_kecamatan";
-    $kasus_kecamatan = $_db->query($sql_kasus_kecamatan);
-    $total_kasus_sekarang = [];
-    foreach($status_kasus as $s){
-      $total_kasus_sekarang[$s] = array_reduce($kasus_kecamatan, function ($total, $d) use ($s) {
-        return $total + $d[$s];
-      }, 0);
-    }
-
-    $data = [
-      'kasus_kecamatan' => $kasus_kecamatan
+    $kecamatan = $this->model('Kecamatan')->read();
+    $where = [
+      'order_by' => ['tanggal', 'DESC'],
+      'limit' => [0,2]
     ];
-
-    $data['total_status_kasus_bulan_lalu']['total_odp'] = $total_kasus_bulan_lalu['odp_proses'] + $total_kasus_bulan_lalu['odp_selesai'];
-    $data['total_status_kasus_bulan_lalu']['total_pdp'] = $total_kasus_bulan_lalu['pdp_perawatan'] + $total_kasus_bulan_lalu['pdp_sembuh'] + $total_kasus_bulan_lalu['pdp_meninggal'];
-    $data['total_status_kasus_bulan_lalu']['total_positif'] = $total_kasus_bulan_lalu['positif_dirawat'] + $total_kasus_bulan_lalu['positif_sembuh'] + $total_kasus_bulan_lalu['positif_meninggal'];
-
-    $data['total_status_kasus_sekarang']['total_odp'] = $total_kasus_sekarang['odp_proses'] + $total_kasus_sekarang['odp_selesai'];
-    $data['total_status_kasus_sekarang']['total_pdp'] = $total_kasus_sekarang['pdp_perawatan'] + $total_kasus_sekarang['pdp_sembuh'] + $total_kasus_sekarang['pdp_meninggal'];
-    $data['total_status_kasus_sekarang']['total_positif'] = $total_kasus_sekarang['positif_dirawat'] + $total_kasus_sekarang['positif_sembuh'] + $total_kasus_sekarang['positif_meninggal'];
-
+    $kasus = $this->model('Kasus')->read(null, $where);
+    $data['total_odp'] = 0;
+    $data['total_pdp'] = 0;
+    $data['total_positif'] = 0;
+    $data['total_odp_old'] = 0;
+    $data['total_pdp_old'] = 0;
+    $data['total_positif_old'] = 0;
+    $data['total_kasus'] = 0;
+    $data['total_kasus_old'] = 0;
+    $data['persentase_odp'] = 0;
+    $data['persentase_pdp'] = 0;
+    $data['persentase_positif'] = 0;
+    $data['persentase_kasus'] = 0;
+    if(count($kasus) > 0) {
+      $data['total_odp'] = $kasus[0]['odp_proses'] + $kasus[0]['odp_selesai'];
+      $data['total_pdp'] = $kasus[0]['pdp_rawat'] + $kasus[0]['pdp_sehat'] + $kasus[0]['pdp_meninggal'];
+      $data['total_positif'] = $kasus[0]['positif_rawat'] + $kasus[0]['positif_sehat'] + $kasus[0]['positif_meninggal'];
+      $data['total_kasus'] = $data['total_odp'] + $data['total_pdp'] + $data['total_positif'];
+    }
+    if(count($kasus) > 1) {
+      $data['total_odp_old'] = $kasus[1]['odp_proses'] + $kasus[1]['odp_selesai'];
+      $data['total_pdp_old'] = $kasus[1]['pdp_rawat'] + $kasus[1]['pdp_sehat'] + $kasus[1]['pdp_meninggal'];
+      $data['total_positif_old'] = $kasus[1]['positif_rawat'] + $kasus[1]['positif_sehat'] + $kasus[1]['positif_meninggal'];
+      $data['total_kasus_old'] = $data['total_odp_old'] + $data['total_pdp_old'] + $data['total_positif_old'];
+      $data['persentase_odp'] = ($data['total_odp'] - $data['total_odp_old']) / $data['total_odp_old'] * 100;
+      $data['persentase_pdp'] = ($data['total_pdp'] - $data['total_pdp_old']) / $data['total_pdp_old'] * 100;
+      $data['persentase_positif'] = ($data['total_positif'] - $data['total_positif_old']) / $data['total_positif_old'] * 100;
+      $data['persentase_kasus'] = ($data['total_kasus'] - $data['total_kasus_old']) / $data['total_kasus_old'] * 100;
+    }
+    $data['tanggal'] = $kasus[0]['tanggal'] ?? '';
+    $data['kecamatan'] = isset($kasus[0]['data_kecamatan']) ? unserialize($kasus[0]['data_kecamatan']) : $kecamatan;
     $this->_web->layout('dashboard');
     $this->_web->view('admin.home', $data);
   }

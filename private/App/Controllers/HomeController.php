@@ -5,32 +5,25 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        $status_kasus = ['odp_proses', 'odp_selesai', 'pdp_perawatan', 'pdp_sembuh', 'pdp_meninggal', 'positif_dirawat', 'positif_sembuh', 'positif_meninggal'];
-        $_db = Database::getInstance();
-        $sql_kasus_kecamatan = "SELECT kecamatan.nama_kecamatan,";
-        foreach ($status_kasus as $s) {
-            $sql_kasus_kecamatan .= " SUM(CASE WHEN kasus.status LIKE '" . $s . "' THEN 1 ELSE 0 END) " . $s . ",";
-        }
-        $sql_kasus_kecamatan = substr($sql_kasus_kecamatan, 0, -1);
-        $sql_kasus_kecamatan .= " FROM kasus RIGHT JOIN kecamatan on kasus.id_kecamatan = kecamatan.id_kecamatan group by kecamatan.nama_kecamatan";
-        $kasus_kecamatan = $_db->query($sql_kasus_kecamatan);
-        $total_kasus = [];
-        foreach ($status_kasus as $s) {
-            $total_kasus[$s] = array_reduce($kasus_kecamatan, function ($total, $d) use ($s) {
-                return $total + $d[$s];
-            }, 0);
-        }
-        $rumah_sakit_m = $this->model('RumahSakit');
-        $rumah_sakit = $rumah_sakit_m->read();
-        $data = [
-            'kasus_kecamatan' => $kasus_kecamatan,
-            'total_kasus' => $total_kasus,
-            'rumah_sakit' => $rumah_sakit
+        $where = [
+            'order_by' => ['tanggal', 'DESC'],
+            'limit' => [0,1]
         ];
-        $data['total_kasus']['total_odp'] = $data['total_kasus']['odp_proses'] + $data['total_kasus']['odp_selesai'];
-        $data['total_kasus']['total_pdp'] = $data['total_kasus']['pdp_perawatan'] + $data['total_kasus']['pdp_sembuh'] + $data['total_kasus']['pdp_meninggal'];
-        $data['total_kasus']['total_positif'] = $data['total_kasus']['positif_dirawat'] + $data['total_kasus']['positif_sembuh'] + $data['total_kasus']['positif_meninggal'];
+        $data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
+        $data['odp_proses'] = $data['odp_proses'] ?? 0;
+        $data['odp_selesai'] = $data['odp_selesai'] ?? 0;
+        $data['pdp_rawat'] = $data['pdp_rawat'] ?? 0;
+        $data['pdp_sehat'] = $data['pdp_sehat'] ?? 0;
+        $data['pdp_meninggal'] = $data['pdp_meninggal'] ?? 0;
+        $data['positif_rawat'] = $data['positif_rawat'] ?? 0;
+        $data['positif_sehat'] = $data['positif_sehat'] ?? 0;
+        $data['positif_meninggal'] = $data['positif_meninggal'] ?? 0;
+        $data['total_odp'] = $data['odp_proses'] + $data['odp_selesai'];
+        $data['total_pdp'] = $data['pdp_rawat'] + $data['pdp_sehat'] + $data['pdp_meninggal'];
+        $data['total_positif'] = $data['positif_rawat'] + $data['positif_sehat'] + $data['positif_meninggal'];
+        $data['total_kasus'] = $data['total_odp'] + $data['total_pdp'] + $data['total_positif'];
+        $data['data_kecamatan'] = isset($data['data_kecamatan']) ? unserialize($data['data_kecamatan']) : null;
+        $data['rumah_sakit'] = $this->model('RumahSakit')->read();
         $this->_web->view('home', $data);
     }
 }

@@ -22,14 +22,14 @@
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
             <h4 class="text-center font-weight-medium text-uppercase mb-4">ODP (Orang dalam pemantauan)</h4>
-            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_odp'] > 0 ? $data['total_kasus']['total_odp'] : '-' ?></h2>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_odp'] ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['odp_proses'] > 0 ? $data['total_kasus']['odp_proses'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['odp_proses'] ?></h4>
                 <p class="text-center text-muted">Proses pemantauan</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['odp_selesai'] > 0 ? $data['total_kasus']['odp_selesai'] : '-' ?>
+                <h4 class="text-center"><?= $data['odp_selesai'] ?>
                 </h4>
                 <p class="text-center text-muted">Selesai pemantauan</p>
               </div>
@@ -39,18 +39,18 @@
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
             <h4 class="text-center font-weight-medium text-uppercase mb-4">PDP (Pasien dalam pengawasan)</h4>
-            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_pdp'] > 0 ? $data['total_kasus']['total_pdp'] : '-' ?></h2>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_pdp'] ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['pdp_perawatan'] > 0 ? $data['total_kasus']['pdp_perawatan'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['pdp_rawat'] ?></h4>
                 <p class="text-center text-muted">Masih dirawat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['pdp_sembuh'] > 0 ? $data['total_kasus']['pdp_sembuh'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['pdp_sehat'] ?></h4>
                 <p class="text-center text-muted">Pulang dan sehat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['pdp_meninggal'] > 0 ? $data['total_kasus']['pdp_meninggal'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['pdp_meninggal'] ?></h4>
                 <p class="text-center text-muted">Meninggal</p>
               </div>
             </div>
@@ -59,24 +59,25 @@
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
             <h4 class="text-center font-weight-medium text-uppercase mb-4">Kasus Positif COVID-19/Corona</h4>
-            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_positif'] > 0 ? $data['total_kasus']['total_positif'] : '-' ?></h2>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_positif'] ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['positif_dirawat'] > 0 ? $data['total_kasus']['positif_dirawat'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['positif_rawat'] ?></h4>
                 <p class="text-center text-muted">Masih Dirawat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['positif_sembuh'] > 0 ? $data['total_kasus']['positif_sembuh'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['positif_sehat'] ?></h4>
                 <p class="text-center text-muted">Pulang dan sehat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['positif_meninggal'] > 0 ? $data['total_kasus']['positif_meninggal'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['positif_meninggal'] ?></h4>
                 <p class="text-center text-muted">Meninggal</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <p class="mt-0 font-italic"><span>*</span> Terakhir diperbarui tanggal <?= Mod::dateID($data['tanggal']) ?></p>
     </div>
   </div>
   <!--<div class="overlay-animated"></div>-->
@@ -139,14 +140,14 @@
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
             <h4 class="text-center font-weight-medium text-uppercase mb-4">ODP (Orang dalam pemantauan)</h4>
-            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_odp'] > 0 ? $data['total_kasus']['total_odp'] : '-' ?></h2>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_odp'] ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['odp_proses'] > 0 ? $data['total_kasus']['odp_proses'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['odp_proses'] ?></h4>
                 <p class="text-center text-muted">Proses pemantauan</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['odp_selesai'] > 0 ? $data['total_kasus']['odp_selesai'] : '-' ?>
+                <h4 class="text-center"><?= $data['odp_selesai'] ?>
                 </h4>
                 <p class="text-center text-muted">Selesai pemantauan</p>
               </div>
@@ -156,18 +157,18 @@
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
             <h4 class="text-center font-weight-medium text-uppercase mb-4">PDP (Pasien dalam pengawasan)</h4>
-            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_pdp'] > 0 ? $data['total_kasus']['total_pdp'] : '-' ?></h2>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_pdp'] ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['pdp_perawatan'] > 0 ? $data['total_kasus']['pdp_perawatan'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['pdp_rawat'] ?></h4>
                 <p class="text-center text-muted">Masih dirawat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['pdp_sembuh'] > 0 ? $data['total_kasus']['pdp_sembuh'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['pdp_sehat'] ?></h4>
                 <p class="text-center text-muted">Pulang dan sehat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['pdp_meninggal'] > 0 ? $data['total_kasus']['pdp_meninggal'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['pdp_meninggal'] ?></h4>
                 <p class="text-center text-muted">Meninggal</p>
               </div>
             </div>
@@ -176,80 +177,82 @@
         <div class="panel panel-default d-flex flex-column">
           <div class="panel-body">
             <h4 class="text-center font-weight-medium text-uppercase mb-4">Kasus Positif COVID-19/Corona</h4>
-            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_kasus']['total_positif'] > 0 ? $data['total_kasus']['total_positif'] : '-' ?></h2>
+            <h2 class="text-center font-weight-bold mb-4"><?= $data['total_positif'] ?></h2>
             <div class="detail-kasus">
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['positif_dirawat'] > 0 ? $data['total_kasus']['positif_dirawat'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['positif_rawat'] ?></h4>
                 <p class="text-center text-muted">Masih Dirawat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['positif_sembuh'] > 0 ? $data['total_kasus']['positif_sembuh'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['positif_sehat'] ?></h4>
                 <p class="text-center text-muted">Pulang dan sehat</p>
               </div>
               <div class="item-detail">
-                <h4 class="text-center"><?= $data['total_kasus']['positif_meninggal'] > 0 ? $data['total_kasus']['positif_meninggal'] : '-' ?></h4>
+                <h4 class="text-center"><?= $data['positif_meninggal'] ?></h4>
                 <p class="text-center text-muted">Meninggal</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th rowspan="2" class="text-center">#</th>
-              <th rowspan="2" class="text-center">Kecamatan</th>
-              <th colspan="2" class="text-center">ODP</th>
-              <th colspan="3" class="text-center">PDP</th>
-              <th colspan="3" class="text-center">Positif</th>
-              <th rowspan="2" class="text-center">Total</th>
-            </tr>
-            <tr>
-              <th class="text-center">Proses</th>
-              <th class="text-center">Selesai</th>
-              <th class="text-center">Dirawat</th>
-              <th class="text-center">Sehat</th>
-              <th class="text-center">Meninggal</th>
-              <th class="text-center">Dirawat</th>
-              <th class="text-center">Meninggal</th>
-              <th class="text-center">Sembuh</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $number = 1;
-            $total_end = 0;
-            foreach ($data['kasus_kecamatan'] as $d) :
-              $total = $d['odp_proses'] + $d['odp_selesai'] + $d['pdp_perawatan'] + $d['pdp_sembuh'] + $d['positif_dirawat'] + $d['positif_meninggal'] + $d['positif_sembuh'];
-              $total_end += $total;
-            ?>
+      <?php if (isset($data['data_kecamatan'])) : ?>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td class="text-center"><?= $number ?></td>
-                <td><?= $d['nama_kecamatan'] ?></td>
-                <td class="text-center"><?= $d['odp_proses'] > 0 ? $d['odp_proses'] : '-' ?></td>
-                <td class="text-center"><?= $d['odp_selesai'] > 0 ? $d['odp_selesai'] : '-' ?></td>
-                <td class="text-center"><?= $d['pdp_perawatan'] > 0 ? $d['pdp_perawatan'] : '-' ?></td>
-                <td class="text-center"><?= $d['pdp_sembuh'] > 0 ? $d['pdp_sembuh'] : '-' ?></td>
-                <td class="text-center"><?= $d['pdp_meninggal'] > 0 ? $d['pdp_meninggal'] : '-' ?></td>
-                <td class="text-center"><?= $d['positif_dirawat'] > 0 ? $d['positif_dirawat'] : '-' ?></td>
-                <td class="text-center"><?= $d['positif_meninggal'] > 0 ? $d['positif_meninggal'] : '-' ?></td>
-                <td class="text-center"><?= $d['positif_sembuh'] > 0 ? $d['positif_sembuh'] : '-' ?></td>
-                <td class="text-center font-weight-bold"><?= $total > 0 ? $total : '-' ?></td>
+                <th rowspan="2" class="text-center">#</th>
+                <th rowspan="2" class="text-center">Kecamatan</th>
+                <th colspan="2" class="text-center">ODP</th>
+                <th colspan="3" class="text-center">PDP</th>
+                <th colspan="3" class="text-center">Positif</th>
+                <th rowspan="2" class="text-center">Total</th>
               </tr>
-            <?php
-              $number++;
-            endforeach
-            ?>
-          </tbody>
-          <tfooter>
-            <tr>
-              <td colspan="10" class="text-right font-weight-bold">Total kasus</td>
-              <td class="text-center font-weight-bold"><?= $total_end > 0 ? $total_end : '-' ?></td>
-            </tr>
-          </tfooter>
-        </table>
-      </div>
+              <tr>
+                <th class="text-center">Proses</th>
+                <th class="text-center">Selesai</th>
+                <th class="text-center">Dirawat</th>
+                <th class="text-center">Sehat</th>
+                <th class="text-center">Meninggal</th>
+                <th class="text-center">Dirawat</th>
+                <th class="text-center">Sembuh</th>
+                <th class="text-center">Meninggal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $n0 = 1;
+              $total_end = 0;
+              foreach ($data['data_kecamatan'] as $d) :
+                $total = intval($d['odp_proses']) + intval($d['odp_selesai']) + intval($d['pdp_rawat']) + intval($d['pdp_sehat']) + intval($d['pdp_meninggal']) + intval($d['positif_rawat']) + intval($d['positif_sehat']) + intval($d['positif_meninggal']);
+                $total_end += $total;
+              ?>
+                <tr>
+                  <td class="text-center"><?= $n0 ?></td>
+                  <td><?= $d['nama_kecamatan'] ?></td>
+                  <td class="text-center"><?= $d['odp_proses'] !== '' ? $d['odp_proses'] : '-' ?></td>
+                  <td class="text-center"><?= $d['odp_selesai'] !== '' ? $d['odp_selesai'] : '-' ?></td>
+                  <td class="text-center"><?= $d['pdp_rawat'] !== '' ? $d['pdp_rawat'] : '-' ?></td>
+                  <td class="text-center"><?= $d['pdp_sehat'] !== '' ? $d['pdp_sehat'] : '-' ?></td>
+                  <td class="text-center"><?= $d['pdp_meninggal'] !== '' ? $d['pdp_meninggal'] : '-' ?></td>
+                  <td class="text-center"><?= $d['positif_rawat'] !== '' ? $d['positif_rawat'] : '-' ?></td>
+                  <td class="text-center"><?= $d['positif_sehat'] !== '' ? $d['positif_sehat'] : '-' ?></td>
+                  <td class="text-center"><?= $d['positif_meninggal'] !== '' ? $d['positif_meninggal'] : '-' ?></td>
+                  <td class="text-center font-weight-bold"><?= $total ?></td>
+                </tr>
+              <?php
+                $n0++;
+              endforeach
+              ?>
+            </tbody>
+            <tfooter>
+              <tr>
+                <td colspan="10" class="text-right font-weight-bold">Total kasus</td>
+                <td class="text-center font-weight-bold"><?= $total_end ?></td>
+              </tr>
+            </tfooter>
+          </table>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
   <div class="section" id="pencegahan">
@@ -329,11 +332,11 @@
         </div>
         <div class="line"></div>
       </div>
-      <div class="mx-md-5">        
+      <div class="mx-md-5">
         <?php
-        if(count($data['rumah_sakit']) <= 0) {
+        if (count($data['rumah_sakit']) <= 0) {
         ?>
-        <h6 class="text-md-center font-italic">Data belum tersedia</h6>
+          <h6 class="text-md-center font-italic">Data belum tersedia</h6>
         <?php
         }
         foreach ($data['rumah_sakit'] as $i => $r) :

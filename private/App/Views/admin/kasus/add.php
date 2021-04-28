@@ -5,50 +5,162 @@
         <?php
         $data_flasher = Flasher::data();
         ?>
-        <div class="row">
-          <div class="col-md">
-            <?= Web::key_field() ?>
-            <div class="form-group">
-              <label class="small form-control-label" for="nik">NIK<span class="text-danger">*</span></label>
-              <input type="text" value="<?= $data_flasher ? $data_flasher->nik : '' ?>" maxlength="50" placeholder="Masukan NIK" required name="nik" id="nik" class="form-control form-control-sm form-control-alternative">
-            </div>
-            <div class="form-group">
-              <label class="small form-control-label" for="nama">Nama<span class="text-danger">*</span></label>
-              <input type="text" value="<?= $data_flasher ? $data_flasher->nama : '' ?>" maxlength="50" placeholder="Masukan nama" required name="nama" id="nama" class="form-control form-control-sm form-control-alternative">
-            </div>
-            <div class="form-group">
-              <label class="small form-control-label" for="id_kecamatan">Kecamatan<span class="text-danger">*</span></label>
-              <select class="form-control form-control-sm form-control-alternative" required="" name="id_kecamatan" id="id_kecamatan">
-                <option value="">Pilih kecamatan</option>
-                <?php
-                foreach ($data['kecamatan'] as $k) :
-                ?>
-                  <option <?= $data_flasher && $data_flasher->id_kecamatan === $k['id_kecamatan'] ? 'selected' : '' ?> value="<?= $k['id_kecamatan'] ?>"><?= $k['nama_kecamatan'] ?></option>
-                <?php
-                endforeach
-                ?>
-              </select>
+        <?= Web::key_field() ?>
+        <div class="form-group">
+          <label class="small form-control-label" for="tanggal">Tanggal<span class="text-danger">*</span></label>
+          <input type="date" value="<?= $data_flasher ? $data_flasher['tanggal'] : date('Y-m-d') ?>" maxlength="50" placeholder="Masukkan tanggal" required name="tanggal" id="tanggal" class="form-control form-control-sm form-control-alternative">
+        </div>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="card mx-0 mb-3">
+              <div class="card-header">
+                <h5 class="m-0 fw-800 text-uppercase">ODP (Orang Dalam Pemantauan)</h5>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="odp_proses">Proses pemantauan<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['odp_proses'] : '' ?>" min="0" placeholder="Jumlah proses pemantauan" required name="odp_proses" id="odp_proses" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="odp_selesai">Selesai pemantauan<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['odp_selesai'] : '' ?>" min="0" placeholder="Jumlah selesai pemantauan" required name="odp_selesai" id="odp_selesai" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md">
-            <div class="form-group">
-              <label class="small form-control-label" for="umur">Umur<span class="text-danger">*</span></label>
-              <input type="number" value="<?= $data_flasher ? $data_flasher->umur : '' ?>" min="0" placeholder="Masukan umur" required name="umur" id="umur" class="form-control form-control-sm form-control-alternative">
+          <div class="col-12">
+            <div class="card mx-0 mb-3">
+              <div class="card-header">
+                <h5 class="m-0 fw-800 text-uppercase">PDP (Pasien Dalam Pengawasan)</h5>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="pdp_rawat">Masih dirawat<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_rawat'] : '' ?>" min="0" placeholder="Jumlah masih dirawat" required name="pdp_rawat" id="pdp_rawat" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="pdp_sehat">Pulang dan sehat<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_sehat'] : '' ?>" min="0" placeholder="Jumlah pulang dan sehat" required name="pdp_sehat" id="pdp_sehat" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="pdp_meninggal">Meninggal<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_meninggal'] : '' ?>" min="0" placeholder="Jumlah meninggal" required name="pdp_meninggal" id="pdp_meninggal" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="small form-control-label" for="hp">No. HP<span class="text-danger">*</span></label>
-              <input type="text" value="<?= $data_flasher ? $data_flasher->hp : '' ?>" placeholder="Masukan nomor HP" required name="hp" id="hp" class="form-control form-control-sm form-control-alternative">
-            </div>
-            <div class="form-group">
-              <label class="small form-control-label" for="jenis_kelamin">Jenis Kelamin<span class="text-danger">*</span></label>
-              <select class="form-control form-control-sm form-control-alternative" required="" name="jenis_kelamin" id="jenis_kelamin">
-                <option value="">Pilih jenis kelamin</option>
-                <option <?= $data_flasher && $data_flasher->jenis_kelamin === 'L' ? 'selected' : '' ?> value="L">Laki-laki</option>
-                <option <?= $data_flasher && $data_flasher->jenis_kelamin === 'P' ? 'selected' : '' ?> value="P">Perempuan</option>
-              </select>
+          </div>
+          <div class="col-12">
+            <div class="card mx-0 mb-3">
+              <div class="card-header">
+                <h5 class="m-0 fw-800 text-uppercase">KASUS POSITIF COVID-19/CORONA</h5>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="positif_rawat">Masih dirawat<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['positif_rawat'] : '' ?>" min="0" placeholder="Jumlah masih dirawat" required name="positif_rawat" id="positif_rawat" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="positif_sehat">Pulang dan sehat<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['positif_sehat'] : '' ?>" min="0" placeholder="Jumlah pulang dan sehat" required name="positif_sehat" id="positif_sehat" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label class="small form-control-label" for="positif_meninggal">Meninggal<span class="text-danger">*</span></label>
+                      <input type="number" value="<?= $data_flasher ? $data_flasher['positif_meninggal'] : '' ?>" min="0" placeholder="Jumlah meninggal" required name="positif_meninggal" id="positif_meninggal" class="form-control form-control-sm form-control-alternative">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <h2 class="fw-800">Detail kasus kecamatan</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="bg-secondary">
+              <tr>
+                <th rowspan="2" class="text-center align-middle">#</th>
+                <th rowspan="2" class="text-center align-middle">Kecamatan</th>
+                <th colspan="2" class="text-center">ODP</th>
+                <th colspan="3" class="text-center">PDP</th>
+                <th colspan="3" class="text-center">Positif</th>
+              </tr>
+              <tr>
+                <th class="text-center">Proses</th>
+                <th class="text-center">Selesai</th>
+                <th class="text-center">Dirawat</th>
+                <th class="text-center">Sehat</th>
+                <th class="text-center">Meninggal</th>
+                <th class="text-center">Dirawat</th>
+                <th class="text-center">Meninggal</th>
+                <th class="text-center">Sembuh</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $no = 1;
+              $kecamatan = $data_flasher ? $data_flasher['data_kecamatan'] : $data['kecamatan'];
+              foreach($kecamatan as $k) :
+              ?>
+                <tr>
+                  <td class="text-center align-middle"><?= $no ?></td>
+                  <td class="align-middle">
+                    <?= $k['nama_kecamatan'] ?>
+                    <input type="hidden" value="<?= $k['nama_kecamatan'] ?>" name="data_kecamatan[<?= $no - 1 ?>][nama_kecamatan]">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['odp_proses'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][odp_proses]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['odp_selesai'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][odp_selesai]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['pdp_rawat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_rawat]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['pdp_sehat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_sehat]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['pdp_meninggal'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_meninggal]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['positif_rawat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_rawat]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['positif_sehat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_sehat]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                  <td>
+                    <input type="number" value="<?= $k['positif_meninggal'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_meninggal]" class="form-control form-control-sm form-control-alternative">
+                  </td>
+                </tr
+              <?php
+                $no++;
+              endforeach;
+              ?>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2020 at 05:38 AM
+-- Generation Time: Apr 28, 2021 at 04:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.27
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
+-- Database: `kuansing_covid19`
 --
 
 -- --------------------------------------------------------
@@ -29,15 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `kasus` (
   `id_kasus` int(11) NOT NULL,
-  `id_kecamatan` int(11) NOT NULL,
-  `nik` varchar(20) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `umur` int(3) NOT NULL,
-  `hp` varchar(20) NOT NULL,
-  `status` enum('','odp_proses','odp_selesai','pdp_perawatan','pdp_sembuh','pdp_meninggal','positif_dirawat','positif_meninggal','positif_sembuh') NOT NULL,
-  `jenis_kelamin` enum('L','P') NOT NULL,
-  `tanggal` date NOT NULL DEFAULT,
-  `tanggal_dibuat` timestamp NOT NULL DEFAULT
+  `tanggal` date NOT NULL,
+  `odp_proses` int(11) NOT NULL,
+  `odp_selesai` int(11) NOT NULL,
+  `pdp_rawat` int(11) NOT NULL,
+  `pdp_sehat` int(11) NOT NULL,
+  `pdp_meninggal` int(11) NOT NULL,
+  `positif_rawat` int(11) NOT NULL,
+  `positif_sehat` int(11) NOT NULL,
+  `positif_meninggal` int(11) NOT NULL,
+  `data_kecamatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -75,21 +77,6 @@ INSERT INTO `kecamatan` (`id_kecamatan`, `nama_kecamatan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pantauan`
---
-
-CREATE TABLE `pantauan` (
-  `id_pantauan` int(11) NOT NULL,
-  `id_kasus` int(11) NOT NULL,
-  `riwayat` text NOT NULL,
-  `status` enum('odp_proses','odp_selesai','pdp_perawatan','pdp_sembuh','pdp_meninggal','positif_dirawat','positif_meninggal','positif_sembuh') NOT NULL,
-  `keterangan` text NOT NULL,
-  `tanggal` date NOT NULL DEFAULT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `rumah_sakit`
 --
 
@@ -98,7 +85,7 @@ CREATE TABLE `rumah_sakit` (
   `nama_rumah_sakit` varchar(50) NOT NULL,
   `alamat_rumah_sakit` text NOT NULL,
   `telepon_rumah_sakit` text NOT NULL,
-  `tanggal_dibuat` timestamp NOT NULL DEFAULT
+  `tanggal_dibuat` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -122,8 +109,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `username`, `name`, `email`, `password`, `role`, `last_login`) VALUES
-(1, 'admin', 'Administrator', 'admin@email.com', '', 'admin', '2020-04-14 06:02:35'),
-(2, 'kecamatan', 'Lorem', 'lorem@ipsum.com', '$2y$10$aIF9lfD5wlYkjzqga2pwFuai9EzkaAtGgmHdib9K0qlgIrDaoiFgi', 'admin', '2020-04-08 05:42:10');
+(1, 'admin', 'Administrator', 'admin@email.com', '$2y$10$yilV5k67WnmfiRtLdek.Pe.SeNZuDwrR7VhDPPYFfKdVuJtY5W6vm', 'admin', '2021-04-28 11:39:40');
 
 --
 -- Indexes for dumped tables
@@ -134,22 +120,13 @@ INSERT INTO `users` (`id_users`, `username`, `name`, `email`, `password`, `role`
 --
 ALTER TABLE `kasus`
   ADD PRIMARY KEY (`id_kasus`),
-  ADD UNIQUE KEY `nik` (`nik`),
-  ADD UNIQUE KEY `hp` (`hp`),
-  ADD KEY `id_kecamatan` (`id_kecamatan`);
+  ADD UNIQUE KEY `tanggal` (`tanggal`);
 
 --
 -- Indexes for table `kecamatan`
 --
 ALTER TABLE `kecamatan`
   ADD PRIMARY KEY (`id_kecamatan`);
-
---
--- Indexes for table `pantauan`
---
-ALTER TABLE `pantauan`
-  ADD PRIMARY KEY (`id_pantauan`),
-  ADD KEY `id_kasus` (`id_kasus`);
 
 --
 -- Indexes for table `rumah_sakit`
@@ -179,12 +156,6 @@ ALTER TABLE `kasus`
 --
 ALTER TABLE `kecamatan`
   MODIFY `id_kecamatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `pantauan`
---
-ALTER TABLE `pantauan`
-  MODIFY `id_pantauan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rumah_sakit`

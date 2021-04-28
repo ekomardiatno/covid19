@@ -2,8 +2,6 @@
 
 class KasusController extends Controller
 {
-  private $_model;
-  private $_kecamatan_model;
   public function __construct()
   {
     parent::__construct();
@@ -12,25 +10,10 @@ class KasusController extends Controller
 
   public function index()
   {
-
-    $fields = [
-      'kasus' => ['id_kasus', 'nik', 'nama', 'umur', 'tanggal', 'jenis_kelamin', 'hp', 'status'],
-      'kecamatan' => ['nama_kecamatan']
+    $where = [
+      'order_by' => ['tanggal', 'DESC']
     ];
-    $index = [
-      'kecamatan' => [
-        'index_table' => 'kasus',
-        'index_id' => 'id_kecamatan'
-      ]
-    ];
-    $data = $this->model('Kasus')->join('LEFT JOIN', $fields, $index);
-
-    $this->_web->title('Kasus COVID-19');
-    $this->_web->breadcrumb(
-      [
-        ['admin.kasus', 'Kasus COVID-19']
-      ]
-    );
+    $data = $this->model('Kasus')->read(null, $where);
     $this->_web->layout('dashboard');
     $this->_web->view('admin.kasus.home', $data);
   }
@@ -48,6 +31,7 @@ class KasusController extends Controller
         ['admin.kasus.tambah', 'Tambah Kasus']
       ]
     );
+
     $this->_web->layout('dashboard');
     $this->_web->view('admin.kasus.add', $data);
   }
@@ -55,14 +39,28 @@ class KasusController extends Controller
   public function post()
   {
     $data = $this->request()->post;
-    $data['tanggal'] = date('Y-m-d');
+    $data['data_kecamatan'] = serialize($data['data_kecamatan']);
     $insert = $this->model('Kasus')->insert($data);
 
     if ($insert) {
       Flasher::setFlash('<b>Berhasil!</b> Kasus ditambahkan', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
+      $data['data_kecamatan'] = unserialize($data['data_kecamatan']);
       Flasher::setData($data);
-      Flasher::setFlash('<b>Gagal!</b> Kemungkinan NIK/No. HP sudah terdaftar', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      $where = [
+        'params' => [
+          [
+            'column' => 'tanggal',
+            'value' => $data['tanggal']
+          ]
+        ]
+      ];
+      $num_rows = $this->model('Kasus')->read(null, $where, 'NUM_ROWS');
+      if($num_rows >= 1) {
+        Flasher::setFlash('<b>Gagal!</b> Data pada tanggal ' . Mod::dateID($data['tanggal']) . ' sudah ada', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      } else {
+        Flasher::setFlash('<b>Gagal!</b> Mohon periksa isian formulir', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      }
       return $this->redirect('admin.kasus.tambah');
     }
 
@@ -71,7 +69,6 @@ class KasusController extends Controller
 
   public function edit($id)
   {
-    $kecamatan = $this->model('Kecamatan')->read();
     $where = [
       'params' => [
         [
@@ -80,16 +77,13 @@ class KasusController extends Controller
         ]
       ]
     ];
-    $kasus = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
-    $data = [
-      'kecamatan' => $kecamatan,
-      'kasus' => $kasus
-    ];
-    $this->_web->title('Ubah Indentitas');
+    $data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
+    $data['data_kecamatan'] = unserialize($data['data_kecamatan']);
+    $this->_web->title('Edit Kasus');
     $this->_web->breadcrumb(
       [
         ['admin.kasus', 'Kasus COVID-19'],
-        ['admin.kasus.edit.' . $id, 'Ubah Identitas']
+        ['admin.kasus.edit.' . $id, 'Edit Kasus']
       ]
     );
     $this->_web->layout('dashboard');
@@ -98,12 +92,38 @@ class KasusController extends Controller
   public function update($id)
   {
     $data = $this->request()->post;
-    $update = $this->model('Kasus')->update($data, ['data_id' => $id]);
+    $data['data_kecamatan'] = serialize($data['data_kecamatan']);
+    $update = $this->model('Kasus')->update($data, ['id_kasus' => $id]);
+
+    $where = [
+      'params' => [
+        [
+          'column' => 'id_kasus',
+          'value' => $id
+        ]
+      ]
+    ];
+    $old_data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
 
     if ($update) {
       Flasher::setFlash('<b>Berhasil!</b> Kasus diperbarui', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
-      Flasher::setFlash('<b>Gagal!</b> Tidak bisa mengubah data', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      $data['data_kecamatan'] = unserialize($data['data_kecamatan']);
+      Flasher::setData($data);
+      $where = [
+        'params' => [
+          [
+            'column' => 'tanggal',
+            'value' => $data['tanggal']
+          ]
+        ]
+      ];
+      $num_rows = $this->model('Kasus')->read(null, $where, 'NUM_ROWS');
+      if($old_data['tanggal'] !== $data['tanggal'] && $num_rows >= 1) {
+        Flasher::setFlash('<b>Gagal!</b> Data pada tanggal ' . Mod::dateID($data['tanggal']) . ' sudah ada', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      } else {
+        Flasher::setFlash('<b>Gagal!</b> Mohon periksa isian formulir', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      }
     }
 
     $this->redirect('admin.kasus.edit.' . $id);
@@ -133,66 +153,4 @@ class KasusController extends Controller
     $this->redirect('admin.kasus');
   }
 
-  public function monitor($id)
-  {
-    $fields = [
-      'kasus' => ['nik', 'nama', 'umur', 'hp', 'jenis_kelamin'],
-      'kecamatan' => ['nama_kecamatan']
-    ];
-    $index = [
-      'kecamatan' => ['index_table' => 'kasus', 'index_id' => 'id_kecamatan']
-    ];
-    $where = [
-      'params' => [
-        [
-          'column' => 'kasus.id_kasus',
-          'value' => $id
-        ]
-      ]
-    ];
-    $profile = $this->model('Kasus')->join('LEFT JOIN', $fields, $index, $where, 'ARRAY_ONE');
-    $where = [
-      'params' => [
-        [
-          'column' => 'id_kasus',
-          'value' => $id
-        ]
-      ],
-      'order_by' => ['tanggal', 'DESC']
-    ];
-    $data = $this->model('Pantauan')->read(null, $where);
-    $this->_web->title('Monitor Kasus');
-    $this->_web->breadcrumb([
-      ['admin.kasus', 'Kasus COVID-19'],
-      ['admin.kasus.monitor', 'Monitor Kasus']
-    ]);
-    $this->_web->layout('dashboard');
-    $data = [
-      'pantauan' => $data,
-      'id_kasus' => $id,
-      'profile' => $profile
-    ];
-    $this->_web->view('admin.kasus.monitor', $data);
-  }
-
-  public function status()
-  {
-
-    $data = $this->request()->post;
-    $insert = $this->model('Pantauan')->insert($data);
-    if ($insert) {
-      $where = [
-        'params' => [
-          [
-            'column' => 'id_kasus',
-            'value' => $data['id_kasus']
-          ]
-        ]
-      ];
-      $this->model('Kasus')->update(['status' => $data['status'], 'tanggal' => $data['tanggal']], $where);
-    } else {
-      Flasher::setFlash('<b>Gagal!</b> Memperbarui status', 'danger', 'ni ni-fat-remove', 'top', 'center');
-    }
-    $this->redirect('admin.kasus.monitor.' . $data['id_kasus']);
-  }
 }
