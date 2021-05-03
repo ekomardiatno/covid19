@@ -16,9 +16,9 @@
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
         <div class="form-group mb-3">
-          <label class="small form-control-label" for="telepon_rumah_sakit">Nomor telepon<span class="text-danger">*</span></label>
+          <label class="small form-control-label" for="telepon_rumah_sakit">Nomor telepon</label>
           <div class="input-with-button d-flex align-items-center mx--1">
-            <input type="text" maxlength="20" placeholder="Masukan nomor telepon" required name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control form-control-sm form-control-alternative mx-1 mb-0">
+            <input type="text" maxlength="20" placeholder="Masukan nomor telepon" name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control form-control-sm form-control-alternative mx-1 mb-0">
             <button type="button" class="btn btn-danger btn-sm mx-1 remove-element"><span class="fas fa-trash"></span></button>
           </div>
         </div>
@@ -27,7 +27,7 @@
           $('.add-element').on('click', function() {
             let html = `
               <div class="input-with-button d-flex align-items-center mx--1">
-                <input type="text" maxlength="20" placeholder="Masukan nomor telepon" required name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control form-control-sm form-control-alternative mx-1 mb-0">
+                <input type="text" maxlength="20" placeholder="Masukan nomor telepon" name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control form-control-sm form-control-alternative mx-1 mb-0">
                 <button type="button" class="btn btn-danger btn-sm mx-1 remove-element"><span class="fas fa-trash"></span></button>
               </div>
             `

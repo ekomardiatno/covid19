@@ -357,7 +357,7 @@
                 ?>
                   <div class="d-flex align-items-start mx--2 <?= count($telepon) === $i + 1 ? '' : 'mb-2' ?>">
                     <span class="mx-2 icon-wrapper-sm text-success"><i class="fas fa-phone-alt"></i></span>
-                    <span class="mx-2 flex-col text-muted font-weight-medium"><?= $t ?></span>
+                    <span class="mx-2 flex-col text-muted font-weight-medium"><?= $t !== '' ? $t : '-' ?></span>
                   </div>
                 <?php
                 endforeach;
