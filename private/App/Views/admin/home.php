@@ -19,7 +19,7 @@ function crease($int)
 			<div class="card-body px-3">
 				<div class="row">
 					<div class="col">
-						<h5 class="card-title text-uppercase text-muted mb-0">TOTAL ODP</h5>
+						<h5 class="card-title text-uppercase text-muted mb-0">SPESIMEN</h5>
 						<span class="h2 font-weight-bold mb-0"><?= $data['total_odp'] ?></span>
 					</div>
 					<div class="col-auto">
@@ -43,7 +43,7 @@ function crease($int)
 			<div class="card-body px-3">
 				<div class="row">
 					<div class="col">
-						<h5 class="card-title text-uppercase text-muted mb-0">TOTAL PDP</h5>
+						<h5 class="card-title text-uppercase text-muted mb-0">SUSPEK</h5>
 						<span class="h2 font-weight-bold mb-0"><?= $data['total_pdp'] ?></span>
 					</div>
 					<div class="col-auto">
@@ -67,7 +67,7 @@ function crease($int)
 			<div class="card-body px-3">
 				<div class="row">
 					<div class="col">
-						<h5 class="card-title text-uppercase text-muted mb-0">Positif</h5>
+						<h5 class="card-title text-uppercase text-muted mb-0">TERKONFIRMASI</h5>
 						<span class="h2 font-weight-bold mb-0"><?= $data['total_positif'] ?></span>
 					</div>
 					<div class="col-auto">
@@ -91,7 +91,7 @@ function crease($int)
 			<div class="card-body px-3">
 				<div class="row">
 					<div class="col">
-						<h5 class="card-title text-uppercase text-muted mb-0">Total Kasus</h5>
+						<h5 class="card-title text-uppercase text-muted mb-0">TOTAL KASUS</h5>
 						<span class="h2 font-weight-bold mb-0"><?= $data['total_kasus'] ?></span>
 					</div>
 					<div class="col-auto">
@@ -117,38 +117,38 @@ function crease($int)
 			<tr>
 				<th class="text-center" scope="col">#</th>
 				<th scope="col">Kecamatan</th>
-				<th class="text-center" scope="col">ODP</th>
-				<th class="text-center" scope="col">PDP</th>
-				<th class="text-center" scope="col">Positif</th>
-				<th class="text-center" scope="col">Total</th>
+				<th class="text-center" scope="col">Spesimen</th>
+				<th class="text-center" scope="col">Suspek</th>
+				<th class="text-center" scope="col">Terkonfirmasi</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
 			$no = 1;
-			$total_kasus_all = 0;
+			$total_odp = 0;
+			$total_pdp = 0;
+			$total_positif = 0;
 			foreach ($data['kecamatan'] as $k) :
 				$odp_proses = isset($k['odp_proses']) ? intval($k['odp_proses']) : 0;
 				$odp_selesai = isset($k['odp_selesai']) ? intval($k['odp_selesai']) : 0;
+				$pdp_rumah = isset($k['pdp_rumah']) ? intval($k['pdp_rumah']) : 0;
 				$pdp_rawat = isset($k['pdp_rawat']) ? intval($k['pdp_rawat']) : 0;
 				$pdp_sehat = isset($k['pdp_sehat']) ? intval($k['pdp_sehat']) : 0;
 				$pdp_meninggal = isset($k['pdp_meninggal']) ? intval($k['pdp_meninggal']) : 0;
+				$positif_rumah = isset($k['positif_rumah']) ? intval($k['positif_rumah']) : 0;
 				$positif_rawat = isset($k['positif_rawat']) ? intval($k['positif_rawat']) : 0;
 				$positif_sehat = isset($k['positif_sehat']) ? intval($k['positif_sehat']) : 0;
 				$positif_meninggal = isset($k['positif_meninggal']) ? intval($k['positif_meninggal']) : 0;
-				$total_odp = $odp_proses + $odp_selesai;
-				$total_pdp = $pdp_rawat + $pdp_sehat + $pdp_meninggal;
-				$total_positif = $positif_rawat + $positif_sehat + $positif_meninggal;
-				$total_kasus = $total_odp + $total_pdp + $total_positif;
-				$total_kasus_all += $total_kasus;
+				$total_odp += $odp_proses + $odp_selesai;
+				$total_pdp += $pdp_rumah + $pdp_rawat + $pdp_sehat + $pdp_meninggal;
+				$total_positif += $positif_rumah + $positif_rawat + $positif_sehat + $positif_meninggal;
 			?>
 				<tr>
 					<td class="text-center"><?= $no ?></td>
 					<td class=""><?= $k['nama_kecamatan'] ?></td>
-					<td class="text-center"><?= $total_odp ?></td>
-					<td class="text-center"><?= $total_pdp ?></td>
-					<td class="text-center"><?= $total_positif ?></td>
-					<td class="text-center"><?= $total_kasus ?></td>
+					<td class="text-center"><?= $odp_proses + $odp_selesai ?></td>
+					<td class="text-center"><?= $pdp_rumah + $pdp_rawat + $pdp_sehat + $pdp_meninggal ?></td>
+					<td class="text-center"><?= $positif_rumah + $positif_rawat + $positif_sehat + $positif_meninggal ?></td>
 				</tr>
 			<?php
 				$no++;
@@ -157,8 +157,10 @@ function crease($int)
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="5" class="text-right font-weight-bold">Total</td>
-				<td class="text-center" colspan="5"><?= $total_kasus_all ?></td>
+				<td colspan="2" class="text-right font-weight-bold">Total</td>
+				<td class="text-center"><?= $total_odp ?></td>
+				<td class="text-center"><?= $total_pdp ?></td>
+				<td class="text-center"><?= $total_positif ?></td>
 			</tr>
 		</tfoot>
 	</table>

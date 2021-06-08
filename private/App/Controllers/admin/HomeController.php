@@ -32,15 +32,15 @@ class HomeController extends Controller
     $data['persentase_kasus'] = 0;
     if(count($kasus) > 0) {
       $data['total_odp'] = $kasus[0]['odp_proses'] + $kasus[0]['odp_selesai'];
-      $data['total_pdp'] = $kasus[0]['pdp_rawat'] + $kasus[0]['pdp_sehat'] + $kasus[0]['pdp_meninggal'];
-      $data['total_positif'] = $kasus[0]['positif_rawat'] + $kasus[0]['positif_sehat'] + $kasus[0]['positif_meninggal'];
-      $data['total_kasus'] = $data['total_odp'] + $data['total_pdp'] + $data['total_positif'];
+      $data['total_pdp'] = $kasus[0]['pdp_rumah'] + $kasus[0]['pdp_rawat'] + $kasus[0]['pdp_sehat'] + $kasus[0]['pdp_meninggal'];
+      $data['total_positif'] = $kasus[0]['positif_rumah'] + $kasus[0]['positif_rawat'] + $kasus[0]['positif_sehat'] + $kasus[0]['positif_meninggal'];
+      $data['total_kasus'] = $data['total_pdp'] + $data['total_positif'];
     }
     if(count($kasus) > 1) {
       $data['total_odp_old'] = $kasus[1]['odp_proses'] + $kasus[1]['odp_selesai'];
-      $data['total_pdp_old'] = $kasus[1]['pdp_rawat'] + $kasus[1]['pdp_sehat'] + $kasus[1]['pdp_meninggal'];
-      $data['total_positif_old'] = $kasus[1]['positif_rawat'] + $kasus[1]['positif_sehat'] + $kasus[1]['positif_meninggal'];
-      $data['total_kasus_old'] = $data['total_odp_old'] + $data['total_pdp_old'] + $data['total_positif_old'];
+      $data['total_pdp_old'] = $kasus[1]['pdp_rumah'] + $kasus[1]['pdp_rawat'] + $kasus[1]['pdp_sehat'] + $kasus[1]['pdp_meninggal'];
+      $data['total_positif_old'] = $kasus[1]['positif_rumah'] + $kasus[1]['positif_rawat'] + $kasus[1]['positif_sehat'] + $kasus[1]['positif_meninggal'];
+      $data['total_kasus_old'] = $data['total_pdp_old'] + $data['total_positif_old'];
       $data['persentase_odp'] = ($data['total_odp'] - $data['total_odp_old']) / $data['total_odp_old'] * 100;
       $data['persentase_pdp'] = ($data['total_pdp'] - $data['total_pdp_old']) / $data['total_pdp_old'] * 100;
       $data['persentase_positif'] = ($data['total_positif'] - $data['total_positif_old']) / $data['total_positif_old'] * 100;

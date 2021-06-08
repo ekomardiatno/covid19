@@ -1,51 +1,52 @@
 <?php
 
-class KasusController extends Controller
+class Kasus_HarianController extends Controller
 {
+  private $_model;
   public function __construct()
   {
     parent::__construct();
     $this->role(['admin']);
+    $this->_model = $this->model('KasusHarian');
   }
 
   public function index()
   {
-    $where = [
-      'order_by' => ['tanggal', 'DESC']
-    ];
-    $data = $this->model('Kasus')->read(null, $where);
+    $data = $this->_model->read();
+    $this->_web->title('Kasus Harian');
+    $this->_web->breadcrumb(
+      [
+        ['admin.kasus-harian', 'Kasus Harian']
+      ]
+    );
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.kasus.home', $data);
+    $this->_web->view('admin.kasus-harian.home', $data);
   }
 
   public function tambah()
   {
-    $kecamatan = $this->model('Kecamatan')->read();
-    $data = [
-      'kecamatan' => $kecamatan
-    ];
-    $this->_web->title('Tambah Kasus');
+    $data['kecamatan'] = $this->model('Kecamatan')->read();
+    $this->_web->title('Tambah Kasus Harian');
     $this->_web->breadcrumb(
       [
-        ['admin.kasus', 'Update Kasus'],
-        ['admin.kasus.tambah', 'Tambah Kasus']
+        ['admin.kasus-harian', 'Kasus Harian'],
+        ['admin.kasus-harian.tambah', 'Tambah Kasus Harian']
       ]
     );
 
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.kasus.tambah', $data);
+    $this->_web->view('admin.kasus-harian.tambah', $data);
   }
 
   public function post()
   {
     $data = $this->request()->post;
-    $data['data_kecamatan'] = serialize($data['data_kecamatan']);
-    $insert = $this->model('Kasus')->insert($data);
-
+    $data['kasus_harian_data'] = serialize($data['kasus_harian_data']);
+    $insert = $this->_model->insert($data);
     if ($insert) {
-      Flasher::setFlash('<b>Berhasil!</b> Kasus ditambahkan', 'success', 'ni ni-check-bold', 'top', 'center');
+      Flasher::setFlash('<b>Berhasil!</b> Kasus harian ditambahkan', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
-      $data['data_kecamatan'] = unserialize($data['data_kecamatan']);
+      $data['kasus_harian_data'] = unserialize($data['kasus_harian_data']);
       Flasher::setData($data);
       $where = [
         'params' => [
@@ -55,60 +56,60 @@ class KasusController extends Controller
           ]
         ]
       ];
-      $num_rows = $this->model('Kasus')->read(null, $where, 'NUM_ROWS');
+      $num_rows = $this->_model->read(null, $where, 'NUM_ROWS');
       if($num_rows >= 1) {
         Flasher::setFlash('<b>Gagal!</b> Data pada tanggal ' . Mod::dateID($data['tanggal']) . ' sudah ada', 'danger', 'ni ni-fat-remove', 'top', 'center');
       } else {
         Flasher::setFlash('<b>Gagal!</b> Mohon periksa isian formulir', 'danger', 'ni ni-fat-remove', 'top', 'center');
       }
-      return $this->redirect('admin.kasus.tambah');
+      return $this->redirect('admin.kasus-harian.tambah');
     }
 
-    $this->redirect('admin.kasus');
+    $this->redirect('admin.kasus-harian');
   }
 
-  public function edit($id)
-  {
+  public function edit($id) {
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus',
+          'column' => 'id_kasus_harian',
           'value' => $id
         ]
       ]
     ];
-    $data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
-    $data['kecamatan'] = unserialize($data['data_kecamatan']);
-    $this->_web->title('Edit Kasus');
+    $data = $this->_model->read(null, $where, 'ARRAY_ONE');
+    $data['kasus_harian_data'] = unserialize($data['kasus_harian_data']);
+    $this->_web->title('Edit Kasus Harian');
     $this->_web->breadcrumb(
       [
-        ['admin.kasus', 'Update Kasus'],
-        ['admin.kasus.edit.' . $id, 'Edit Kasus']
+        ['admin.kasus-harian', 'Kasus Harian'],
+        ['admin.kasus-harian.edit.' . $id, 'Edit Kasus Harian']
       ]
     );
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.kasus.edit', $data);
+    $this->_web->view('admin.kasus-harian.edit', $data);
   }
+
   public function update($id)
   {
     $data = $this->request()->post;
-    $data['data_kecamatan'] = serialize($data['data_kecamatan']);
-    $update = $this->model('Kasus')->update($data, ['id_kasus' => $id]);
+    $data['kasus_harian_data'] = serialize($data['kasus_harian_data']);
+    $update = $this->_model->update($data, ['id_kasus_harian' => $id]);
 
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus',
+          'column' => 'id_kasus_harian',
           'value' => $id
         ]
       ]
     ];
-    $old_data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
+    $old_data = $this->_model->read(null, $where, 'ARRAY_ONE');
 
     if ($update) {
       Flasher::setFlash('<b>Berhasil!</b> Kasus diperbarui', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
-      $data['data_kecamatan'] = unserialize($data['data_kecamatan']);
+      $data['kasus_harian_data'] = unserialize($data['kasus_harian_data']);
       Flasher::setData($data);
       $where = [
         'params' => [
@@ -118,7 +119,7 @@ class KasusController extends Controller
           ]
         ]
       ];
-      $num_rows = $this->model('Kasus')->read(null, $where, 'NUM_ROWS');
+      $num_rows = $this->_model->read(null, $where, 'NUM_ROWS');
       if($old_data['tanggal'] !== $data['tanggal'] && $num_rows >= 1) {
         Flasher::setFlash('<b>Gagal!</b> Data pada tanggal ' . Mod::dateID($data['tanggal']) . ' sudah ada', 'danger', 'ni ni-fat-remove', 'top', 'center');
       } else {
@@ -126,17 +127,17 @@ class KasusController extends Controller
       }
     }
 
-    $this->redirect('admin.kasus.edit.' . $id);
+    $this->redirect('admin.kasus-harian.edit.' . $id);
   }
 
   public function delete()
   {
     $data = $this->request()->post;
-    $id = $data['id_kasus'];
+    $id = $data['id_kasus_harian'];
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus',
+          'column' => 'id_kasus_harian',
           'value' => $id
         ]
       ]
@@ -149,7 +150,6 @@ class KasusController extends Controller
       Flasher::setFlash('<b>Gagal!</b> Tidak bisa menhapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
     }
 
-    $this->redirect('admin.kasus');
+    $this->redirect('admin.kasus-harian');
   }
-
 }

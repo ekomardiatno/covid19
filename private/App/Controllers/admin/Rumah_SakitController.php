@@ -32,7 +32,7 @@ class Rumah_SakitController extends Controller
       ]
     );
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.rumah-sakit.add');
+    $this->_web->view('admin.rumah-sakit.tambah');
   }
 
   public function post()

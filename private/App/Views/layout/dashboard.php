@@ -98,7 +98,12 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.kasus'); ?>">
-              <i class="fas fa-viruses text-orange"></i> Kasus COVID-19
+              <i class="fas fa-viruses text-danger"></i> Update Kasus
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= Web::url('admin.kasus-harian'); ?>">
+              <i class="fas fa-viruses text-warning"></i> Kasus Harian
             </a>
           </li>
           <li class="nav-item">
@@ -122,7 +127,7 @@
       <div class="container-fluid">
         <ul class="navbar-nav align-items-center ml-md--3">
           <li class="nav-item">
-            <a class="nav-link" href="<?= Web::url() ?>" target="_blank">
+            <a class="nav-link px-md-0" href="<?= Web::url() ?>" target="_blank">
               <i class="fas fa-globe"></i> Lihat web
             </a>
           </li>
