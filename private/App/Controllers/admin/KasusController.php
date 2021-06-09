@@ -14,6 +14,12 @@ class KasusController extends Controller
       'order_by' => ['tanggal', 'DESC']
     ];
     $data = $this->model('Kasus')->read(null, $where);
+    $this->_web->title('Update Kasus');
+    $this->_web->breadcrumb(
+      [
+        ['admin.kasus', 'Update Kasus']
+      ]
+    );
     $this->_web->layout('dashboard');
     $this->_web->view('admin.kasus.home', $data);
   }
@@ -33,7 +39,7 @@ class KasusController extends Controller
     );
 
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.kasus.tambah', $data);
+    $this->_web->view('admin.kasus.add', $data);
   }
 
   public function post()
@@ -93,8 +99,6 @@ class KasusController extends Controller
   {
     $data = $this->request()->post;
     $data['data_kecamatan'] = serialize($data['data_kecamatan']);
-    $update = $this->model('Kasus')->update($data, ['id_kasus' => $id]);
-
     $where = [
       'params' => [
         [
@@ -103,6 +107,8 @@ class KasusController extends Controller
         ]
       ]
     ];
+    $update = $this->model('Kasus')->update($data, $where);
+
     $old_data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
 
     if ($update) {
@@ -146,7 +152,7 @@ class KasusController extends Controller
     if ($delete) {
       Flasher::setFlash('<b>Berhasil!</b> Data terhapus', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
-      Flasher::setFlash('<b>Gagal!</b> Tidak bisa menhapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      Flasher::setFlash('<b>Gagal!</b> Tidak bisa menghapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
     }
 
     $this->redirect('admin.kasus');

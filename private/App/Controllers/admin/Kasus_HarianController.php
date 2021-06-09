@@ -35,7 +35,7 @@ class Kasus_HarianController extends Controller
     );
 
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.kasus-harian.tambah', $data);
+    $this->_web->view('admin.kasus-harian.add', $data);
   }
 
   public function post()
@@ -57,7 +57,7 @@ class Kasus_HarianController extends Controller
         ]
       ];
       $num_rows = $this->_model->read(null, $where, 'NUM_ROWS');
-      if($num_rows >= 1) {
+      if ($num_rows >= 1) {
         Flasher::setFlash('<b>Gagal!</b> Data pada tanggal ' . Mod::dateID($data['tanggal']) . ' sudah ada', 'danger', 'ni ni-fat-remove', 'top', 'center');
       } else {
         Flasher::setFlash('<b>Gagal!</b> Mohon periksa isian formulir', 'danger', 'ni ni-fat-remove', 'top', 'center');
@@ -68,7 +68,8 @@ class Kasus_HarianController extends Controller
     $this->redirect('admin.kasus-harian');
   }
 
-  public function edit($id) {
+  public function edit($id)
+  {
     $where = [
       'params' => [
         [
@@ -94,8 +95,6 @@ class Kasus_HarianController extends Controller
   {
     $data = $this->request()->post;
     $data['kasus_harian_data'] = serialize($data['kasus_harian_data']);
-    $update = $this->_model->update($data, ['id_kasus_harian' => $id]);
-
     $where = [
       'params' => [
         [
@@ -104,6 +103,8 @@ class Kasus_HarianController extends Controller
         ]
       ]
     ];
+    $update = $this->_model->update($data, $where);
+
     $old_data = $this->_model->read(null, $where, 'ARRAY_ONE');
 
     if ($update) {
@@ -120,7 +121,7 @@ class Kasus_HarianController extends Controller
         ]
       ];
       $num_rows = $this->_model->read(null, $where, 'NUM_ROWS');
-      if($old_data['tanggal'] !== $data['tanggal'] && $num_rows >= 1) {
+      if ($old_data['tanggal'] !== $data['tanggal'] && $num_rows >= 1) {
         Flasher::setFlash('<b>Gagal!</b> Data pada tanggal ' . Mod::dateID($data['tanggal']) . ' sudah ada', 'danger', 'ni ni-fat-remove', 'top', 'center');
       } else {
         Flasher::setFlash('<b>Gagal!</b> Mohon periksa isian formulir', 'danger', 'ni ni-fat-remove', 'top', 'center');
@@ -147,7 +148,7 @@ class Kasus_HarianController extends Controller
     if ($delete) {
       Flasher::setFlash('<b>Berhasil!</b> Data terhapus', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
-      Flasher::setFlash('<b>Gagal!</b> Tidak bisa menhapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      Flasher::setFlash('<b>Gagal!</b> Tidak bisa menghapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
     }
 
     $this->redirect('admin.kasus-harian');

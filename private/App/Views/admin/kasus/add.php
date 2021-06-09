@@ -7,8 +7,8 @@
         ?>
         <?= Web::key_field() ?>
         <div class="form-group">
-          <label class="small form-control-label" for="tanggal">Tanggal<span class="text-danger">*</span></label>
-          <input type="date" value="<?= $data_flasher ? $data_flasher['tanggal'] : date('Y-m-d') ?>" maxlength="50" placeholder="Masukkan tanggal" required name="tanggal" id="tanggal" class="form-control form-control-sm">
+          <label for="tanggal">Tanggal <span class="text-danger">*</span></label>
+          <input type="date" value="<?= $data_flasher ? $data_flasher['tanggal'] : date('Y-m-d') ?>" maxlength="50" placeholder="Masukkan tanggal" required name="tanggal" id="tanggal" class="form-control">
         </div>
         <div class="row mb-3">
           <div class="col-12">
@@ -16,14 +16,14 @@
             <div class="row">
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="odp_proses">Hasil Negatif<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['odp_proses'] : '' ?>" min="0" placeholder="Hasil Negatif" required name="odp_proses" id="odp_proses" class="form-control form-control-sm">
+                  <label for="odp_proses">Hasil Negatif <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['odp_proses'] : '' ?>" min="0" placeholder="Hasil Negatif" required name="odp_proses" id="odp_proses" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="odp_selesai">Hasil Positif<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['odp_selesai'] : '' ?>" min="0" placeholder="Hasil Positif" required name="odp_selesai" id="odp_selesai" class="form-control form-control-sm">
+                  <label for="odp_selesai">Hasil Positif <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['odp_selesai'] : '' ?>" min="0" placeholder="Hasil Positif" required name="odp_selesai" id="odp_selesai" class="form-control">
                 </div>
               </div>
             </div>
@@ -33,26 +33,26 @@
             <div class="row">
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="pdp_rumah">Isolasi Mandiri<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_rumah'] : '' ?>" min="0" placeholder="Isolasi Mandiri" required name="pdp_rumah" id="pdp_rumah" class="form-control form-control-sm">
+                  <label for="pdp_rumah">Isolasi Mandiri <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_rumah'] : '' ?>" min="0" placeholder="Isolasi Mandiri" required name="pdp_rumah" id="pdp_rumah" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="pdp_rawat">Isolasi di RS<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_rawat'] : '' ?>" min="0" placeholder="Isolasi di RS" required name="pdp_rawat" id="pdp_rawat" class="form-control form-control-sm">
+                  <label for="pdp_rawat">Isolasi di RS <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_rawat'] : '' ?>" min="0" placeholder="Isolasi di RS" required name="pdp_rawat" id="pdp_rawat" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="pdp_sehat">Selesai Isolasi<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_sehat'] : '' ?>" min="0" placeholder="Selesai Isolasi" required name="pdp_sehat" id="pdp_sehat" class="form-control form-control-sm">
+                  <label for="pdp_sehat">Selesai Isolasi <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_sehat'] : '' ?>" min="0" placeholder="Selesai Isolasi" required name="pdp_sehat" id="pdp_sehat" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="pdp_meninggal">Meninggal<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_meninggal'] : '' ?>" min="0" placeholder="Meninggal" required name="pdp_meninggal" id="pdp_meninggal" class="form-control form-control-sm">
+                  <label for="pdp_meninggal">Meninggal <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['pdp_meninggal'] : '' ?>" min="0" placeholder="Meninggal" required name="pdp_meninggal" id="pdp_meninggal" class="form-control">
                 </div>
               </div>
             </div>
@@ -62,26 +62,26 @@
             <div class="row">
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="positif_rumah">Isolasi Mandiri<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_rumah'] : '' ?>" min="0" placeholder="Isolasi Mandiri" required name="positif_rumah" id="positif_rumah" class="form-control form-control-sm">
+                  <label for="positif_rumah">Isolasi Mandiri <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_rumah'] : '' ?>" min="0" placeholder="Isolasi Mandiri" required name="positif_rumah" id="positif_rumah" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="positif_rawat">Isolasi di RS<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_rawat'] : '' ?>" min="0" placeholder="Isolasi di RS" required name="positif_rawat" id="positif_rawat" class="form-control form-control-sm">
+                  <label for="positif_rawat">Isolasi di RS <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_rawat'] : '' ?>" min="0" placeholder="Isolasi di RS" required name="positif_rawat" id="positif_rawat" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="positif_sehat">Selesai Isolasi<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_sehat'] : '' ?>" min="0" placeholder="Selesai Isolasi" required name="positif_sehat" id="positif_sehat" class="form-control form-control-sm">
+                  <label for="positif_sehat">Selesai Isolasi <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_sehat'] : '' ?>" min="0" placeholder="Selesai Isolasi" required name="positif_sehat" id="positif_sehat" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label class="small form-control-label" for="positif_meninggal">Meninggal<span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_meninggal'] : '' ?>" min="0" placeholder="Meninggal" required name="positif_meninggal" id="positif_meninggal" class="form-control form-control-sm">
+                  <label for="positif_meninggal">Meninggal <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['positif_meninggal'] : '' ?>" min="0" placeholder="Meninggal" required name="positif_meninggal" id="positif_meninggal" class="form-control">
                 </div>
               </div>
             </div>
@@ -125,34 +125,34 @@
                     <input type="hidden" value="<?= $k['nama_kecamatan'] ?>" name="data_kecamatan[<?= $no - 1 ?>][nama_kecamatan]">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['odp_proses'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][odp_proses]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['odp_proses'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][odp_proses]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['odp_selesai'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][odp_selesai]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['odp_selesai'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][odp_selesai]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['pdp_rumah'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_rumah]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['pdp_rumah'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_rumah]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['pdp_rawat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_rawat]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['pdp_rawat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_rawat]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['pdp_sehat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_sehat]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['pdp_sehat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_sehat]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['pdp_meninggal'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_meninggal]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['pdp_meninggal'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][pdp_meninggal]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['positif_rumah'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_rumah]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['positif_rumah'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_rumah]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['positif_rawat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_rawat]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['positif_rawat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_rawat]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['positif_sehat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_sehat]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['positif_sehat'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_sehat]" class="form-control">
                   </td>
                   <td>
-                    <input type="number" value="<?= $k['positif_meninggal'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_meninggal]" class="form-control form-control-sm">
+                    <input type="number" value="<?= $k['positif_meninggal'] ?? '' ?>" min="0" placeholder="" name="data_kecamatan[<?= $no - 1 ?>][positif_meninggal]" class="form-control">
                   </td>
                 </tr>
               <?php
@@ -170,8 +170,8 @@
     <div class="col">
       <div class="card shadow mb-3 bg-secondary">
         <div class="card-body p-3">
-          <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-          <button type="reset" class="btn btn-warning btn-sm">Reset</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="reset" class="btn btn-warning">Reset</button>
         </div>
       </div>
     </div>

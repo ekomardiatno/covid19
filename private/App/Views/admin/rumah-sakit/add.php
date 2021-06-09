@@ -4,21 +4,21 @@
       <div class="card-body">
         <?= Web::key_field() ?>
         <div class="form-group">
-          <label class="small form-control-label" for="nama_rumah_sakit">Nama rumah sakit<span class="text-danger">*</span></label>
-          <input type="text" maxlength="50" placeholder="Masukan nama rumah sakit" required name="nama_rumah_sakit" id="nama_rumah_sakit" class="form-control form-control-sm form-control-alternative">
+          <label for="nama_rumah_sakit">Nama rumah sakit <span class="text-danger">*</span></label>
+          <input type="text" maxlength="50" placeholder="Masukan nama rumah sakit" required name="nama_rumah_sakit" id="nama_rumah_sakit" class="form-control">
         </div>
         <div class="form-group">
-          <label class="small form-control-label" for="alamat_rumah_sakit">Alamat rumah sakit<span class="text-danger">*</span></label>
-          <textarea placeholder="Alamat rumah sakit" class="form-control form-control-alternative" name="alamat_rumah_sakit" id="alamat_rumah_sakit" rows="4"></textarea>
+          <label for="alamat_rumah_sakit">Alamat rumah sakit <span class="text-danger">*</span></label>
+          <textarea placeholder="Alamat rumah sakit" class="form-control" name="alamat_rumah_sakit" id="alamat_rumah_sakit" rows="4"></textarea>
         </div>
       </div>
     </div>
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
         <div class="form-group mb-3">
-          <label class="small form-control-label" for="telepon_rumah_sakit">Nomor telepon</label>
+          <label for="telepon_rumah_sakit">Nomor telepon</label>
           <div class="input-with-button d-flex align-items-center mx--1">
-            <input type="text" maxlength="20" placeholder="Masukan nomor telepon" name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control form-control-sm form-control-alternative mx-1 mb-0">
+            <input type="text" maxlength="20" placeholder="Masukan nomor telepon" name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control mx-1 mb-0">
             <button type="button" class="btn btn-danger btn-sm mx-1 remove-element"><span class="fas fa-trash"></span></button>
           </div>
         </div>
@@ -27,7 +27,7 @@
           $('.add-element').on('click', function() {
             let html = `
               <div class="input-with-button d-flex align-items-center mx--1">
-                <input type="text" maxlength="20" placeholder="Masukan nomor telepon" name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control form-control-sm form-control-alternative mx-1 mb-0">
+                <input type="text" maxlength="20" placeholder="Masukan nomor telepon" name="telepon_rumah_sakit[]" id="telepon_rumah_sakit" class="form-control mx-1 mb-0">
                 <button type="button" class="btn btn-danger btn-sm mx-1 remove-element"><span class="fas fa-trash"></span></button>
               </div>
             `
@@ -59,8 +59,8 @@
     <div class="col">
       <div class="card shadow mb-3 bg-secondary">
         <div class="card-body p-3">
-          <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-          <button type="reset" class="btn btn-warning btn-sm">Reset</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="reset" class="btn btn-warning">Reset</button>
         </div>
       </div>
     </div>

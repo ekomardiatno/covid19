@@ -4,16 +4,16 @@
       <div class="card-body">
         <?= Web::key_field() ?>
         <div class="form-group">
-          <label class="small form-control-label" for="username">Username<span class="text-danger">*</span></label>
-          <input value="<?= $data['username'] ?>" type="text" maxlength="50" placeholder="Masukkan username" required name="fields[username]" id="username" class="form-control form-control-sm form-control-alternative">
+          <label for="username">Username <span class="text-danger">*</span></label>
+          <input value="<?= $data['username'] ?>" type="text" maxlength="50" placeholder="Masukkan username" required name="fields[username]" id="username" class="form-control form-control-alternative">
         </div>
         <div class="form-group">
-          <label class="small form-control-label" for="name">Nama<span class="text-danger">*</span></label>
-          <input value="<?= $data['name'] ?>" type="text" maxlength="50" placeholder="Masukkan nama" required name="fields[name]" id="name" class="form-control form-control-sm form-control-alternative">
+          <label for="name">Nama <span class="text-danger">*</span></label>
+          <input value="<?= $data['name'] ?>" type="text" maxlength="50" placeholder="Masukkan nama" required name="fields[name]" id="name" class="form-control form-control-alternative">
         </div>
         <div class="form-group">
-          <label class="small form-control-label" for="email">Email<span class="text-danger">*</span></label>
-          <input value="<?= $data['email'] ?>" type="text" placeholder="Masukkan email" required name="fields[email]" id="email" class="form-control form-control-sm form-control-alternative">
+          <label for="email">Email <span class="text-danger">*</span></label>
+          <input value="<?= $data['email'] ?>" type="text" placeholder="Masukkan email" required name="fields[email]" id="email" class="form-control form-control-alternative">
         </div>
       </div>
     </div>
@@ -24,12 +24,12 @@
           <p class="font-italic small text-muted mb-0">Isikan password baru untuk mengganti password</p>
         </div>
         <div class="form-group">
-          <label class="small form-control-label" for="new_password">Password baru</label>
-          <input type="password" placeholder="Masukkan password baru" name="fields[password]" id="new_password" class="form-control form-control-sm form-control-alternative">
+          <label for="new_password">Password baru</label>
+          <input type="password" placeholder="Masukkan password baru" name="fields[password]" id="new_password" class="form-control form-control-alternative">
         </div>
         <div class="form-group">
-          <label class="small form-control-label" for="re_new_password">Ulangi Password baru</label>
-          <input type="password" placeholder="Ulangi masukkan password baru" id="re_new_password" class="form-control form-control-sm form-control-alternative">
+          <label for="re_new_password">Ulangi Password baru</label>
+          <input type="password" placeholder="Ulangi masukkan password baru" id="re_new_password" class="form-control form-control-alternative">
         </div>
       </div>
     </div>
@@ -43,8 +43,8 @@
         </div>
         <div class="col-12 col-lg-6">
           <div class="form-group mb-1">
-            <label class="small form-control-label" for="password">Password saat ini<span class="text-danger">*</span></label>
-            <input type="password" placeholder="Masukkan password" required name="password" id="password" class="form-control form-control-sm form-control-alternative">
+            <label for="password">Password saat ini <span class="text-danger">*</span></label>
+            <input type="password" placeholder="Masukkan password" required name="password" id="password" class="form-control form-control-alternative">
           </div>
         </div>
       </div>

@@ -85,7 +85,9 @@
           </div>
         </div>
       </div>
-      <p class="mt-0 font-italic"><span>*</span> Terakhir diperbarui tanggal <?= Mod::dateID($data['tanggal']) ?></p>
+      <?php if (isset($data['tanggal'])) : ?>
+        <p class="mt-0 font-italic"><span>*</span> Terakhir diperbarui tanggal <?= Mod::dateID($data['tanggal']) ?></p>
+      <?php endif; ?>
     </div>
   </div>
   <!--<div class="overlay-animated"></div>-->
@@ -213,7 +215,7 @@
       </div>
       <?php if (isset($data['data_kecamatan'])) : ?>
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table class="table table-striped mb-0">
             <thead>
               <tr>
                 <th rowspan="2" class="text-center">#</th>
@@ -297,6 +299,38 @@
           </table>
         </div>
       <?php endif; ?>
+    </div>
+  </div>
+  <div class="section" id="kontak">
+    <div class="container">
+      <div class="title">
+        <h2>Kontak</h2>
+        <div class="line"></div>
+      </div>
+      <div class="row justify-content-center my--3">
+        <?php foreach ($data['kontak'] as $d) : ?>
+          <?php
+          $icons = ['fa-phone-square', 'fa-user-md'];
+          $bgs = ['bg-gradient-red', 'bg-gradient-green']
+          ?>
+          <div class="col-md-4 my-3">
+            <a href="tel:<?= $d['no_hp'] ?>">
+              <div class="panel mb-0 mx-0">
+                <div class="panel-body d-flex flex-row p-3 mx--2">
+                  <div class="icon icon-shape <?= intval($d['tipe_kontak']) <= count($bgs) - 1 ? $bgs[intval($d['tipe_kontak'])] : $bgs[0] ?> text-white rounded-circle shadow mx-2">
+                    <i class="fas <?= intval($d['tipe_kontak']) <= count($icons) - 1 ? $icons[intval($d['tipe_kontak'])] : $icons[0] ?>"></i>
+                  </div>
+                  <div class="mx-2">
+                    <h4 class="font-weight-bold text-dark-blue"><?= preg_replace('~^.{3}|.{3}|.{4}(?!$)~', '$0 ', $d['no_hp']) ?></h4>
+                    <h5 class="text-dark-blue"><?= $d['nama_kontak'] ?></h5>
+                    <p class="text-muted mb-0"><?= $d['keterangan'] !== '' ? $d['keterangan'] : '-' ?></p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
   <div class="section" id="pencegahan">

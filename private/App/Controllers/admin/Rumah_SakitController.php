@@ -32,7 +32,7 @@ class Rumah_SakitController extends Controller
       ]
     );
     $this->_web->layout('dashboard');
-    $this->_web->view('admin.rumah-sakit.tambah');
+    $this->_web->view('admin.rumah-sakit.add');
   }
 
   public function post()
@@ -77,7 +77,15 @@ class Rumah_SakitController extends Controller
   {
     $data = $this->request()->post;
     $data['telepon_rumah_sakit'] = serialize($data['telepon_rumah_sakit']);
-    $update = $this->_model->update($data, ['data_id' => $id]);
+    $where = [
+      'params' => [
+        [
+          'column' => 'id_rumah_sakit',
+          'value' => $id
+        ]
+      ]
+    ];
+    $update = $this->_model->update($data, $where);
 
     if ($update) {
       Flasher::setFlash('<b>Berhasil!</b> kasus diperbarui', 'success', 'ni ni-check-bold', 'top', 'center');
@@ -92,12 +100,20 @@ class Rumah_SakitController extends Controller
   {
     $data = $this->request()->post;
     $id = $data['id_rumah_sakit'];
-    $delete = $this->_model->delete(['data_id' => $id]);
+    $where = [
+      'params' => [
+        [
+          'column' => 'id_rumah_sakit',
+          'value' => $id
+        ]
+      ]
+    ];
+    $delete = $this->_model->delete($where);
 
     if ($delete) {
       Flasher::setFlash('<b>Berhasil!</b> data terhapus', 'success', 'ni ni-check-bold', 'top', 'center');
     } else {
-      Flasher::setFlash('<b>Gagal!</b> tidak bisa menhapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      Flasher::setFlash('<b>Gagal!</b> tidak bisa menghapus data', 'danger', 'ni ni-fat-remove', 'top', 'center');
     }
 
     $this->redirect('admin.rumah-sakit');

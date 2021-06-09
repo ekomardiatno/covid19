@@ -26,6 +26,7 @@ class HomeController extends Controller
         $data['total_kasus'] = $data['total_pdp'] + $data['total_positif'];
         $data['data_kecamatan'] = isset($data['data_kecamatan']) ? unserialize($data['data_kecamatan']) : null;
         $data['rumah_sakit'] = $this->model('RumahSakit')->read();
+        $data['kontak'] = $this->model('Kontak')->read(null, ['order_by' => ['tanggal_dibuat', 'ASC']]);
         $this->_web->view('home', $data);
     }
 }

@@ -87,8 +87,8 @@
           <td><?= $d['positif_sehat'] ?></td>
           <td><?= $d['positif_meninggal'] ?></td>
           <td>
-            <a href="<?= Web::url('admin.kasus.edit.' . $d['id_kasus']) ?>" class="btn btn-primary btn-sm"><span class="fas fa-user"></span> Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus'] ?>"><span class="fas fa-trash-alt"></span> Hapus</button>
+            <a href="<?= Web::url('admin.kasus.edit.' . $d['id_kasus']) ?>" class="btn btn-primary"><span class="fas fa-user"></span> Edit</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus'] ?>"><span class="fas fa-trash-alt"></span> Hapus</button>
           </td>
         </tr>
       <?php

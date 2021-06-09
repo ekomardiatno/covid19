@@ -9,7 +9,6 @@
 
   <title><?= $title != '' ? $title . ' | ' . getenv('APP_NAME') : getenv('APP_NAME') ?></title>
   <meta content="<?= $desc; ?>" name="description" />
-  <base href="<?= Web::url('admin') ?>">
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet">
   <link rel="stylesheet" href="<?= Web::assets('nucleo.css', 'css') ?>">
@@ -104,6 +103,11 @@
           <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.kasus-harian'); ?>">
               <i class="fas fa-viruses text-warning"></i> Kasus Harian
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= Web::url('admin.kontak'); ?>">
+              <i class="fas fa-address-book text-info"></i> Kontak
             </a>
           </li>
           <li class="nav-item">
@@ -249,21 +253,22 @@
 
 
   <script>
-    let baseHref = $('base').attr('href')
     let windowUrl = window.location.href
+    windowUrl = windowUrl.split('/')
+    if (windowUrl[windowUrl.length - 1] === '') {
+      windowUrl.splice(windowUrl.length - 1, 1)
+    }
     $('#sidenav-collapse-main .navbar-nav .nav-item').each(function() {
       let navLink = $(this).children('.nav-link')
       let aHref = navLink.attr('href')
-      if (baseHref !== aHref) {
-        let baseHrefSlice = windowUrl.replace(baseHref, '')
-        let aHrefSlice = aHref.replace(baseHref, '')
-        baseHrefSlice.indexOf(aHrefSlice) > -1 ?
-          navLink.addClass('active') :
-          null
-      } else {
-        aHref === windowUrl ?
-          navLink.addClass('active') :
-          null
+      aHref = aHref.split('/')
+      if (aHref[aHref.length - 1] === '') {
+        aHref.splice(aHref.length - 1, 1)
+      }
+      if (windowUrl.length <= 5 && aHref[4] === windowUrl[4] && aHref.length <= 5) {
+        navLink.addClass('active')
+      } else if (windowUrl[5] === aHref[5]) {
+        navLink.addClass('active')
       }
     })
   </script>

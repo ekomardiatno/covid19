@@ -33,6 +33,153 @@
     .soon .title .sub-title p {
       color: #fff;
     }
+
+    .icon {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .icon-shape {
+      display: inline-flex;
+      padding: 12px;
+      text-align: center;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon i,
+    .icon svg {
+      font-size: 3.25rem;
+    }
+
+    .icon-shape i,
+    .icon-shape svg {
+      font-size: 2.25rem;
+    }
+
+    .avatar.rounded-circle img,
+    .rounded-circle {
+      border-radius: 50% !important;
+    }
+
+    .bg-gradient-primary {
+      background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+    }
+
+    .bg-gradient-secondary {
+      background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important;
+    }
+
+    .bg-gradient-success {
+      background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
+    }
+
+    .bg-gradient-info {
+      background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
+    }
+
+    .bg-gradient-warning {
+      background: linear-gradient(87deg, #fb6340 0, #fbb140 100%) !important;
+    }
+
+    .bg-gradient-danger {
+      background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
+    }
+
+    .bg-gradient-light {
+      background: linear-gradient(87deg, #adb5bd 0, #adaebd 100%) !important;
+    }
+
+    .bg-gradient-dark {
+      background: linear-gradient(87deg, #212529 0, #212229 100%) !important;
+    }
+
+    .bg-gradient-default {
+      background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
+    }
+
+    .bg-gradient-white {
+      background: linear-gradient(87deg, #fff 0, #fff 100%) !important;
+    }
+
+    .bg-gradient-neutral {
+      background: linear-gradient(87deg, #fff 0, #fff 100%) !important;
+    }
+
+    .bg-gradient-darker {
+      background: linear-gradient(87deg, #000 0, #000 100%) !important;
+    }
+
+    .bg-gradient-blue {
+      background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+    }
+
+    .bg-gradient-indigo {
+      background: linear-gradient(87deg, #5603ad 0, #9d03ad 100%) !important;
+    }
+
+    .bg-gradient-purple {
+      background: linear-gradient(87deg, #8965e0 0, #bc65e0 100%) !important;
+    }
+
+    .bg-gradient-pink {
+      background: linear-gradient(87deg, #f3a4b5 0, #f3b4a4 100%) !important;
+    }
+
+    .bg-gradient-red {
+      background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
+    }
+
+    .bg-gradient-orange {
+      background: linear-gradient(87deg, #fb6340 0, #fbb140 100%) !important;
+    }
+
+    .bg-gradient-yellow {
+      background: linear-gradient(87deg, #ffd600 0, #beff00 100%) !important;
+    }
+
+    .bg-gradient-green {
+      background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
+    }
+
+    .bg-gradient-teal {
+      background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
+    }
+
+    .bg-gradient-cyan {
+      background: linear-gradient(87deg, #2bffc6 0, #2be0ff 100%) !important;
+    }
+
+    .bg-gradient-white {
+      background: linear-gradient(87deg, #fff 0, #fff 100%) !important;
+    }
+
+    .bg-gradient-gray {
+      background: linear-gradient(87deg, #8898aa 0, #888aaa 100%) !important;
+    }
+
+    .bg-gradient-gray-dark {
+      background: linear-gradient(87deg, #32325d 0, #44325d 100%) !important;
+    }
+
+    .bg-gradient-light {
+      background: linear-gradient(87deg, #ced4da 0, #cecfda 100%) !important;
+    }
+
+    .bg-gradient-lighter {
+      background: linear-gradient(87deg, #e9ecef 0, #e9eaef 100%) !important;
+    }
+
+    .navbar-default .default-logo, .navbar-default.affix .affix-logo {
+      display: block;
+    }
+    .navbar-default.affix .default-logo, .navbar-default .affix-logo {
+      display: none;
+    }
+    a:hover, a:focus {
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -58,7 +205,8 @@
           </span>
         </button>
         <a class="navbar-brand" href="#">
-          <img src="<?= Web::assets('brand/kuansing.png', 'images') ?>" alt="kuansing">
+          <img class="default-logo" src="<?= Web::assets('brand/kuansing.png', 'images') ?>" alt="kuansing">
+          <img class="affix-logo" src="<?= Web::assets('brand/kuansing-blue.png', 'images') ?>" alt="kuansing">
         </a>
       </div>
       <div class="navigation">
@@ -66,6 +214,7 @@
           <li><a class="decoration" href="#depan">Beranda</a></li>
           <li><a class="decoration" href="#tentang-covid19">Tentang COVID-19</a></li>
           <li><a class="decoration" href="#data-kasus">Kasus COVID-19</a></li>
+          <li><a class="decoration" href="#kontak">Kontak</a></li>
           <li><a class="decoration" href="#pencegahan">Pencegahan</a></li>
           <li><a class="decoration" href="#rumah-sakit">Rumah Sakit</a></li>
           <!-- <li><a href="http://www.instagram.com/komafx" class="menu-special"><i class="fa fa-instagram"></i> Follow my Instagram</a></li> -->

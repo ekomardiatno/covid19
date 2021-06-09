@@ -67,8 +67,8 @@
           </td>
           <td><?= Mod::dateID($d['tanggal']); ?></td>
           <td>
-            <a href="<?= Web::url('admin.kasus-harian.edit.' . $d['id_kasus_harian']) ?>" class="btn btn-primary btn-sm"><span class="fas fa-user"></span> Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus_harian'] ?>"><span class="fas fa-trash-alt"></span> Hapus</button>
+            <a href="<?= Web::url('admin.kasus-harian.edit.' . $d['id_kasus_harian']) ?>" class="btn btn-primary"><span class="fas fa-user"></span> Edit</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus_harian'] ?>"><span class="fas fa-trash-alt"></span> Hapus</button>
           </td>
         </tr>
       <?php
