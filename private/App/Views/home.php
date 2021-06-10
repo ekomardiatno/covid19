@@ -213,6 +213,64 @@
           </div>
         </div>
       </div>
+      <?php if (isset($data['kasus_harian'])) : ?>
+        <div class="table-responsive">
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th class="text-center" rowspan="2">#</th>
+                <th class="text-center" rowspan="2">Kecamatan</th>
+                <th class="text-center" <?= count($data['kasus_harian']) >= 2 ? 'colspan="3"' : 'colspan="2"' ?>>Jumlah Kasus</th>
+                <th class="text-center" <?= count($data['kasus_harian']) >= 2 ? 'colspan="3"' : 'colspan="2"' ?>>Jumlah Kasus Sembuh</th>
+                <th class="text-center" <?= count($data['kasus_harian']) >= 2 ? 'colspan="3"' : 'colspan="2"' ?>>Jumlah Kasus Meninggal</th>
+              </tr>
+              <tr>
+                <?php for ($i = 0; $i < 3; $i++) : ?>
+                  <?php for ($j = 0; $j < count($data['kasus_harian']); $j++) : ?>
+                    <th><?= Mod::dateID($data['kasus_harian'][$j]['tanggal']) ?></th>
+                  <?php endfor; ?>
+                  <th class="text-dark">Kumulatif</th>
+                <?php endfor; ?>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $no = 1;
+              $keys = ['kasus', 'sehat', 'meninggal'];
+              $totals = [];
+              ?>
+              <?php foreach ($data['kasus_harian'][0]['kasus_harian_data'] as $i => $d) : ?>
+                <tr>
+                  <td><?= $no; ?></td>
+                  <td><?= $d['nama_kecamatan']; ?></td>
+                  <?php foreach ($keys as $k) : ?>
+                    <?php $kumulatif = 0; ?>
+                    <?php for ($j = 0; $j < count($data['kasus_harian']); $j++) : ?>
+                      <td class="text-right"><?= intval($data['kasus_harian'][$j]['kasus_harian_data'][$i][$k]); ?></td>
+                      <?php $totals[$k][$data['kasus_harian'][$j]['tanggal']][] = intval($data['kasus_harian'][$j]['kasus_harian_data'][$i][$k]) ?>
+                      <?php $kumulatif += intval($data['kasus_harian'][$j]['kasus_harian_data'][$i][$k]); ?>
+                    <?php endfor; ?>
+                    <?php $totals[$k]['kumulatif'][] = $kumulatif ?>
+                    <td class="text-right font-weight-bold bg-light text-dark"><?= $kumulatif; ?></td>
+                  <?php endforeach; ?>
+                </tr>
+                <?php $no++; ?>
+              <?php endforeach; ?>
+            </tbody>
+            <tfoot class="bg-light">
+              <tr>
+                <td colspan="2" class="text-right font-weight-bold">Total</td>
+                <?php foreach ($keys as $k) : ?>
+                  <?php for ($j = 0; $j < count($data['kasus_harian']); $j++) : ?>
+                    <td class="text-right"><?= array_sum($totals[$k][$data['kasus_harian'][$j]['tanggal']]); ?></td>
+                  <?php endfor; ?>
+                  <td class="text-right font-weight-bold"><?= array_sum($totals[$k]['kumulatif']); ?></td>
+                <?php endforeach; ?>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      <?php endif; ?>
       <?php if (isset($data['data_kecamatan'])) : ?>
         <div class="table-responsive">
           <table class="table table-striped mb-0">
@@ -321,7 +379,7 @@
                     <i class="fas <?= intval($d['tipe_kontak']) <= count($icons) - 1 ? $icons[intval($d['tipe_kontak'])] : $icons[0] ?>"></i>
                   </div>
                   <div class="mx-2">
-                    <h4 class="font-weight-bold text-dark-blue"><?= preg_replace('~^.{3}|.{3}|.{4}(?!$)~', '$0 ', $d['no_hp']) ?></h4>
+                    <h4 class="font-weight-bold text-dark-blue"><?= preg_replace(substr($d['no_hp'], 0, 1) === '+' ? '~^.{3}|.{4}(?!$)~' : '~^.{4}|.{4}(?!$)~', '$0 ', $d['no_hp']) ?></h4>
                     <h5 class="text-dark-blue"><?= $d['nama_kontak'] ?></h5>
                     <p class="text-muted mb-0"><?= $d['keterangan'] !== '' ? $d['keterangan'] : '-' ?></p>
                   </div>
@@ -419,21 +477,22 @@
         }
         foreach ($data['rumah_sakit'] as $i => $r) :
         ?>
-          <div class="<?= count($data['rumah_sakit']) === $i + 1 ? 'mb-0' : 'mb-3' ?>">
-            <div class="d-md-flex mx-md--3 <?= count($data['rumah_sakit']) === $i + 1 ? '' : 'border-bottom pb-3' ?>">
+          <div class="<?= count($data['rumah_sakit']) === $i + 1 ? 'mb-0' : 'mb-5' ?>">
+            <div class="d-md-flex mx-md--3 <?= count($data['rumah_sakit']) === $i + 1 ? '' : 'border-bottom pb-5' ?>">
               <div class="flex-md-col mx-md-3 mb-3 mb-md-0 ml-md-0">
                 <h3 class="font-weight-bold text-dark-blue"><?= $r['nama_rumah_sakit'] ?></h3>
+                <a class="text-primary" target="_blank" href="http://maps.google.com/?q=<?= $r['latitude'] . ',' . $r['longitude']; ?>"><i class="fas fa-location-arrow"></i> Lihat di Peta</a>
               </div>
               <div class="flex-md-col mx-md-3 ml-3 mr-md-0">
-                <div class="d-flex align-items-start mx--2 mb-2">
-                  <span class="mx-2 icon-wrapper-sm text-warning"><i class="fas fa-map-marked-alt"></i></span>
+                <div class="d-flex align-items-start mx--2 mb-3">
+                  <span class="mx-2 icon-wrapper-sm text-warning"><i class="fas fa-map-marker-alt"></i></span>
                   <span class="mx-2 flex-col text-muted font-weight-medium"><?= $r['alamat_rumah_sakit'] ?></span>
                 </div>
                 <?php
                 $telepon = unserialize($r['telepon_rumah_sakit']);
                 foreach ($telepon as $i => $t) :
                 ?>
-                  <div class="d-flex align-items-start mx--2 <?= count($telepon) === $i + 1 ? '' : 'mb-2' ?>">
+                  <div class="d-flex align-items-start mx--2 <?= count($telepon) === $i + 1 ? '' : 'mb-3' ?>">
                     <span class="mx-2 icon-wrapper-sm text-success"><i class="fas fa-phone-alt"></i></span>
                     <span class="mx-2 flex-col text-muted font-weight-medium"><?= $t !== '' ? $t : '-' ?></span>
                   </div>
@@ -447,6 +506,11 @@
         endforeach
         ?>
       </div>
+      <?php if ($data['rumah_sakit_total'] > 5) : ?>
+        <div class="text-center mt-5">
+          <a class="btn btn-success border-0" href="<?= Web::url('rumah-sakit') ?>">Lihat semua <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </div>

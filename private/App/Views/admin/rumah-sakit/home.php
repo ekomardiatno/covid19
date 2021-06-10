@@ -29,8 +29,9 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nama Rumah Sakit</th>
-        <th scope="col">Alamat Rumah Sakit</th>
         <th scope="col">Nomor Telepon</th>
+        <th scope="col">Koordinat</th>
+        <th scope="col">Alamat Rumah Sakit</th>
         <th scope="col">&nbsp;</th>
       </tr>
     </thead>
@@ -72,8 +73,9 @@
         <tr>
           <td><?= $no; ?></td>
           <td><?= $d['nama_rumah_sakit']; ?></td>
-          <td><?= $d['alamat_rumah_sakit']; ?></td>
           <td><?= $telepon_rumah_sakit_str; ?></td>
+          <td><a  target="_blank" href="http://maps.google.com/?q=<?= $d['latitude'] . ',' . $d['longitude']; ?>"><?= $d['latitude'] . ',' . $d['longitude']; ?></a></td>
+          <td><?= $d['alamat_rumah_sakit']; ?></td>
           <td>
             <a href="<?= Web::url('admin.rumah-sakit.edit.' . $d['id_rumah_sakit']) ?>" class="btn btn-warning">Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_rumah_sakit'] ?>">Hapus</button>

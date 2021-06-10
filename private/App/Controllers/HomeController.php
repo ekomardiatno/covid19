@@ -7,7 +7,7 @@ class HomeController extends Controller
     {
         $where = [
             'order_by' => ['tanggal', 'DESC'],
-            'limit' => [0,1]
+            'limit' => [0, 1]
         ];
         $data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
         $data['odp_proses'] = $data['odp_proses'] ?? 0;
@@ -25,8 +25,17 @@ class HomeController extends Controller
         $data['total_positif'] = $data['positif_rumah'] + $data['positif_rawat'] + $data['positif_sehat'] + $data['positif_meninggal'];
         $data['total_kasus'] = $data['total_pdp'] + $data['total_positif'];
         $data['data_kecamatan'] = isset($data['data_kecamatan']) ? unserialize($data['data_kecamatan']) : null;
-        $data['rumah_sakit'] = $this->model('RumahSakit')->read();
+        $data['rumah_sakit'] = $this->model('RumahSakit')->read(null, ['limit' => [0, 5]]);
+        $data['rumah_sakit_total'] = $this->model('RumahSakit')->read(null, null, 'NUM_ROWS');
         $data['kontak'] = $this->model('Kontak')->read(null, ['order_by' => ['tanggal_dibuat', 'ASC']]);
+        $data['kasus_harian'] = $this->model('KasusHarian')->read(null, ['order_by' => ['tanggal', 'DESC'], 'limit' => [0, 2]]);
+        $data['kasus_harian'] = array_reverse($data['kasus_harian']);
+        if (count($data['kasus_harian']) >= 2) {
+            $data['kasus_harian'][0]['kasus_harian_data'] = unserialize($data['kasus_harian'][0]['kasus_harian_data']);
+            $data['kasus_harian'][1]['kasus_harian_data'] = unserialize($data['kasus_harian'][1]['kasus_harian_data']);
+        } else if (count($data['kasus_harian']) >= 1) {
+            $data['kasus_harian'][0]['kasus_harian_data'] = unserialize($data['kasus_harian'][0]['kasus_harian_data']);
+        }
         $this->_web->view('home', $data);
     }
 }

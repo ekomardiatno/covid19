@@ -69,7 +69,7 @@
           <td><?= $no; ?></td>
           <td><?= $tipe[intval($d['tipe_kontak'])]; ?></td>
           <td><?= $d['nama_kontak']; ?></td>
-          <td><?= $d['no_hp']; ?></td>
+          <td><?= preg_replace(substr($d['no_hp'], 0, 1) === '+' ? '~^.{3}|.{4}(?!$)~' : '~^.{4}|.{4}(?!$)~', '$0 ', $d['no_hp']); ?></td>
           <td><?= $d['keterangan']; ?></td>
           <td>
             <a href="<?= Web::url('admin.kontak.edit.' . $d['id_kontak']) ?>" class="btn btn-warning">Edit</a>

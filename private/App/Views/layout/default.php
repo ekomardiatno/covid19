@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="<?= Web::assets('brand/favicon.png', 'images'); ?>" type="image/x-icon">
   <title><?= $title != '' ? $title . ' | ' . getenv('APP_NAME') : getenv('APP_NAME') ?></title>
   <meta content="<?= $desc; ?>" name="description" />
+  <base href="<?= Web::url() ?>" />
   <link rel="stylesheet" href="<?= Web::assets('css/bootstrap.css', 'frontend') ?>">
   <link rel="stylesheet" href="<?= Web::assets('css/font-awesome.css', 'frontend') ?>">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900|Work+Sans:300,400,500,700" rel="stylesheet">
@@ -171,14 +172,39 @@
       background: linear-gradient(87deg, #e9ecef 0, #e9eaef 100%) !important;
     }
 
-    .navbar-default .default-logo, .navbar-default.affix .affix-logo {
+    .navbar-default .default-logo,
+    .navbar-default.affix .affix-logo {
       display: block;
     }
-    .navbar-default.affix .default-logo, .navbar-default .affix-logo {
+
+    .navbar-default.affix .default-logo,
+    .navbar-default .affix-logo {
       display: none;
     }
-    a:hover, a:focus {
+
+    a:hover,
+    a:focus {
       text-decoration: none;
+    }
+
+    .form-search {
+      font-size: 3rem;
+      height: auto;
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      box-shadow: none;
+      text-align: center;
+      font-weight: bold;
+      border-width: 2px;
+      border-color: #e9ecef;
+    }
+
+    .form-search:focus {
+      box-shadow: none;
     }
   </style>
 </head>
@@ -204,19 +230,19 @@
             <span class="menu-line"></span>
           </span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="<?= Web::url() ?>#">
           <img class="default-logo" src="<?= Web::assets('brand/kuansing.png', 'images') ?>" alt="kuansing">
           <img class="affix-logo" src="<?= Web::assets('brand/kuansing-blue.png', 'images') ?>" alt="kuansing">
         </a>
       </div>
       <div class="navigation">
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="decoration" href="#depan">Beranda</a></li>
-          <li><a class="decoration" href="#tentang-covid19">Tentang COVID-19</a></li>
-          <li><a class="decoration" href="#data-kasus">Kasus COVID-19</a></li>
-          <li><a class="decoration" href="#kontak">Kontak</a></li>
-          <li><a class="decoration" href="#pencegahan">Pencegahan</a></li>
-          <li><a class="decoration" href="#rumah-sakit">Rumah Sakit</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#">Beranda</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#tentang-covid19">Tentang COVID-19</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#data-kasus">Kasus COVID-19</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#kontak">Kontak</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#pencegahan">Pencegahan</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#rumah-sakit">Rumah Sakit</a></li>
           <!-- <li><a href="http://www.instagram.com/komafx" class="menu-special"><i class="fa fa-instagram"></i> Follow my Instagram</a></li> -->
         </ul>
       </div>
@@ -273,7 +299,7 @@
   <script>
     const scrollTo = (anchor, topOffset, callback = null) => {
       $('html, body').stop().animate({
-        scrollTop: ($(anchor).offset().top - (topOffset - 1))
+        scrollTop: (anchor ? $(anchor).offset().top - (topOffset - 1) : 0)
       }, 800, 'easeInOutExpo', () => {
         callback !== null ? callback() : null
       })
@@ -335,8 +361,9 @@
         }
       })
 
+      console.log(window.location.href)
       $('.nav li a, .banner .to-content').bind('click', function(event) {
-        event.preventDefault()
+        // event.preventDefault()
         if (!$(this).parent().hasClass('dropdown')) {
           $('.nav li.active').removeClass('active')
           var $anchor = this.hash
@@ -344,11 +371,19 @@
         }
       })
 
+      $('a.navbar-brand').bind('click', function(event) {
+        // event.preventDefault()
+        var $anchor = this.hash
+        scrollTo($anchor, n)
+      })
+
       if (window.location.hash !== '') {
         setTimeout(function() {
           let hash = window.location.hash
           $(hash) ? scrollTo(window.location.hash, n) : null
         }, 250)
+      } else {
+        scrollTo('#depan', n)
       }
 
     })

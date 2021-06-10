@@ -12,7 +12,7 @@ class Kasus_HarianController extends Controller
 
   public function index()
   {
-    $data = $this->_model->read();
+    $data = $this->_model->read(null, ['order_by' => ['tanggal', 'DESC']]);
     $this->_web->title('Kasus Harian');
     $this->_web->breadcrumb(
       [
