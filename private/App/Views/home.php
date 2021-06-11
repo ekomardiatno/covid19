@@ -214,6 +214,7 @@
         </div>
       </div>
       <?php if (isset($data['kasus_harian'])) : ?>
+        <h3 class="text-center mb-3">Laporan Harian Kasus Konfirmasi Covid-19 Kabupaten Kuantan Singingi</h3>
         <div class="table-responsive">
           <table class="table table-striped mb-0">
             <thead>
@@ -272,6 +273,8 @@
         </div>
       <?php endif; ?>
       <?php if (isset($data['data_kecamatan'])) : ?>
+        <h3 class="text-center mt-5">Data Pantauan Covid-19 Kabupaten Kuantan Singingi</h3>
+        <h4 class="text-center mb-3 text-muted">Tanggal update <?= Mod::dateID($data['tanggal']) ?></h4>
         <div class="table-responsive">
           <table class="table table-striped mb-0">
             <thead>
