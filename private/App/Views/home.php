@@ -484,7 +484,9 @@
             <div class="d-md-flex mx-md--3 <?= count($data['rumah_sakit']) === $i + 1 ? '' : 'border-bottom pb-5' ?>">
               <div class="flex-md-col mx-md-3 mb-3 mb-md-0 ml-md-0">
                 <h3 class="font-weight-bold text-dark-blue"><?= $r['nama_rumah_sakit'] ?></h3>
-                <a class="text-primary" target="_blank" href="http://maps.google.com/?q=<?= $r['latitude'] . ',' . $r['longitude']; ?>"><i class="fas fa-location-arrow"></i> Lihat di Peta</a>
+                <?php if ($r['latitude'] . ',' . $r['longitude'] !== '0,0') : ?>
+                  <a class="text-primary" target="_blank" href="http://maps.google.com/?q=<?= $r['latitude'] . ',' . $r['longitude']; ?>"><i class="fas fa-location-arrow"></i> Lihat di Peta</a>
+                <?php endif; ?>
               </div>
               <div class="flex-md-col mx-md-3 ml-3 mr-md-0">
                 <div class="d-flex align-items-start mx--2 mb-3">
@@ -517,18 +519,18 @@
     </div>
   </div>
 </div>
-<?php if($data['kontributor']): ?>
-<div class="py-5 bg-light">
-  <div class="container">
-    <div class="partner-logo">
-      <?php foreach($data['kontributor'] as $d): ?>
-      <div class="partner-item">
-        <a href="<?= filter_var($d['url_kontributor'], FILTER_VALIDATE_URL) ? $d['url_kontributor'] : '#' ?>" title="<?= $d['nama_kontributor'] ?>">
-          <img class="img-responsive" src="<?= $d['image_kontributor'] ?>" title="<?= $d['nama_kontributor'] ?>" alt="<?= $d['nama_kontributor'] ?>">
-        </a>
+<?php if ($data['kontributor']) : ?>
+  <div class="py-5 bg-light">
+    <div class="container">
+      <div class="partner-logo">
+        <?php foreach ($data['kontributor'] as $d) : ?>
+          <div class="partner-item">
+            <a href="<?= filter_var($d['url_kontributor'], FILTER_VALIDATE_URL) ? $d['url_kontributor'] : '#' ?>" title="<?= $d['nama_kontributor'] ?>">
+              <img class="img-responsive" src="<?= $d['image_kontributor'] ?>" title="<?= $d['nama_kontributor'] ?>" alt="<?= $d['nama_kontributor'] ?>">
+            </a>
+          </div>
+        <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
     </div>
   </div>
-</div>
 <?php endif; ?>
