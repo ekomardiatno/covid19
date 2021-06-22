@@ -27,7 +27,6 @@
   <table class="table table-striped align-items-center table-flush datatables">
     <thead class="thead-light">
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Tanggal</th>
         <th scope="col">Spesimen: Negatif</th>
         <th scope="col">Spesimen: Positif</th>
@@ -48,33 +47,30 @@
       foreach ($data as $d) :
       ?>
         <tr>
-          <td>
-            <?= $no ?>
-            <!-- Modal -->
-            <div class="modal fade" id="modalHapus-<?= $d['id_kasus'] ?>" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus-<?= $d['id_kasus'] ?>" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="labelModalHapus-<?= $d['id_kasus'] ?>">Peringatan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <h3 class="m-0 font-weight-bold">Yakin ingin Menghapus data <?= Mod::dateID($d['tanggal']) ?>?</h3>
-                  </div>
-                  <div class="modal-footer">
-                    <form action="<?= Web::url('admin.kasus.delete') ?>" method="post">
-                      <?= Web::key_field() ?>
-                      <input type="hidden" name="id_kasus" value="<?= $d['id_kasus'] ?>">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                      <button type="submit" class="btn btn-danger">Hapus</button>
-                    </form>
-                  </div>
+          <!-- Modal -->
+          <div class="modal fade" id="modalHapus-<?= $d['id_kasus'] ?>" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus-<?= $d['id_kasus'] ?>" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="labelModalHapus-<?= $d['id_kasus'] ?>">Peringatan</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3 class="m-0 font-weight-bold">Yakin ingin Menghapus data <?= Mod::dateID($d['tanggal']) ?>?</h3>
+                </div>
+                <div class="modal-footer">
+                  <form action="<?= Web::url('admin.kasus.delete') ?>" method="post">
+                    <?= Web::key_field() ?>
+                    <input type="hidden" name="id_kasus" value="<?= $d['id_kasus'] ?>">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                  </form>
                 </div>
               </div>
             </div>
-          </td>
+          </div>
           <td><?= Mod::dateID($d['tanggal']); ?></td>
           <td><?= $d['odp_proses'] ?></td>
           <td><?= $d['odp_selesai'] ?></td>
