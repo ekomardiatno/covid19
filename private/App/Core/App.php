@@ -71,6 +71,15 @@ class App extends Aes
         unset($_POST['_key']);
       }
       $_POST = $this->encrypt(json_encode($_POST), $this->form_key);
+      if($_FILES) {
+        $_FILES = $this->encrypt(json_encode($_FILES), $this->form_key);
+        if (!file_exists('uploads/')) {
+          mkdir('uploads');
+        }
+        if (!file_exists('uploads/images')) {
+          mkdir('uploads/images');
+        }
+      }
     }
 
     $get = $this->parseURL();

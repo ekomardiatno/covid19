@@ -4,6 +4,7 @@ class Request extends Aes
 {
   public $post = [];
   public $get = [];
+  public $file = [];
   public function __construct()
   {
     if ($_POST) {
@@ -12,6 +13,10 @@ class Request extends Aes
 
     if($_GET) {
       $this->get = $_GET;
+    }
+
+    if($_FILES) {
+      $this->file = json_decode($this->decrypt($_FILES, getenv('APP_KEY')), true);
     }
   }
 }

@@ -3,10 +3,8 @@ function crease($int)
 {
 	if ($int >= 50) {
 		return ['text-danger', 'fas fa-arrow-up'];
-	} else if ($int > 0) {
+	} else if ($int >= 0) {
 		return ['text-warning', 'fas fa-arrow-up'];
-	} else if ($int === 0) {
-		return ['text-success', 'fas fa-arrows-alt-h'];
 	} else {
 		return ['text-success', 'fas fa-arrow-down'];
 	}

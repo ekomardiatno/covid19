@@ -36,6 +36,7 @@ class HomeController extends Controller
         } else if (count($data['kasus_harian']) >= 1) {
             $data['kasus_harian'][0]['kasus_harian_data'] = unserialize($data['kasus_harian'][0]['kasus_harian_data']);
         }
+        $data['kontributor'] = $this->model('Kontributor')->read();
         $this->_web->view('home', $data);
     }
 }

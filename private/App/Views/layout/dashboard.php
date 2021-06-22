@@ -32,6 +32,7 @@
   <script src="<?= Web::assets('responsive.bootstrap4.min.js', 'js') ?>"></script>
   <script src="<?= Web::assets('flash-message.min.js', 'js') ?>"></script>
   <script src="<?= Web::assets('argon.min.js', 'js') ?>"></script>
+  <script src="<?= Web::assets('input-foto.js', 'js') ?>"></script>
 
 <body>
   <nav class="navbar navbar-vertical fixed-left fixed-top navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -113,6 +114,11 @@
           <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.rumah-sakit'); ?>">
               <i class="fas fa-hospital text-success"></i> Rumah Sakit
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= Web::url('admin.kontributor'); ?>">
+              <i class="fas fa-building"></i> Kontributor
             </a>
           </li>
           <!-- <li class="nav-item">

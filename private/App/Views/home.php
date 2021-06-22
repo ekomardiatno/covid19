@@ -213,7 +213,7 @@
           </div>
         </div>
       </div>
-      <?php if (isset($data['kasus_harian'])) : ?>
+      <?php if (count($data['kasus_harian']) > 0) : ?>
         <h3 class="text-center mb-3">Laporan Harian Kasus Konfirmasi Covid-19 Kabupaten Kuantan Singingi</h3>
         <div class="table-responsive">
           <table class="table table-striped mb-0">
@@ -517,24 +517,18 @@
     </div>
   </div>
 </div>
+<?php if($data['kontributor']): ?>
 <div class="py-5 bg-light">
   <div class="container">
     <div class="partner-logo">
+      <?php foreach($data['kontributor'] as $d): ?>
       <div class="partner-item">
-        <img class="img-responsive" src="<?= Web::assets('bnpb.png', 'images/brand') ?>" alt="">
+        <a href="<?= filter_var($d['url_kontributor'], FILTER_VALIDATE_URL) ? $d['url_kontributor'] : '#' ?>" title="<?= $d['nama_kontributor'] ?>">
+          <img class="img-responsive" src="<?= $d['image_kontributor'] ?>" title="<?= $d['nama_kontributor'] ?>" alt="<?= $d['nama_kontributor'] ?>">
+        </a>
       </div>
-      <div class="partner-item">
-        <img class="img-responsive" src="<?= Web::assets('dinas-kesehatan.png', 'images/brand') ?>" alt="">
-      </div>
-      <div class="partner-item">
-        <img class="img-responsive" src="<?= Web::assets('diskominfo.png', 'images/brand') ?>" alt="">
-      </div>
-      <div class="partner-item">
-        <img class="img-responsive" src="<?= Web::assets('tni.png', 'images/brand') ?>" alt="">
-      </div>
-      <div class="partner-item">
-        <img class="img-responsive" src="<?= Web::assets('polri.png', 'images/brand') ?>" alt="">
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </div>
+<?php endif; ?>
