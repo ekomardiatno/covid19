@@ -121,6 +121,11 @@
               <i class="fas fa-building"></i> Kontributor
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= Web::url('admin.kamar'); ?>">
+              <i class="fas fa-procedures text-warning"></i> Kamar
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="<?= Web::url('admin.user'); ?>">
               <i class="fas fa-users"></i> Pengguna
@@ -261,6 +266,8 @@
   <script>
     let windowUrl = window.location.href
     windowUrl = windowUrl.split('/')
+    let host = '<?= $_ENV['APP_URL'] ?>'
+    let hostSplitLength = host.split('/').length
     if (windowUrl[windowUrl.length - 1] === '') {
       windowUrl.splice(windowUrl.length - 1, 1)
     }
@@ -271,9 +278,9 @@
       if (aHref[aHref.length - 1] === '') {
         aHref.splice(aHref.length - 1, 1)
       }
-      if (windowUrl.length <= 5 && aHref[4] === windowUrl[4] && aHref.length <= 5) {
+      if (windowUrl.length <= hostSplitLength && aHref[hostSplitLength - 1] === windowUrl[hostSplitLength - 1] && aHref.length <= hostSplitLength) {
         navLink.addClass('active')
-      } else if (windowUrl[5] === aHref[5]) {
+      } else if (windowUrl[hostSplitLength] === aHref[hostSplitLength]) {
         navLink.addClass('active')
       }
     })

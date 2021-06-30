@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="<?= Web::assets('css/museo.css', 'frontend') ?>">
   <link rel="stylesheet" href="<?= Web::assets('css/style.css', 'frontend') ?>">
   <link rel="stylesheet" href="<?= Web::assets('css/media-screen.css', 'frontend') ?>">
+  <link rel="stylesheet" href="<?= Web::assets('css/owl.carousel.min.css', 'frontend') ?>">
+  <link rel="stylesheet" href="<?= Web::assets('css/owl.theme.default.min.css', 'frontend') ?>">
   <script src="<?= Web::assets('js/jquery.min.js', 'frontend') ?>"></script>
   <script src="<?= Web::assets('js/bootstrap.min.js', 'frontend') ?>"></script>
   <script src="<?= Web::assets('js/jquery.easing.min.js', 'frontend') ?>"></script>
@@ -22,6 +24,7 @@
   <script src="<?= Web::assets('js/stellar.js', 'frontend') ?>"></script>
   <script src="<?= Web::assets('js/typeit.js', 'frontend') ?>"></script>
   <script src="<?= Web::assets('js/parallax.js', 'frontend') ?>"></script>
+  <script src="<?= Web::assets('js/owl.carousel.min.js', 'frontend') ?>"></script>
   <style>
     .soon {
       background-color: #333;
@@ -205,6 +208,13 @@
 
     .form-search:focus {
       box-shadow: none;
+    }
+
+    .owl-carousel .owl-stage-outer {
+      text-align: center;
+    }
+    .owl-carousel .owl-stage {
+      display: inline-block;
     }
   </style>
 </head>
@@ -447,6 +457,28 @@
     $(window).on('load', function() {
       var $preloader = $('.preloader')
       $preloader.delay(500).fadeOut('slow')
+    })
+
+    $('.owl-carousel').owlCarousel({
+      loop: true,
+      margin: 0,
+      nav: false,
+      center: false,
+      dots: false,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      autoplayHoverPause: true,
+      responsive: {
+        0: {
+          items: 2
+        },
+        600: {
+          items: 4
+        },
+        1000: {
+          items: 6
+        }
+      }
     })
   </script>
 </body>

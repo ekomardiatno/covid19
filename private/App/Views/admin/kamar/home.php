@@ -2,7 +2,7 @@
   <div class="card-header border-0">
     <div class="d-flex flex-column-sm mx--3 align-items-center-md">
       <div class="mx-3 flex-fill d-flex align-items-center">
-        <h3 class="mb-0 mb-2-sm text-uppercase fw-800">Kontak</h3>
+        <h3 class="mb-0 mb-2-sm text-uppercase fw-800">Ketersediaan Kamar</h3>
       </div>
       <div class="mx-3">
         <div class="mx--1 d-flex">
@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="mx-1 d-flex">
-            <a href="<?= Web::url('admin.kontak.tambah'); ?>" class="btn btn-sm btn-primary d-flex align-items-center"><span class="fas fa-plus"></span><span class="d-none d-md-inline-block ml-1">Tambah Kontak</span></a>
+            <a href="<?= Web::url('admin.kamar.tambah'); ?>" class="btn btn-sm btn-primary d-flex align-items-center"><span class="fas fa-plus"></span><span class="d-none d-md-inline-block ml-1">Tambah Kamar</span></a>
           </div>
         </div>
       </div>
@@ -28,25 +28,24 @@
     <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Tipe Kontak</th>
-        <th scope="col">Nama Kontak</th>
-        <th scope="col">Nomor Ponsel</th>
-        <th scope="col">Keterangan</th>
+        <th scope="col">Rumah Sakit</th>
+        <th scope="col">Nama Kamar</th>
+        <th scope="col">Ketersediaan</th>
+        <th scope="col">Tersedia</th>
         <th scope="col">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       <?php
       $no = 1;
-      $tipe = ['Hotline', 'Dokter'];
       foreach ($data as $d) :
       ?>
         <!-- Modal -->
-        <div class="modal fade" id="modalHapus-<?= $d['id_kontak'] ?>" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus-<?= $d['id_kontak'] ?>" aria-hidden="true">
+        <div class="modal fade" id="modalHapus-<?= $d['id_kamar'] ?>" tabindex="-1" role="dialog" aria-labelledby="labelModalHapus-<?= $d['id_kamar'] ?>" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="labelModalHapus-<?= $d['id_kontak'] ?>">Peringatan</h5>
+                <h5 class="modal-title" id="labelModalHapus-<?= $d['id_kamar'] ?>">Peringatan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -55,9 +54,9 @@
                 <h3 class="m-0 font-weight-bold">Yakin ingin Menghapus data?</h3>
               </div>
               <div class="modal-footer">
-                <form action="<?= Web::url('admin.kontak.delete') ?>" method="post">
+                <form action="<?= Web::url('admin.kontributor.delete') ?>" method="post">
                   <?= Web::key_field() ?>
-                  <input type="hidden" name="id_kontak" value="<?= $d['id_kontak'] ?>">
+                  <input type="hidden" name="id_kamar" value="<?= $d['id_kamar'] ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
@@ -67,13 +66,13 @@
         </div>
         <tr>
           <td><?= $no; ?></td>
-          <td><?= $tipe[intval($d['tipe_kontak'])]; ?></td>
-          <td><?= $d['nama_kontak']; ?></td>
-          <td><?= preg_replace(substr($d['no_hp'], 0, 1) === '+' ? '~^.{3}|.{4}(?!$)~' : '~^.{4}|.{4}(?!$)~', '$0 ', $d['no_hp']); ?></td>
-          <td><?= $d['keterangan']; ?></td>
+          <td><?= $d['nama_rumah_sakit']; ?></td>
+          <td><?= $d['nama_kamar']; ?></td>
+          <td><?= $d['ketersediaan_kamar']; ?></td>
+          <td><?= $d['kamar_tersedia']; ?></td>
           <td>
-            <a href="<?= Web::url('admin.kontak.edit.' . $d['id_kontak']) ?>" class="btn btn-warning">Edit</a>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kontak'] ?>">Hapus</button>
+            <a href="<?= Web::url('admin.kamar.edit.' . $d['id_kamar']) ?>" class="btn btn-warning">Edit</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kamar'] ?>">Hapus</button>
           </td>
         </tr>
       <?php

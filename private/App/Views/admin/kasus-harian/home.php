@@ -8,7 +8,7 @@
         <div class="mx--1 d-flex">
           <div class="mx-1 flex-fill">
             <div class="form-group mb-0">
-              <div class="input-group input-group-sm input-group-alternative">
+              <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fas fa-search"></span></span>
                 </div>

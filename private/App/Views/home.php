@@ -520,14 +520,17 @@
   </div>
 </div>
 <?php if ($data['kontributor']) : ?>
-  <div class="py-5 bg-light">
+  <div class="py-4 bg-light">
     <div class="container">
-      <div class="partner-logo">
+      <div class="owl-carousel owl-theme">
         <?php foreach ($data['kontributor'] as $d) : ?>
-          <div class="partner-item">
-            <a href="<?= filter_var($d['url_kontributor'], FILTER_VALIDATE_URL) ? $d['url_kontributor'] : '#' ?>" title="<?= $d['nama_kontributor'] ?>">
-              <img class="img-responsive" src="<?= $d['image_kontributor'] ?>" title="<?= $d['nama_kontributor'] ?>" alt="<?= $d['nama_kontributor'] ?>">
-            </a>
+          <div class="item">
+            <div class="partner-item">
+              <a href="<?= filter_var($d['url_kontributor'], FILTER_VALIDATE_URL) ? $d['url_kontributor'] : '#' ?>" title="<?= $d['nama_kontributor'] ?>">
+                <img class="img-responsive" src="<?= $d['image_kontributor'] ?>" title="<?= $d['nama_kontributor'] ?>" alt="<?= $d['nama_kontributor'] ?>">
+                <p><?= $d['nama_kontributor'] ?></p>
+              </a>
+            </div>
           </div>
         <?php endforeach; ?>
       </div>
