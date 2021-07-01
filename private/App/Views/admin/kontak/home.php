@@ -57,7 +57,7 @@
               <div class="modal-footer">
                 <form action="<?= Web::url('admin.kontak.delete') ?>" method="post">
                   <?= Web::key_field() ?>
-                  <input type="hidden" name="id_kontak" value="<?= $d['id_kontak'] ?>">
+                  <input type="hidden" name="id_kontak" value="<?= md5($d['id_kontak']) ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
@@ -72,7 +72,7 @@
           <td><?= preg_replace(substr($d['no_hp'], 0, 1) === '+' ? '~^.{3}|.{4}(?!$)~' : '~^.{4}|.{4}(?!$)~', '$0 ', $d['no_hp']); ?></td>
           <td><?= $d['keterangan']; ?></td>
           <td>
-            <a href="<?= Web::url('admin.kontak.edit.' . $d['id_kontak']) ?>" class="btn btn-warning">Edit</a>
+            <a href="<?= Web::url('admin.kontak.edit.' . md5($d['id_kontak'])) ?>" class="btn btn-warning">Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kontak'] ?>">Hapus</button>
           </td>
         </tr>

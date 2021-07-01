@@ -78,12 +78,16 @@ class KasusController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus',
+          'column' => 'md5(id_kasus)',
           'value' => $id
         ]
       ]
     ];
     $data = $this->model('Kasus')->read(null, $where, 'ARRAY_ONE');
+    if(!$data) {
+      Flasher::setFlash('Alamat tidak sah', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      return $this->redirect('admin.kasus');
+    }
     $data['kecamatan'] = unserialize($data['data_kecamatan']);
     $this->_web->title('Edit Kasus');
     $this->_web->breadcrumb(
@@ -102,7 +106,7 @@ class KasusController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus',
+          'column' => 'md5(id_kasus)',
           'value' => $id
         ]
       ]
@@ -142,12 +146,12 @@ class KasusController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus',
+          'column' => 'md5(id_kasus)',
           'value' => $id
         ]
       ]
     ];
-    $delete = $this->_model->delete($where);
+    $delete = $this->model('Kasus')->delete($where);
 
     if ($delete) {
       Flasher::setFlash('<b>Berhasil!</b> Data terhapus', 'success', 'ni ni-check-bold', 'top', 'center');

@@ -56,7 +56,7 @@
               <div class="modal-footer">
                 <form action="<?= Web::url('admin.kontributor.delete') ?>" method="post">
                   <?= Web::key_field() ?>
-                  <input type="hidden" name="id_kontributor" value="<?= $d['id_kontributor'] ?>">
+                  <input type="hidden" name="id_kontributor" value="<?= md5($d['id_kontributor']) ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
@@ -77,7 +77,7 @@
           </td>
           <td><?= $d['deskripsi_kontributor'] !== '' ? $d['deskripsi_kontributor'] : '-'; ?></td>
           <td>
-            <a href="<?= Web::url('admin.kontributor.edit.' . $d['id_kontributor']) ?>" class="btn btn-warning">Edit</a>
+            <a href="<?= Web::url('admin.kontributor.edit.' . md5($d['id_kontributor'])) ?>" class="btn btn-warning">Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kontributor'] ?>">Hapus</button>
           </td>
         </tr>

@@ -54,12 +54,16 @@ class KontakController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kontak',
+          'column' => 'md5(id_kontak)',
           'value' => $id
         ]
       ]
     ];
     $data = $this->_model->read(null, $where, 'ARRAY_ONE');
+    if(!$data) {
+      Flasher::setFlash('Alamat tidak sah', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      return $this->redirect('admin.kontak');
+    }
     $this->_web->title('Edit Kontak');
     $this->_web->breadcrumb(
       [
@@ -76,7 +80,7 @@ class KontakController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kontak',
+          'column' => 'md5(id_kontak)',
           'value' => $id
         ]
       ]
@@ -100,7 +104,7 @@ class KontakController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kontak',
+          'column' => 'md5(id_kontak)',
           'value' => $id
         ]
       ]

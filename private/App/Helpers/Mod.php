@@ -53,6 +53,15 @@ class Mod
 
     }
 
+    function dateTimeConvert($date){
+        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+        $y = substr($date, 0, 4);
+        $m = substr($date, 5, 2);
+        $d = substr($date, 8, 2);
+
+        return $d . ' ' . $months[intval($m) - 1] . ' ' . $y . ' ' . substr($date, 11, 8);
+    }
+
     public static function hash($password)
     {
 

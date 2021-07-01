@@ -56,7 +56,7 @@
                   <div class="modal-footer">
                     <form action="<?= Web::url('admin.kasus-harian.delete') ?>" method="post">
                       <?= Web::key_field() ?>
-                      <input type="hidden" name="id_kasus_harian" value="<?= $d['id_kasus_harian'] ?>">
+                      <input type="hidden" name="id_kasus_harian" value="<?= md5($d['id_kasus_harian']) ?>">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                       <button type="submit" class="btn btn-danger">Hapus</button>
                     </form>
@@ -67,7 +67,7 @@
           </td>
           <td><?= Mod::dateID($d['tanggal']); ?></td>
           <td>
-            <a href="<?= Web::url('admin.kasus-harian.edit.' . $d['id_kasus_harian']) ?>" class="btn btn-primary"><span class="fas fa-user"></span> Edit</a>
+            <a href="<?= Web::url('admin.kasus-harian.edit.' . md5($d['id_kasus_harian'])) ?>" class="btn btn-primary"><span class="fas fa-user"></span> Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus_harian'] ?>"><span class="fas fa-trash-alt"></span> Hapus</button>
           </td>
         </tr>

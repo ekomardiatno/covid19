@@ -1,4 +1,4 @@
-<form action="<?= Web::url('admin.kasus.update.' . $data['id_kasus']) ?>" method="POST">
+<form action="<?= Web::url('admin.kasus.update.' . md5($data['id_kasus'])) ?>" method="POST">
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">

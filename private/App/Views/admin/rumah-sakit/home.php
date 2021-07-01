@@ -62,7 +62,7 @@
               <div class="modal-footer">
                 <form action="<?= Web::url('admin.rumah-sakit.delete') ?>" method="post">
                   <?= Web::key_field() ?>
-                  <input type="hidden" name="id_rumah_sakit" value="<?= $d['id_rumah_sakit'] ?>">
+                  <input type="hidden" name="id_rumah_sakit" value="<?= md5($d['id_rumah_sakit']) ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
@@ -77,7 +77,7 @@
           <td><a  target="_blank" href="http://maps.google.com/?q=<?= $d['latitude'] . ',' . $d['longitude']; ?>"><?= $d['latitude'] . ',' . $d['longitude']; ?></a></td>
           <td><?= $d['alamat_rumah_sakit']; ?></td>
           <td>
-            <a href="<?= Web::url('admin.rumah-sakit.edit.' . $d['id_rumah_sakit']) ?>" class="btn btn-warning">Edit</a>
+            <a href="<?= Web::url('admin.rumah-sakit.edit.' . md5($d['id_rumah_sakit'])) ?>" class="btn btn-warning">Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_rumah_sakit'] ?>">Hapus</button>
           </td>
         </tr>

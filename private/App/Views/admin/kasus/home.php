@@ -63,7 +63,7 @@
                 <div class="modal-footer">
                   <form action="<?= Web::url('admin.kasus.delete') ?>" method="post">
                     <?= Web::key_field() ?>
-                    <input type="hidden" name="id_kasus" value="<?= $d['id_kasus'] ?>">
+                    <input type="hidden" name="id_kasus" value="<?= md5($d['id_kasus']) ?>">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-danger">Hapus</button>
                   </form>
@@ -83,7 +83,7 @@
           <td><?= $d['positif_sehat'] ?></td>
           <td><?= $d['positif_meninggal'] ?></td>
           <td>
-            <a href="<?= Web::url('admin.kasus.edit.' . $d['id_kasus']) ?>" class="btn btn-primary"><span class="fas fa-user"></span> Edit</a>
+            <a href="<?= Web::url('admin.kasus.edit.' . md5($d['id_kasus'])) ?>" class="btn btn-primary"><span class="fas fa-user"></span> Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kasus'] ?>"><span class="fas fa-trash-alt"></span> Hapus</button>
           </td>
         </tr>

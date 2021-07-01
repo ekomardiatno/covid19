@@ -73,12 +73,16 @@ class Kasus_HarianController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus_harian',
+          'column' => 'md5(id_kasus_harian)',
           'value' => $id
         ]
       ]
     ];
     $data = $this->_model->read(null, $where, 'ARRAY_ONE');
+    if(!$data) {
+      Flasher::setFlash('Alamat tidak sah', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      return $this->redirect('admin.kasus-harian');
+    }
     $data['kasus_harian_data'] = unserialize($data['kasus_harian_data']);
     $this->_web->title('Edit Kasus Harian');
     $this->_web->breadcrumb(
@@ -98,7 +102,7 @@ class Kasus_HarianController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus_harian',
+          'column' => 'md5(id_kasus_harian)',
           'value' => $id
         ]
       ]
@@ -138,7 +142,7 @@ class Kasus_HarianController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_kasus_harian',
+          'column' => 'md5(id_kasus_harian)',
           'value' => $id
         ]
       ]

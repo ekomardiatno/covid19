@@ -900,7 +900,7 @@ h6 {
     bottom: 2.25rem;
     right: 2.25rem;
     font-size: 2rem;
-    color: #fff;
+    color: #333;
     background-color: #ffb836;
     border-radius: .5rem;
     box-shadow: 1px 3px 7px rgba(0, 0, 0, .5);
@@ -917,7 +917,7 @@ h6 {
 .back-to-top:hover,
 .back-to-top:focus {
     text-decoration: none;
-    color: #fff;
+    color: #333;
     transform: translateY(-1px);
     box-shadow: 2px 6px 10px rgba(0, 0, 0, .5);
 }

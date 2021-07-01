@@ -213,6 +213,7 @@
     .owl-carousel .owl-stage-outer {
       text-align: center;
     }
+
     .owl-carousel .owl-stage {
       display: inline-block;
     }
@@ -240,14 +241,14 @@
             <span class="menu-line"></span>
           </span>
         </button>
-        <a class="navbar-brand" href="<?= Web::url() ?>#">
+        <a class="navbar-brand" href="<?= Web::url() ?>">
           <img class="default-logo" src="<?= Web::assets('brand/kuansing.png', 'images') ?>" alt="kuansing">
           <img class="affix-logo" src="<?= Web::assets('brand/kuansing-blue.png', 'images') ?>" alt="kuansing">
         </a>
       </div>
       <div class="navigation">
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="decoration" href="<?= Web::url() ?>#">Beranda</a></li>
+          <li><a class="decoration" href="<?= Web::url() ?>#depan">Beranda</a></li>
           <li><a class="decoration" href="<?= Web::url() ?>#tentang-covid19">Tentang COVID-19</a></li>
           <li><a class="decoration" href="<?= Web::url() ?>#data-kasus">Kasus COVID-19</a></li>
           <li><a class="decoration" href="<?= Web::url() ?>#kontak">Kontak</a></li>
@@ -371,25 +372,28 @@
         }
       })
 
-      console.log(window.location.href)
       $('.nav li a, .banner .to-content').bind('click', function(event) {
-        // event.preventDefault()
+        let appUrl = '<?= Web::url() ?>'
+        console.log(appUrl.split('/').length)
+        var locationMain = appUrl.split('/').length >= 5 ? location.protocol + '//' + location.host + location.pathname : location.protocol + '//' + location.host + '/'
+        var $anchor = this.hash
+        if (locationMain === appUrl) {
+          event.preventDefault()
+          location.hash = ''
+        }
         if (!$(this).parent().hasClass('dropdown')) {
           $('.nav li.active').removeClass('active')
-          var $anchor = this.hash
+          if ($(this).parents('.navigation') && $anchor === '') {
+            window.location = $(this).attr('href')
+            return true
+          }
           scrollTo($anchor, n, () => $(this).parent().addClass('active'))
         }
       })
 
-      $('a.navbar-brand').bind('click', function(event) {
-        // event.preventDefault()
-        var $anchor = this.hash
-        scrollTo($anchor, n)
-      })
-
       if (window.location.hash !== '') {
         setTimeout(function() {
-          let hash = window.location.hash
+          var hash = location.hash.replace('#', '');
           $(hash) ? scrollTo(window.location.hash, n) : null
         }, 250)
       } else {

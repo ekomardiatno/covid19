@@ -31,7 +31,7 @@
         <th scope="col">Rumah Sakit</th>
         <th scope="col">Nama Kamar</th>
         <th scope="col">Ketersediaan</th>
-        <th scope="col">Tersedia</th>
+        <th scope="col">Terisi</th>
         <th scope="col">&nbsp;</th>
       </tr>
     </thead>
@@ -54,9 +54,9 @@
                 <h3 class="m-0 font-weight-bold">Yakin ingin Menghapus data?</h3>
               </div>
               <div class="modal-footer">
-                <form action="<?= Web::url('admin.kontributor.delete') ?>" method="post">
+                <form action="<?= Web::url('admin.kamar.delete') ?>" method="post">
                   <?= Web::key_field() ?>
-                  <input type="hidden" name="id_kamar" value="<?= $d['id_kamar'] ?>">
+                  <input type="hidden" name="id_kamar" value="<?= md5($d['id_kamar']) ?>">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
@@ -69,9 +69,9 @@
           <td><?= $d['nama_rumah_sakit']; ?></td>
           <td><?= $d['nama_kamar']; ?></td>
           <td><?= $d['ketersediaan_kamar']; ?></td>
-          <td><?= $d['kamar_tersedia']; ?></td>
+          <td><?= $d['kamar_terisi']; ?></td>
           <td>
-            <a href="<?= Web::url('admin.kamar.edit.' . $d['id_kamar']) ?>" class="btn btn-warning">Edit</a>
+            <a href="<?= Web::url('admin.kamar.edit.' . md5($d['id_kamar'])) ?>" class="btn btn-warning">Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalHapus-<?= $d['id_kamar'] ?>">Hapus</button>
           </td>
         </tr>

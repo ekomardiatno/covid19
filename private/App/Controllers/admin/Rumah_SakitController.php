@@ -55,12 +55,16 @@ class Rumah_SakitController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_rumah_sakit',
+          'column' => 'md5(id_rumah_sakit)',
           'value' => $id
         ]
       ]
     ];
     $data = $this->_model->read(null, $where, 'ARRAY_ONE');
+    if(!$data) {
+      Flasher::setFlash('Alamat tidak sah', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      return $this->redirect('admin.rumah-sakit');
+    }
     $data['telepon_rumah_sakit'] = unserialize($data['telepon_rumah_sakit']);
     $this->_web->title('Edit Rumah Sakit');
     $this->_web->breadcrumb(
@@ -80,7 +84,7 @@ class Rumah_SakitController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_rumah_sakit',
+          'column' => 'md5(id_rumah_sakit)',
           'value' => $id
         ]
       ]
@@ -103,7 +107,7 @@ class Rumah_SakitController extends Controller
     $where = [
       'params' => [
         [
-          'column' => 'id_rumah_sakit',
+          'column' => 'md5(id_rumah_sakit)',
           'value' => $id
         ]
       ]

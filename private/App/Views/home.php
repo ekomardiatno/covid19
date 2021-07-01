@@ -485,8 +485,9 @@
               <div class="flex-md-col mx-md-3 mb-3 mb-md-0 ml-md-0">
                 <h3 class="font-weight-bold text-dark-blue"><?= $r['nama_rumah_sakit'] ?></h3>
                 <?php if ($r['latitude'] . ',' . $r['longitude'] !== '0,0') : ?>
-                  <a class="text-primary" target="_blank" href="http://maps.google.com/?q=<?= $r['latitude'] . ',' . $r['longitude']; ?>"><i class="fas fa-location-arrow"></i> Lihat di Peta</a>
+                  <a class="badge bg-primary" target="_blank" href="http://maps.google.com/?q=<?= $r['latitude'] . ',' . $r['longitude']; ?>"><i class="fas fa-location-arrow"></i> Lihat di Peta</a>
                 <?php endif; ?>
+                <a class="badge bg-warning text-dark" target="_blank" href="<?= Web::url('ketersediaan-kamar.' . md5($r['id_rumah_sakit'])) ?>"><i class="fas fa-procedures"></i> Ketersediaan Kamar</a>
               </div>
               <div class="flex-md-col mx-md-3 ml-3 mr-md-0">
                 <div class="d-flex align-items-start mx--2 mb-3">

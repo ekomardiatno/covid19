@@ -98,93 +98,43 @@
 <div class="section-wrapper bg-virus" id="depan">
   <div class="section">
     <div class="container">
-      <div class="title mb-3">
-        <h2>Rumah Sakit</h2>
+      <div class="title">
+        <h2><?= $data['rumah_sakit']['nama_rumah_sakit'] ?></h2>
         <div class="sub-title">
-          <p>Berikut rumah sakit yang bisa Anda jadikan rujukan untuk permasalahan Coronavirus/COVID-19</p>
+          <p>Berikut ketersediaan kamar di <?= $data['rumah_sakit']['nama_rumah_sakit'] ?></p>
         </div>
         <div class="line"></div>
       </div>
-      <form class="mb-5" action="<?= Web::url('rumah-sakit.1') ?>" method="get">
-        <input name="keyword" placeholder="Pencarian..." id="keyword" value="<?= $data['keyword'] ?>" class="form form-control form-search" />
-      </form>
       <!-- Projects table -->
       <table class="table table-striped align-items-center table-flush datatables">
         <thead class="thead-light">
           <tr>
-            <th class="text-center" scope="col">#</th>
-            <th class="text-center" scope="col">Nama</th>
-            <th class="text-center" scope="col">Telepon</th>
-            <th class="text-center" width="40%" scope="col">Alamat</th>
-            <th class="text-center" scope="col">Lokasi</th>
-            <th class="text-center" scope="col"><i class="fas fa-external-link-alt"></i></th>
+            <th scope="col">Nama Kamar</th>
+            <th scope="col">Terakhir diperbarui</th>
+            <th class="text-right" scope="col">Total Kamar</th>
+            <th class="text-right" scope="col">Terisi</th>
+            <th class="text-right" scope="col">Kosong</th>
           </tr>
         </thead>
         <tbody>
-          <?php if($data['rumah_sakit_total'] <= 0) : ?>
+          <?php if(count($data['kamar']) <= 0) : ?>
             <tr>
-              <td colspan="5">Data tidak ditemukan</td>
+              <td colspan="5" class="text-center">Data tidak ditemukan</td>
             </tr>
           <?php endif; ?>
           <?php
-          $no = ($data['page'] - 1) * $data['limit'] + 1;
-          foreach ($data['rumah_sakit'] as $d) :
-            $telepon_rumah_sakit = unserialize($d['telepon_rumah_sakit']);
-            $telepon_rumah_sakit_str = '';
-            foreach ($telepon_rumah_sakit as $t) {
-              $telepon_rumah_sakit_str .= $t . ', ';
-            }
-            $telepon_rumah_sakit_str = substr($telepon_rumah_sakit_str, 0, -2);
+          foreach ($data['kamar'] as $d) :
           ?>
             <tr>
-              <td><?= $no; ?></td>
-              <td><?= $d['nama_rumah_sakit']; ?></td>
-              <td><?= $telepon_rumah_sakit_str; ?></td>
-              <td><?= $d['alamat_rumah_sakit']; ?></td>
-              <td class="<?= $d['latitude'] . ',' . $d['longitude'] !== '0,0' ? '' : 'text-center' ?>">
-                <?php if ($d['latitude'] . ',' . $d['longitude'] !== '0,0') : ?>
-                  <a target="_blank" class="badge bg-primary" href="http://maps.google.com/?q=<?= $d['latitude'] . ',' . $d['longitude']; ?>"><i class="fas fa-location-arrow"></i> Lihat di Peta</a>
-                <?php else : ?>
-                  <span>-</span>
-                <?php endif; ?>
-              </td>
-              <td><a class="badge bg-warning text-dark" target="_blank" href="<?= Web::url('ketersediaan-kamar.' . md5($d['id_rumah_sakit'])) ?>"><i class="fas fa-procedures"></i> Kamar</a></td>
+              <td><?= $d['nama_kamar']; ?></td>
+              <td class="font-italic"><?= Mod::dateTimeConvert($d['tanggal_diedit']); ?></td>
+              <td class="text-right"><?= $d['ketersediaan_kamar']; ?></td>
+              <td class="text-right"><?= $d['kamar_terisi']; ?></td>
+              <td class="text-right font-weight-bold"><?= $d['ketersediaan_kamar'] - $d['kamar_terisi']; ?></td>
             </tr>
-          <?php
-            $no++;
-          endforeach
-          ?>
+          <?php endforeach ?>
         </tbody>
       </table>
-      <?php if ($data['rumah_sakit_total_page'] > 1) : ?>
-        <nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
-          <ul class="pagination text-center">
-            <li class="page-item<?= $data['page'] <= 1 ? ' disabled' : '' ?>">
-              <?php if ($data['page'] <= 1) : ?>
-                <span class="page-link"><i class="fa fa-chevron-left"></i></span>
-              <?php else : ?>
-                <a class="page-link" href="<?= Web::url('rumah-sakit.' . ($data['page'] - 1) . ($data['keyword'] !== '' ? '?keyword=' . str_replace(' ', '-', $data['keyword']) : '')) ?>"><i class="fas fa-chevron-left"></i></a>
-              <?php endif; ?>
-            </li>
-            <?php for ($i = 1; $i < $data['rumah_sakit_total_page'] + 1; $i++) : ?>
-              <li class="page-item<?= $i === $data['page'] ? ' active' : '' ?>">
-                <?php if ($i === $data['page']) : ?>
-                  <span class="page-link"><?= $i ?></span>
-                <?php else : ?>
-                  <a class="page-link" href="<?= Web::url('rumah-sakit.' . $i . ($data['keyword'] !== '' ? '?keyword=' . str_replace(' ', '-', $data['keyword']) : '')) ?>"><?= $i ?></a>
-                <?php endif; ?>
-              </li>
-            <?php endfor; ?>
-            <li class="page-item<?= $data['page'] >= $data['rumah_sakit_total_page'] ? ' disabled' : '' ?>">
-              <?php if ($data['page'] >= $data['rumah_sakit_total_page']) : ?>
-                <span class="page-link"><i class="fa fa-chevron-right"></i></span>
-              <?php else : ?>
-                <a class="page-link" href="<?= Web::url('rumah-sakit.' . ($data['page'] + 1) . ($data['keyword'] !== '' ? '?keyword=' . str_replace(' ', '-', $data['keyword']) : '')) ?>"><i class="fa fa-chevron-right"></i></a>
-              <?php endif; ?>
-            </li>
-          </ul>
-        </nav>
-      <?php endif ?>
     </div>
   </div>
 </div>

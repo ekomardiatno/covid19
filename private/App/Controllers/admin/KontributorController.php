@@ -65,12 +65,16 @@ class KontributorController extends Controller {
     $where = [
       'params' => [
         [
-          'column' => 'id_kontributor',
+          'column' => 'md5(id_kontributor)',
           'value' => $id
         ]
       ]
     ];
     $data = $this->_model->read(null, $where, 'ARRAY_ONE');
+    if(!$data) {
+      Flasher::setFlash('Alamat tidak sah', 'danger', 'ni ni-fat-remove', 'top', 'center');
+      return $this->redirect('admin.kontributor');
+    }
     $this->_web->title('Edit Kontributor');
     $this->_web->breadcrumb(
       [
@@ -101,7 +105,7 @@ class KontributorController extends Controller {
     $where = [
       'params' => [
         [
-          'column' => 'id_kontributor',
+          'column' => 'md5(id_kontributor)',
           'value' => $id
         ]
       ]
@@ -126,7 +130,7 @@ class KontributorController extends Controller {
     $where = [
       'params' => [
         [
-          'column' => 'id_kontributor',
+          'column' => 'md5(id_kontributor)',
           'value' => $id
         ]
       ]
