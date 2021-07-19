@@ -1,6 +1,6 @@
 <?php
 
-class Ketersediaan_KamarController extends Controller
+class Tempat_TidurController extends Controller
 {
   public function index($id)
   {
@@ -33,7 +33,7 @@ class Ketersediaan_KamarController extends Controller
       ]
     ];
     $data['rumah_sakit'] = $this->model('RumahSakit')->read(['nama_rumah_sakit'], $where, 'ARRAY_ONE');
-    $data['kamar'] = $this->model('Kamar')->read(['nama_kamar', 'ketersediaan_kamar', 'kamar_terisi', 'tanggal_diedit'], $where);
-    $this->_web->view('ketersediaan-kamar', $data);
+    $data['tempat_tidur'] = $this->model('TempatTidur')->read(['nama_tempat_tidur', 'total_tempat_tidur', 'tempat_tidur_terisi', 'tanggal_diedit'], $where);
+    $this->_web->view('tempat-tidur', $data);
   }
 }

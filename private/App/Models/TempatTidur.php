@@ -1,12 +1,12 @@
 <?php
 
-class Kamar extends Model
+class TempatTidur extends Model
 {
 
   public function __construct()
   {
     parent::__construct();
-    $this->_db->table('kamar');
+    $this->_db->table('tempat_tidur');
   }
 
   public function insert($post, $fetch = null)

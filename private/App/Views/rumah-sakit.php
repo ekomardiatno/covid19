@@ -148,7 +148,7 @@
                   <span>-</span>
                 <?php endif; ?>
               </td>
-              <td><a class="badge bg-warning text-dark" href="<?= Web::url('ketersediaan-kamar.' . md5($d['id_rumah_sakit'])) ?>"><i class="fas fa-procedures"></i> Kamar</a></td>
+              <td><a class="badge bg-warning text-dark" href="<?= Web::url('tempat-tidur.' . md5($d['id_rumah_sakit'])) ?>"><i class="fas fa-procedures"></i> Tempat Tidur</a></td>
             </tr>
           <?php
             $no++;

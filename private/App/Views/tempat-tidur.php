@@ -101,7 +101,7 @@
       <div class="title">
         <h2><?= $data['rumah_sakit']['nama_rumah_sakit'] ?></h2>
         <div class="sub-title">
-          <p>Berikut ketersediaan kamar di <?= $data['rumah_sakit']['nama_rumah_sakit'] ?></p>
+          <p>Berikut ketersediaan tempat tidur di <?= $data['rumah_sakit']['nama_rumah_sakit'] ?></p>
         </div>
         <div class="line"></div>
       </div>
@@ -109,28 +109,28 @@
       <table class="table table-striped align-items-center table-flush datatables">
         <thead class="thead-light">
           <tr>
-            <th scope="col">Nama Kamar</th>
+            <th scope="col">Nama Tempat Tidur</th>
             <th scope="col">Terakhir diperbarui</th>
-            <th class="text-right" scope="col">Total Kamar</th>
+            <th class="text-right" scope="col">Total Tempat Tidur</th>
             <th class="text-right" scope="col">Terisi</th>
             <th class="text-right" scope="col">Kosong</th>
           </tr>
         </thead>
         <tbody>
-          <?php if(count($data['kamar']) <= 0) : ?>
+          <?php if(count($data['tempat_tidur']) <= 0) : ?>
             <tr>
               <td colspan="5" class="text-center">Data tidak ditemukan</td>
             </tr>
           <?php endif; ?>
           <?php
-          foreach ($data['kamar'] as $d) :
+          foreach ($data['tempat_tidur'] as $d) :
           ?>
             <tr>
-              <td><?= $d['nama_kamar']; ?></td>
+              <td><?= $d['nama_tempat_tidur']; ?></td>
               <td class="font-italic"><?= Mod::dateTimeConvert($d['tanggal_diedit']); ?></td>
-              <td class="text-right"><?= $d['ketersediaan_kamar']; ?></td>
-              <td class="text-right"><?= $d['kamar_terisi']; ?></td>
-              <td class="text-right font-weight-bold"><?= $d['ketersediaan_kamar'] - $d['kamar_terisi']; ?></td>
+              <td class="text-right"><?= $d['total_tempat_tidur']; ?></td>
+              <td class="text-right"><?= $d['tempat_tidur_terisi']; ?></td>
+              <td class="text-right font-weight-bold"><?= $d['total_tempat_tidur'] - $d['tempat_tidur_terisi']; ?></td>
             </tr>
           <?php endforeach ?>
         </tbody>

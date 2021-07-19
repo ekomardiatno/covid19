@@ -117,13 +117,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= Web::url('admin.kontributor'); ?>">
-              <i class="fas fa-building"></i> Kontributor
+            <a class="nav-link" href="<?= Web::url('admin.tempat-tidur'); ?>">
+              <i class="fas fa-procedures text-warning"></i> Tempat Tidur
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= Web::url('admin.kamar'); ?>">
-              <i class="fas fa-procedures text-warning"></i> Kamar
+            <a class="nav-link" href="<?= Web::url('admin.kontributor'); ?>">
+              <i class="fas fa-building"></i> Kontributor
             </a>
           </li>
           <!-- <li class="nav-item">

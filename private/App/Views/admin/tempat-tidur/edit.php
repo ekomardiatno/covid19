@@ -1,4 +1,4 @@
-<form action="<?= Web::url('admin.kamar.update.' . md5($data['id_kamar'])) ?>" method="POST">
+<form action="<?= Web::url('admin.tempat-tidur.update.' . md5($data['id_tempat_tidur'])) ?>" method="POST">
   <div class="card-group-flex-row card-group-flex-row-md">
     <div class="card bg-secondary shadow mb-3">
       <div class="card-body">
@@ -15,22 +15,22 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="nama_kamar">Nama Kamar <span class="text-danger">*</span></label>
-          <input type="text" maxlength="100" value="<?= $data_flasher ? $data_flasher['nama_kotak'] : $data['nama_kamar'] ?>" placeholder="Nama Kamar" required name="nama_kamar" id="nama_kamar" class="form-control">
+          <label for="nama_tempat_tidur">Nama Tempat Tidur <span class="text-danger">*</span></label>
+          <input type="text" maxlength="100" value="<?= $data_flasher ? $data_flasher['nama_kotak'] : $data['nama_tempat_tidur'] ?>" placeholder="Nama Tempat Tidur" required name="nama_tempat_tidur" id="nama_tempat_tidur" class="form-control">
         </div>
         <div class="row mb-3">
           <div class="col-12">
             <div class="row">
               <div class="col-md">
                 <div class="form-group">
-                  <label for="ketersediaan_kamar">Ketersediaan Kamar <span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['ketersediaan_kamar'] : $data['ketersediaan_kamar'] ?>" min="0" placeholder="Ketersediaan Kamar" required name="ketersediaan_kamar" id="ketersediaan_kamar" class="form-control">
+                  <label for="total_tempat_tidur">Ketersediaan Tempat Tidur <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['total_tempat_tidur'] : $data['total_tempat_tidur'] ?>" min="0" placeholder="Ketersediaan Tempat Tidur" required name="total_tempat_tidur" id="total_tempat_tidur" class="form-control">
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-group">
-                  <label for="kamar_terisi">Kamar Yang Terisi <span class="text-danger">*</span></label>
-                  <input type="number" value="<?= $data_flasher ? $data_flasher['kamar_terisi'] : $data['kamar_terisi'] ?>" min="0" placeholder="Kamar Yang Terisi" required name="kamar_terisi" id="kamar_terisi" class="form-control">
+                  <label for="tempat_tidur_terisi">Tempat Tidur Yang Terisi <span class="text-danger">*</span></label>
+                  <input type="number" value="<?= $data_flasher ? $data_flasher['tempat_tidur_terisi'] : $data['tempat_tidur_terisi'] ?>" min="0" placeholder="Tempat Tidur Yang Terisi" required name="tempat_tidur_terisi" id="tempat_tidur_terisi" class="form-control">
                 </div>
               </div>
             </div>
@@ -56,8 +56,8 @@ let timeout1 = null
 let timeout2 = null
 let timeout3 = null
 let timeout4 = null
-let roomAvailability = document.getElementById('ketersediaan_kamar')
-let roomFilled = document.getElementById('kamar_terisi')
+let roomAvailability = document.getElementById('total_tempat_tidur')
+let roomFilled = document.getElementById('tempat_tidur_terisi')
 let checkRoomFilled = () => {
   if(parseInt(roomAvailability.value) < parseInt(roomFilled.value)) {
     if(timeout3 !== null) {
@@ -67,7 +67,7 @@ let checkRoomFilled = () => {
     if(roomAvailability.nextElementSibling === null) {
       span.classList.add('small')
       span.classList.add('text-danger')
-      span.innerText = "Tidak boleh kurang dari jumlah kamar yang terisi"
+      span.innerText = "Tidak boleh kurang dari jumlah tempat tidur yang terisi"
       roomAvailability.after(span)
     }
     timeout3 = setTimeout(() => {
@@ -87,7 +87,7 @@ let checkRoomAvailability = () => {
     if(roomFilled.nextElementSibling === null) {
       span.classList.add('small')
       span.classList.add('text-danger')
-      span.innerText = "Tidak boleh lebih dari jumlah ketersediaan kamar"
+      span.innerText = "Tidak boleh lebih dari jumlah ketersediaan tempat tidur"
       roomFilled.after(span)
     }
     timeout4 = setTimeout(() => {
