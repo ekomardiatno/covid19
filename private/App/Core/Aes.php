@@ -3,6 +3,15 @@
 class Aes
 {
     private $chiper = 'aes-256-cbc';
+    public static $_instance = null;
+    public static function getInstance()
+    {
+        if (!isset(self::$_instance)) {
+            self::$_instance = new Aes;
+        }
+
+        return self::$_instance;
+    }
     public function encrypt($plaintext, $key)
     {
         $password = substr(hash('sha1', $key, true), 0, 32);

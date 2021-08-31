@@ -1,6 +1,6 @@
 <?php
 
-$dir = ['/Core/', '/Wrapper/', '/Helpers/'];
+$dir = ['/Core/', '/Wrapper/', '/Helpers/', '/Libraries/'];
 foreach($dir as $d) {
     spl_autoload_register(function ($class) use ($d) {
     
