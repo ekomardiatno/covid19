@@ -2,36 +2,32 @@
 
 class ApiController extends Controller
 {
-
   public $_method = 'GET';
   public function __construct()
   {
     parent::__construct();
-    $aes = Aes::getInstance();
+    header("Access-Control-Allow-Headers: *");
+    header('Access-Control-Allow-Origin: *');
+    $aes = new Aes;
     $password = '@):/-absc';
     $headers = apache_request_headers();
-    $decrypting_key = $aes->decrypt($headers['Token-Key'] ?? '', $password);
+    $token = $headers['Token-Key'] ?? $headers['token-key'] ?? '';
+    $decrypting_key = $aes->decrypt($token, $password);
     $client = unserialize($decrypting_key);
     $now = date('Y-m-d');
-    $target = $client['validate_date'];
-    if (!isset($target)) {
+    if (!isset($client['validate_date'])) {
       $this->sendOutput(
-        json_encode(['status' => 401, 'msg' => 'Unauthorized Token']),
+        json_encode(['status' => false, 'msg' => 'Unauthorized Token']),
         ['Content-Type: application/json', 'HTTP/1.1 401 Unauthorized']
       );
     }
-    $expired_in = (strtotime($target) - strtotime($now)) / (60 * 60 * 24);
+    $expired_in = (strtotime($client['validate_date']) - strtotime($now)) / (60 * 60 * 24);
     if ($expired_in < 0) {
       $this->sendOutput(
-        json_encode(['status' => 401, 'msg' => 'Token has expired']),
+        json_encode(['status' => false, 'msg' => 'Token has expired']),
         ['Content-Type: application/json', 'HTTP/1.1 401 Unauthorized']
       );
     }
-  }
-
-  public function set_method($method)
-  {
-    $this->_method = 'GET';
   }
 
   public function response($data, $status = 'HTTP/1.1 200 OK')
@@ -40,7 +36,7 @@ class ApiController extends Controller
       $strErrorDesc = 'Method not correct';
       $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
       $this->sendOutput(
-        json_encode(['status' => 422, 'msg' => $strErrorDesc]),
+        json_encode(['status' => false, 'msg' => $strErrorDesc]),
         ['Content-Type: application/json', $strErrorHeader]
       );
     }
@@ -91,7 +87,6 @@ class ApiController extends Controller
       }
     }
 
-    echo $data;
-    exit;
+    echo $data; die;
   }
 }
